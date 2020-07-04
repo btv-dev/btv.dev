@@ -1,0 +1,26 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+#home img {
+    position: absolute;
+    top: 0;
+    filter: grayscale(0.6);
+}
+
+h1 {
+    font-family: 'Modak', cursive;
+    font-size: 10em;
+    color: white;
+    font-weight: normal;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-top: 27%;
+}
