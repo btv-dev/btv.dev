@@ -1,0 +1,6 @@
+
+# redirect from old blogger urls to new 11ty urls
+redirects = [
+  {from="/kyle", to="https://kylemit.dev/"},
+  {from="/james", to="https://www.jamestedesco.me/"}
+]
