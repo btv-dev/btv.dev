@@ -1,0 +1,24 @@
+{
+  "name": "btv.dev",
+  "version": "1.0.0",
+  "description": "main website repo for btv dot dev",
+  "main": "index.js",
+  "scripts": {
+    "serve": "npx eleventy --serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btv-dev/btv.dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/btv-dev/btv.dev/issues"
+  },
+  "homepage": "https://github.com/btv-dev/btv.dev#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^0.11.0"
+  }
+}
