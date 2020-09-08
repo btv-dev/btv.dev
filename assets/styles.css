@@ -32,7 +32,7 @@ h1 {
 }
 
 main {
-    margin: 0 15%;
+    margin: 0 5%;
 }
 
 section {
@@ -85,6 +85,9 @@ a.button {
 
 /* Media queries */
 @media only screen and (min-width: 700px) {
+    main {
+        margin: 0 15%;
+    }
     .bros {
         display: grid;
         grid-template-columns: 1fr 1fr;
