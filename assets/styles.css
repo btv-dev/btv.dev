@@ -78,10 +78,6 @@ a.button {
     border-radius: 50%;
 }
 
-.bros a {
-    display: block;
-}
-
 
 /* Media queries */
 @media only screen and (min-width: 700px) {
