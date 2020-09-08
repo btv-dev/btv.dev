@@ -4,6 +4,7 @@ body {
     padding: 0;
     font-family: sans-serif;
     line-height: 2em;
+    color: #4e4e4e;
 }
 
 header {
@@ -41,14 +42,40 @@ h2 {
     margin: 0;
 }
 
-
-/* Bio Styles */
-.bros {
-    display: grid;
-    grid-template-areas: 1fr 1fr;
+a {
+    width: fit-content;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 2px solid #CEF1F6;
+    box-shadow: 0px -10px 0px #CEF1F6 inset;
 }
 
+a:hover,
+.entry-content a:focus {
+    border-bottom-color: #e4e4e4;
+    box-shadow: 0px -10px 0px #e4e4e4 inset;
+}
+
+
+/* Bio Styles */
+.bro {
+    margin: 2em 0;
+}
 .profile-pic {
     height: 10em;
     border-radius: 50%;
+}
+
+.bros a {
+    display: block;
+}
+
+
+/* Media queries */
+@media only screen and (min-width: 700px) {
+    .bros {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 3em;
+    }
 }
