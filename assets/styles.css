@@ -5,6 +5,7 @@ body {
     padding: 0;
     font-family: sans-serif;
     line-height: 2em;
+    font-size: 1.1em;
     color: #4e4e4e;
     scroll-behavior: smooth;
 }
