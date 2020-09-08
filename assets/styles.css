@@ -1,3 +1,4 @@
+/* Utilities */
 html,
 body {
     margin: 0;
@@ -5,6 +6,7 @@ body {
     font-family: sans-serif;
     line-height: 2em;
     color: #4e4e4e;
+    scroll-behavior: smooth;
 }
 
 header {
@@ -54,6 +56,16 @@ a:hover,
 .entry-content a:focus {
     border-bottom-color: #e4e4e4;
     box-shadow: 0px -10px 0px #e4e4e4 inset;
+}
+
+a.button {
+    background: #336AD6;
+    font-size: 1em;
+    padding: .5em 1em;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    box-shadow: #033598 4px 4px 6px;
 }
 
 
