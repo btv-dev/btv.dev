@@ -15,7 +15,10 @@ header {
 
 #home img {
     filter: grayscale(0.6);
-    max-width: 100%;
+    width: 100%;
+    height: 47vh;
+    object-fit: cover;
+    object-position: 50% 28%;
 }
 
 h1 {
@@ -24,7 +27,7 @@ h1 {
     color: white;
     font-weight: normal;
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     margin: 0;
     transform: translate(-50%, -50%);
@@ -73,6 +76,7 @@ a.button {
 .bro {
     margin: 2em 0;
 }
+
 .profile-pic {
     height: 10em;
     border-radius: 50%;
@@ -84,6 +88,7 @@ a.button {
     main {
         margin: 0 15%;
     }
+
     .bros {
         display: grid;
         grid-template-columns: 1fr 1fr;
