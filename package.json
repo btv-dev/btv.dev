@@ -4,6 +4,7 @@
   "description": "main website repo for btv dot dev",
   "main": "index.js",
   "scripts": {
+    "build": "npx eleventy",
     "serve": "npx eleventy --serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
