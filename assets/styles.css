@@ -2,6 +2,8 @@ html,
 body {
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
+    line-height: 2em;
 }
 
 header {
@@ -23,4 +25,29 @@ h1 {
     left: 50%;
     margin: 0;
     transform: translate(-50%, -50%);
+}
+
+main {
+    margin: 0 15%;
+}
+
+section {
+    margin: 1em 0 4em 0;
+}
+
+h2 {
+    color: #336AD6;
+    margin: 0;
+}
+
+
+/* Bio Styles */
+.bros {
+    display: grid;
+    grid-template-areas: 1fr 1fr;
+}
+
+.profile-pic {
+    height: 10em;
+    border-radius: 50%;
 }
