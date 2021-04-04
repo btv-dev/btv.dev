@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx eleventy",
-    "serve": "npx eleventy --serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "npx eleventy --serve"
   },
   "repository": {
     "type": "git",
@@ -20,6 +19,6 @@
   },
   "homepage": "https://github.com/btv-dev/btv.dev#readme",
   "dependencies": {
-    "@11ty/eleventy": "^0.11.0"
+    "@11ty/eleventy": "^0.12.1"
   }
 }
