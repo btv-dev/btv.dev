@@ -1,0 +1,171 @@
+<header id="home">
+	<img src="/images/church-street.jpg" alt="Kyle and James on Church Street at Christmas" />
+	<h1>btv.dev</h1>
+</header>
+<main>
+	<section id="Our-Approach">
+		<h2>Our Approach</h2>
+		<p>
+			When it comes to design, we use progressive check-ins to make sure your vision and our work
+			remain closely aligned. This looks like:
+		</p>
+		<ol>
+			<li>Discussing your goals, org personality, and sense of style</li>
+			<li>Sketching ideas on paper</li>
+			<li>Building a professional wireframe of what the site would actually look like</li>
+			<li>Beginning development based on that wireframe</li>
+		</ol>
+	</section>
+
+	<section id="Work-&-Features">
+		<h2>Work & Features</h2>
+		<p>
+			We're usually focused on building smaller sites (of less than 10 pages), but we know how to
+			keep our work feature rich.
+		</p>
+		<p>Beyond serving a static site, you can also add dynamic features such as the ability to:</p>
+		<ul>
+			<li>Update content yourself through an editor portal</li>
+			<li>Store and read information on databases</li>
+			<li>Connect personal emails to site domain</li>
+			<li>Add subscribers to an email list</li>
+		</ul>
+	</section>
+
+	<section id="Black-Lives-Matter">
+		<h2>Black Lives Matter</h2>
+		<p>
+			If you're a black owned business or organization, we'd love to build you a custom site for
+			free.
+		</p>
+		<p>
+			The burdens of systemic racism are compounded on black owned businesses, and while we know
+			this doesn't solve the root issue, we know web visibility plays a large role in success.
+		</p>
+		<a class="button" href="#Lets-Talk">Get in Touch!</a>
+	</section>
+
+	<section id="The-Team">
+		<h2>The Team</h2>
+		<p>We're friends, brothers, & developers.</p>
+		<div class="bros">
+			<div class="bro">
+				<img class="profile-pic" src="/images/james.jpg" alt="Headshot of James Mitofsky" />
+				<h3>James Mitofsky</h3>
+				<em> Freelance Frontend Developer </em>
+				<p>
+					James is particularly interested in how design affects behavior, and in his free time he
+					loves speaking French, going for runs, and playing the guitar.
+				</p>
+				<a href="email:james@btv.dev" target="_blank">james@btv.dev</a>
+				<a href="https://jamesmit.dev" target="_blank">jamesmit.dev</a>
+			</div>
+			<div class="bro">
+				<img class="profile-pic" src="/images/kyle.jpg" alt="Headshot of Kyle Mitofsky" />
+				<h3>Kyle Mitofsky</h3>
+				<em>Senior developer at StackOverflow.</em>
+				<p>
+					More than a love for learning new things, Kyle looks for creative ways to bring knowledge
+					to others. Proud owner of 3 black cats, a dog, and just as many laptops.
+				</p>
+				<a href="email:kyle@btv.dev" target="_blank">kyle@btv.dev</a>
+				<a href="https://kylemit.dev" target="_blank">kylemit.dev</a>
+			</div>
+		</div>
+	</section>
+	<section id="Lets-Talk">
+		<h2>Let's Talk!</h2>
+		You can hit us up at
+		<a href="email:contact@btv.dev" target="_blank">contact@btv.dev</a>. We're quick to reply and
+		always excited to scope out new ideas, projects, and collaborations.
+	</section>
+</main>
+<footer id="footer" />
+
+<style>
+	/* Utilities */
+
+	header {
+		position: relative;
+	}
+
+	#home img {
+		filter: grayscale(0.6);
+		width: 100%;
+		height: 47vh;
+		object-fit: cover;
+		object-position: 50% 28%;
+	}
+
+	h1 {
+		font-family: 'Modak', cursive;
+		font-size: 10em;
+		color: white;
+		font-weight: normal;
+		position: absolute;
+		top: 70%;
+		left: 50%;
+		margin: 0;
+		transform: translate(-50%, -50%);
+		font-size: 15vw;
+	}
+
+	main {
+		margin: 0 5%;
+	}
+
+	section {
+		margin: 1em 0 4em 0;
+	}
+
+	h2 {
+		color: #336ad6;
+		margin: 0;
+	}
+
+	a {
+		width: fit-content;
+		text-decoration: none;
+		color: inherit;
+		border-bottom: 2px solid #cef1f6;
+		box-shadow: 0px -10px 0px #cef1f6 inset;
+	}
+
+	a:hover {
+		border-bottom-color: #e4e4e4;
+		box-shadow: 0px -10px 0px #e4e4e4 inset;
+	}
+
+	a.button {
+		background: #336ad6;
+		font-size: 1em;
+		padding: 0.5em 1em;
+		border: none;
+		color: white;
+		border-radius: 5px;
+		box-shadow: #033598 4px 4px 6px;
+	}
+
+	/* Bio Styles */
+	.bro {
+		margin: 2em 0;
+	}
+
+	.profile-pic {
+		height: 10em;
+		border-radius: 50%;
+	}
+
+	/* Media queries */
+	@media only screen and (min-width: 700px) {
+		main {
+			margin: 0 15%;
+		}
+
+		.bros {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 3em;
+		}
+	}
+</style>
