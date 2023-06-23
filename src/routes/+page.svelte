@@ -6,43 +6,53 @@
 	<section id="Our-Approach">
 		<h2>Our Approach</h2>
 		<p>
-			When it comes to design, we use progressive check-ins to make sure your vision and our work
-			remain closely aligned. This looks like:
+			We take a collaborative approach to ensures that our work stays aligned with what you want and
+			need. Here's how we do it:
 		</p>
 		<ol>
-			<li>Discussing your goals, org personality, and sense of style</li>
-			<li>Sketching ideas on paper</li>
-			<li>Building a professional wireframe of what the site would actually look like</li>
-			<li>Beginning development based on that wireframe</li>
+			<li>
+				We start by understanding your goals, organizational personality, and preferred style.
+			</li>
+			<li>We brainstorm and sketch ideas on paper to capture the essence of your vision.</li>
+			<li>
+				We transform those ideas into a professional wireframe that represents the actual look and
+				feel of your website.
+			</li>
+			<li>
+				We bring your website to life by starting the development process based on the wireframe.
+			</li>
 		</ol>
 	</section>
 
 	<section id="Work-&-Features">
 		<h2>Work & Features</h2>
 		<p>
-			We're usually focused on building smaller sites (of less than 10 pages), but we know how to
-			keep our work feature rich.
+			At btv.dev, we specialize in building websites that are not only visually appealing but also
+			packed with features that meet your specific needs.
 		</p>
-		<p>Beyond serving a static site, you can also add dynamic features such as the ability to:</p>
+		<p>In addition to creating static websites, we offer dynamic features that include:</p>
 		<ul>
-			<li>Update content yourself through an editor portal</li>
-			<li>Store and read information on databases</li>
-			<li>Connect personal emails to site domain</li>
-			<li>Add subscribers to an email list</li>
+			<li>Easy content updating through a user-friendly editor portal.</li>
+			<li>Seamless integration with databases for storing and retrieving information.</li>
+			<li>Connecting personalized emails to your site's domain.</li>
+			<li>Building and managing email subscription lists.</li>
 		</ul>
 	</section>
 
-	<section id="Black-Lives-Matter">
-		<h2>Black Lives Matter</h2>
+	<section id="NonProfits">
+		<h2>Supporting Non-Profits</h2>
 		<p>
-			If you're a black owned business or organization, we'd love to build you a custom site for
-			free.
+			We are passionate about collaborating with mission-oriented organizations and businesses that
+			are driven by a higher purpose. If you're working towards making a positive impact in the
+			world, we want to be a part of your journey. We understand the unique challenges and limited
+			resources that mission-driven organizations often face.
 		</p>
 		<p>
-			The burdens of systemic racism are compounded on black owned businesses, and while we know
-			this doesn't solve the root issue, we know web visibility plays a large role in success.
+			To support your noble cause, we offer special discounts and customized solutions tailored to
+			your specific needs. Let's create something remarkable together. <a href="#Lets-Talk"
+				>Let's talk!</a
+			>
 		</p>
-		<a class="button" href="#Lets-Talk">Get in Touch!</a>
 	</section>
 
 	<section id="The-Team">
@@ -52,10 +62,11 @@
 			<div class="bro">
 				<img class="profile-pic" src="/images/james.jpg" alt="Headshot of James Mitofsky" />
 				<h3>James Mitofsky</h3>
-				<em> Freelance Frontend Developer </em>
+				<em>Designer / Developer at Grinto</em>
 				<p>
-					James is particularly interested in how design affects behavior, and in his free time he
-					loves speaking French, going for runs, and playing the guitar.
+					James has a keen interest in the impact of design on user behavior. When not coding,
+					you'll find him speaking French, running through the countryside, or shredding slopes on
+					his snowboard.
 				</p>
 				<a href="email:james@btv.dev" target="_blank">james@btv.dev</a>
 				<a href="https://jamesmit.dev" target="_blank">jamesmit.dev</a>
@@ -63,21 +74,27 @@
 			<div class="bro">
 				<img class="profile-pic" src="/images/kyle.jpg" alt="Headshot of Kyle Mitofsky" />
 				<h3>Kyle Mitofsky</h3>
-				<em>Senior developer at StackOverflow.</em>
+				<em>Senior Developer at StackOverflow</em>
 				<p>
-					More than a love for learning new things, Kyle looks for creative ways to bring knowledge
-					to others. Proud owner of 3 black cats, a dog, and just as many laptops.
+					Kyle has passion for sharing knowledge, seeking creative ways to educate and empower
+					others. The proud owner of three black cats, a dog, and multiple laptops, Kyle brings a
+					unique blend of expertise and personality.
 				</p>
 				<a href="email:kyle@btv.dev" target="_blank">kyle@btv.dev</a>
 				<a href="https://kylemit.dev" target="_blank">kylemit.dev</a>
 			</div>
 		</div>
 	</section>
+
 	<section id="Lets-Talk">
 		<h2>Let's Talk!</h2>
-		You can hit us up at
-		<a href="email:contact@btv.dev" target="_blank">contact@btv.dev</a>. We're quick to reply and
-		always excited to scope out new ideas, projects, and collaborations.
+		<p>
+			We would love to hear from you! Feel free to reach out to us at <a
+				href="email:contact@btv.dev"
+				target="_blank">contact@btv.dev</a
+			>. We are highly responsive and always excited to discuss new ideas, projects, and
+			collaborations.
+		</p>
 	</section>
 </main>
 <footer id="footer" />
@@ -121,6 +138,8 @@
 	h2 {
 		color: #336ad6;
 		margin: 0;
+		font-size: 2em;
+		line-height: 1em;
 	}
 
 	a {
