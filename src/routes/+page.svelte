@@ -136,7 +136,7 @@
 	}
 
 	h2 {
-		color: #336ad6;
+		color: #1d83c4;
 		margin: 0;
 		font-size: 2em;
 		line-height: 1em;
@@ -156,7 +156,7 @@
 	}
 
 	a.button {
-		background: #336ad6;
+		background: #1d83c4;
 		font-size: 1em;
 		padding: 0.5em 1em;
 		border: none;
