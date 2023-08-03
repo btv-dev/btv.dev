@@ -84,7 +84,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 10em;
+		gap: 3em;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -103,10 +103,6 @@
 
 	/* Media query for mobile-sized screens */
 	@media screen and (min-width: 768px) {
-		h1 {
-			font-size: 10em;
-		}
-
 		header {
 			height: 50vh;
 		}

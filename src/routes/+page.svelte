@@ -153,7 +153,7 @@
 	/* Media queries */
 	@media only screen and (min-width: 700px) {
 		main {
-			margin: 0 15%;
+			max-width: 50em;
 		}
 
 		.bros {

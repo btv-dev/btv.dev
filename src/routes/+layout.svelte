@@ -21,9 +21,12 @@
 		margin: 0;
 		padding: 0;
 		font-family: sans-serif;
-		line-height: 2em;
+		line-height: 2.5em;
 		font-size: 1.1em;
-		color: #4e4e4e;
+		color: rgb(38, 38, 38);
 		scroll-behavior: smooth;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 </style>
