@@ -62,7 +62,6 @@
 			<div class="bro">
 				<img class="profile-pic" src="/images/james.jpg" alt="Headshot of James Mitofsky" />
 				<h3>James Mitofsky</h3>
-				<em>Designer / Developer at Grinto</em>
 				<p>
 					James has a keen interest in the impact of design on user behavior. When not coding,
 					you'll find him speaking French, running through the countryside, or shredding slopes on
@@ -74,7 +73,6 @@
 			<div class="bro">
 				<img class="profile-pic" src="/images/kyle.jpg" alt="Headshot of Kyle Mitofsky" />
 				<h3>Kyle Mitofsky</h3>
-				<em>Senior Developer at StackOverflow</em>
 				<p>
 					Kyle has passion for sharing knowledge, seeking creative ways to educate and empower
 					others. The proud owner of three black cats, a dog, and multiple laptops, Kyle brings a
