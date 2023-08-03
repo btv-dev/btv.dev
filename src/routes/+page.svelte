@@ -1,7 +1,9 @@
-<header id="home">
-	<img src="/images/church-street.jpg" alt="Kyle and James on Church Street at Christmas" />
-	<h1>btv.dev</h1>
-</header>
+<script>
+	import LandingPageHero from '../components/LandingPageHero.svelte';
+</script>
+
+<LandingPageHero />
+
 <main>
 	<section id="Our-Approach">
 		<h2>Our Approach</h2>
@@ -100,31 +102,6 @@
 <style>
 	/* Utilities */
 
-	header {
-		position: relative;
-	}
-
-	#home img {
-		filter: grayscale(0.6);
-		width: 100%;
-		height: 47vh;
-		object-fit: cover;
-		object-position: 50% 28%;
-	}
-
-	h1 {
-		font-family: 'Modak', cursive;
-		font-size: 10em;
-		color: white;
-		font-weight: normal;
-		position: absolute;
-		top: 70%;
-		left: 50%;
-		margin: 0;
-		transform: translate(-50%, -50%);
-		font-size: 15vw;
-	}
-
 	main {
 		margin: 0 5%;
 	}
@@ -153,7 +130,7 @@
 		box-shadow: 0px -10px 0px #e4e4e4 inset;
 	}
 
-	a.button {
+	/* a.button {
 		background: #1d83c4;
 		font-size: 1em;
 		padding: 0.5em 1em;
@@ -161,7 +138,7 @@
 		color: white;
 		border-radius: 5px;
 		box-shadow: #033598 4px 4px 6px;
-	}
+	} */
 
 	/* Bio Styles */
 	.bro {
