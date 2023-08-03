@@ -62,7 +62,7 @@
 		<p>We're friends, brothers, & developers.</p>
 		<div class="bros">
 			<div class="bro">
-				<img class="profile-pic" src="/images/james.jpg" alt="Headshot of James Mitofsky" />
+				<img class="profile-pic" src="/images/james.webp" alt="Headshot of James Mitofsky" />
 				<h3>James Mitofsky</h3>
 				<p>
 					James has a keen interest in the impact of design on user behavior. When not coding,
@@ -73,7 +73,7 @@
 				<a href="https://jamesmit.dev" target="_blank">jamesmit.dev</a>
 			</div>
 			<div class="bro">
-				<img class="profile-pic" src="/images/kyle.jpg" alt="Headshot of Kyle Mitofsky" />
+				<img class="profile-pic" src="/images/kyle.webp" alt="Headshot of Kyle Mitofsky" />
 				<h3>Kyle Mitofsky</h3>
 				<p>
 					Kyle has passion for sharing knowledge, seeking creative ways to educate and empower
