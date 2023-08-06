@@ -1,7 +1,9 @@
-<header id="home">
-	<img src="/images/church-street.jpg" alt="Kyle and James on Church Street at Christmas" />
-	<h1>btv.dev</h1>
-</header>
+<script>
+	import LandingPageHero from '../components/LandingPageHero.svelte';
+</script>
+
+<LandingPageHero />
+
 <main>
 	<section id="Our-Approach">
 		<h2>Our Approach</h2>
@@ -60,7 +62,7 @@
 		<p>We're friends, brothers, & developers.</p>
 		<div class="bros">
 			<div class="bro">
-				<img class="profile-pic" src="/images/james.jpg" alt="Headshot of James Mitofsky" />
+				<img class="profile-pic" src="/images/james.webp" alt="Headshot of James Mitofsky" />
 				<h3>James Mitofsky</h3>
 				<p>
 					James has a keen interest in the impact of design on user behavior. When not coding,
@@ -71,7 +73,7 @@
 				<a href="https://jamesmit.dev" target="_blank">jamesmit.dev</a>
 			</div>
 			<div class="bro">
-				<img class="profile-pic" src="/images/kyle.jpg" alt="Headshot of Kyle Mitofsky" />
+				<img class="profile-pic" src="/images/kyle.webp" alt="Headshot of Kyle Mitofsky" />
 				<h3>Kyle Mitofsky</h3>
 				<p>
 					Kyle has passion for sharing knowledge, seeking creative ways to educate and empower
@@ -99,31 +101,6 @@
 
 <style>
 	/* Utilities */
-
-	header {
-		position: relative;
-	}
-
-	#home img {
-		filter: grayscale(0.6);
-		width: 100%;
-		height: 47vh;
-		object-fit: cover;
-		object-position: 50% 28%;
-	}
-
-	h1 {
-		font-family: 'Modak', cursive;
-		font-size: 10em;
-		color: white;
-		font-weight: normal;
-		position: absolute;
-		top: 70%;
-		left: 50%;
-		margin: 0;
-		transform: translate(-50%, -50%);
-		font-size: 15vw;
-	}
 
 	main {
 		margin: 0 5%;
@@ -153,7 +130,7 @@
 		box-shadow: 0px -10px 0px #e4e4e4 inset;
 	}
 
-	a.button {
+	/* a.button {
 		background: #1d83c4;
 		font-size: 1em;
 		padding: 0.5em 1em;
@@ -161,7 +138,7 @@
 		color: white;
 		border-radius: 5px;
 		box-shadow: #033598 4px 4px 6px;
-	}
+	} */
 
 	/* Bio Styles */
 	.bro {
@@ -176,7 +153,7 @@
 	/* Media queries */
 	@media only screen and (min-width: 700px) {
 		main {
-			margin: 0 15%;
+			max-width: 50em;
 		}
 
 		.bros {
