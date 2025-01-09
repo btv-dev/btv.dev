@@ -104,7 +104,7 @@ export default function Home() {
         {/* They Trust Us Section */}
         <section id="They-Trust-Us" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">They Trust Us</H2>
-          <Paragraph>
+          <Paragraph className="mb-12 sm:mb-0">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
           </Paragraph>
@@ -128,7 +128,7 @@ export default function Home() {
           <Paragraph>
             Let's create something remarkable together.
             <a
-              href="#Lets-Talk"
+              href="mailto:hey@btv.dev"
               className="ml-2 text-btv-blue-500 hover:text-btv-blue-600 underline"
             >
               Let's talk!
@@ -157,7 +157,7 @@ export default function Home() {
                 running through the countryside, or carving down snowy slopes on
                 his snowboard.
               </Paragraph>
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <a
                   href="https://jamesmit.dev"
                   target="_blank"
@@ -166,7 +166,7 @@ export default function Home() {
                 >
                   jamesmit.dev
                 </a>
-              </div>
+              </div> */}
             </div>
             {/* Kyle */}
             <div className="space-y-4 text-center">
@@ -184,7 +184,7 @@ export default function Home() {
                 dog, and multiple laptops, Kyle brings a unique blend of
                 expertise and personality.
               </Paragraph>
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <a
                   href="https://kylemit.dev"
                   target="_blank"
@@ -193,7 +193,7 @@ export default function Home() {
                 >
                   kylemit.dev
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -215,8 +215,8 @@ export default function Home() {
             >
               hey@btv.dev
             </a>
-            . We're responsive and eager to discuss how we can help you take the
-            next step for your business, your art, or your cause.
+            . We're eager to discuss how we can help you improve your presence
+            on the web.
           </Paragraph>
           {/* <Button variant="default" className="mt-4">
             Contact Us

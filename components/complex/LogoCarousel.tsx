@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 export interface Logo {
   name: string;
@@ -56,7 +57,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
 
     return (
       <motion.div
-        className="relative h-14 w-full overflow-hidden md:h-48 justify-center flex"
+        className="relative h-32 w-full overflow-hidden md:h-48 justify-center flex"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -94,10 +95,12 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               },
             }}
           >
-            <img
+            <Image
               src={currentLogoUrl}
+              height={160}
+              width={160}
               alt={logos[currentIndex].name}
-              className="h-20 w-20 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32"
+              className="h-32 w-32 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32"
             />
           </motion.div>
         </AnimatePresence>
