@@ -2,9 +2,10 @@ import fs from "fs";
 import path from "path";
 import NextImage from "next/image";
 import { AnimatedLogo } from "../components/complex/AnimatedLogo";
-import { H2, H3, Paragraph, UL, OL, LI } from "@/components/ui/typography";
+import { H2, H3, Paragraph, OL, LI } from "@/components/ui/typography";
 
 import { Logo, LogoCarousel } from "../components/complex/LogoCarousel";
+import { WorkAndFeatures } from "../components/complex/WorkAndFeatures";
 
 export default function Home() {
   // Read client images from the filesystem
@@ -31,7 +32,7 @@ export default function Home() {
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Our Approach Section */}
         <section id="Our-Approach" className="my-16">
-          <H2 className="text-btv-blue-500 mb-4">Our Approach</H2>
+          <H2>Our Approach</H2>
           <Paragraph>
             At BTV.dev, our collaborative process ensures your vision comes to
             life—beautifully and seamlessly.
@@ -58,52 +59,11 @@ export default function Home() {
           </Paragraph>
         </section>
 
-        {/* Work & Features Section */}
-        <section id="Work-&-Features" className="my-16">
-          <H2 className="text-btv-blue-500 mb-4">Work & Features</H2>
-          <Paragraph>
-            We don't just build websites; we create digital experiences that
-            captivate and convert.
-          </Paragraph>
-          <Paragraph className="mb-4 text-md">
-            We deliver according to your needs, but some of the features we find
-            reliably helpful include:
-          </Paragraph>
-          <UL className="space-y-2 text-md">
-            <LI>
-              <strong>Responsive Design & Animations:</strong> Engaging,
-              mobile-friendly layouts with subtle animations to enhance user
-              experience.
-            </LI>
-            <LI>
-              <strong>SEO Tools:</strong> Out-of-the-box SEO-friendly markup,
-              meta tag management, and structured data to boost visibility.
-            </LI>
-            <LI>
-              <strong>Contact Forms & Social Sharing:</strong> Easy-to-use
-              contact forms and social media integration to engage visitors and
-              streamline communication.
-            </LI>
-            <LI>
-              <strong>Image Optimization & Lazy Loading:</strong> Automated
-              image compression and lazy loading for faster page loads and
-              improved performance.
-            </LI>
-            <LI>
-              <strong>Analytics Integration:</strong> Setup for tracking user
-              interactions, helping you make data-driven decisions.
-            </LI>
-            <LI>
-              <strong>Integrated Blog & CMS:</strong> A simple, built-in content
-              management system allowing effortless content updates and blog
-              posts.
-            </LI>
-          </UL>
-        </section>
+        <WorkAndFeatures />
 
         {/* They Trust Us Section */}
         <section id="They-Trust-Us" className="my-16">
-          <H2 className="text-btv-blue-500 mb-4">They Trust Us</H2>
+          <H2>They Trust Us</H2>
           <Paragraph className="mb-12 sm:mb-0">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
@@ -114,7 +74,7 @@ export default function Home() {
 
         {/* Supporting Non-Profits Section */}
         <section id="NonProfits" className="my-16">
-          <H2 className="text-btv-blue-500 mb-4">Supporting Non-Profits</H2>
+          <H2>Supporting Non-Profits</H2>
           <Paragraph>
             We are passionate about empowering mission-driven organizations.
             Your cause deserves a digital presence that reflects its heart and
@@ -138,7 +98,7 @@ export default function Home() {
 
         {/* The Team Section */}
         <section id="The-Team" className="my-16">
-          <H2 className="text-btv-blue-500 mb-4">The Team</H2>
+          <H2>The Team</H2>
           <Paragraph>We're friends, brothers, & developers.</Paragraph>
           <div className="grid md:grid-cols-2 gap-8">
             {/* James */}
@@ -200,7 +160,7 @@ export default function Home() {
 
         {/* Let's Talk Section */}
         <section id="Lets-Talk" className="my-16">
-          <H2 className="text-btv-blue-500 mb-4">Let's Talk!</H2>
+          <H2>Let's Talk!</H2>
           <Paragraph>
             Ready to transform your vision into reality? We're here to listen,
             collaborate, and innovate.
