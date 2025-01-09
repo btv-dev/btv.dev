@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: ["class"],
@@ -9,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        "rubik-mono-one": ["var(--font-rubik-mono-one)", ...fontFamily.mono],
+      },
       colors: {
         "btv-blue": {
           DEFAULT: "#1D83C4",
