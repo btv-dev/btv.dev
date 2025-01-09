@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white leading-loose">
       <AnimatedLogo />
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Our Approach Section */}
@@ -110,7 +110,7 @@ export default function Home() {
                 alt="Headshot of James Mitofsky"
               />
               <H3 className="font-semibold">James Mitofsky</H3>
-              <Paragraph className="text-md">
+              <Paragraph className="text-md text-justify">
                 A design enthusiast with a passion for how aesthetics influence
                 user behavior. When he's not coding, James is speaking French,
                 running through the countryside, or carving down snowy slopes on
@@ -145,7 +145,7 @@ export default function Home() {
                 alt="Headshot of Kyle Mitofsky"
               />
               <H3 className="font-semibold">Kyle Mitofsky</H3>
-              <Paragraph className="text-md">
+              <Paragraph className="text-md text-justify">
                 A knowledge sharer with a creative spirit, Kyle thrives on
                 educating and empowering. Proud owner of three black cats, a
                 dog, and multiple laptops, Kyle brings a unique blend of
