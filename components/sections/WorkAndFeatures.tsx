@@ -9,10 +9,8 @@ import {
   TrendingUp, // for Analytics Integration
   FileText, // for Integrated Blog & CMS
 } from "lucide-react";
-import { H2, H3, Paragraph } from "../ui/typography";
-
-const MotionParagraph = motion(Paragraph);
-const MotionH2 = motion(H2);
+import { H3 } from "../ui/typography";
+import { MotionH2, MotionParagraph } from "../ui/motion-typography";
 
 const features = [
   {
@@ -73,12 +71,7 @@ const WorkAndFeatures = () => {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ staggerChildren: 0.15 }}
       >
-        <MotionH2
-          // className="text-btv-blue-500 mb-4 text-center text-3xl font-bold"
-          variants={headerVariants}
-        >
-          Work & Features
-        </MotionH2>
+        <MotionH2 variants={headerVariants}>Work & Features</MotionH2>
         <MotionParagraph
           className="mb-2"
           variants={headerVariants}

@@ -2,10 +2,11 @@ import fs from "fs";
 import path from "path";
 import NextImage from "next/image";
 import { AnimatedLogo } from "../components/complex/AnimatedLogo";
-import { H2, H3, Paragraph, OL, LI } from "@/components/ui/typography";
+import { H2, H3, Paragraph } from "@/components/ui/typography";
 
 import { Logo, LogoCarousel } from "../components/complex/LogoCarousel";
-import { WorkAndFeatures } from "../components/complex/WorkAndFeatures";
+import { WorkAndFeatures } from "../components/sections/WorkAndFeatures";
+import OurApproach from "../components/sections/OurApproach";
 
 export default function Home() {
   // Read client images from the filesystem
@@ -31,33 +32,8 @@ export default function Home() {
       <AnimatedLogo />
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Our Approach Section */}
-        <section id="Our-Approach" className="my-16">
-          <H2>Our Approach</H2>
-          <Paragraph>
-            At BTV.dev, our collaborative process ensures your vision comes to
-            life—beautifully and seamlessly.
-          </Paragraph>
-          <OL className="space-y-2 text-md">
-            <LI>
-              <strong>Discover:</strong> We start by diving deep into your
-              goals, brand personality, and design preferences.
-            </LI>
-            <LI>
-              <strong>Sketch & Brainstorm:</strong> We sketch ideas on paper and
-              create mockups, visualizing potential directions and refining
-              concepts before moving forward.
-            </LI>
-            <LI>
-              <strong>Build:</strong> Bringing designs to life, we begin
-              development to craft a site that exceeds expectations.
-            </LI>
-          </OL>
-          <Paragraph className="mt-4 text-md">
-            Through sketches and mockups, we explore various possibilities and
-            steer the project in the right direction before committing to the
-            final design, ensuring our work aligns perfectly with your vision.
-          </Paragraph>
-        </section>
+
+        <OurApproach />
 
         <WorkAndFeatures />
 
