@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "../components/ui/button";
 import { AnimatedLogo } from "../components/complex/AnimatedLogo";
 
 export default function Home() {
@@ -10,7 +9,7 @@ export default function Home() {
       <AnimatedLogo />
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <section id="Our-Approach" className="my-16">
-          <h2 className="text-3xl font-bold text-blue-600 mb-4">
+          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
             Our Approach
           </h2>
           <p className="mb-4">
@@ -38,7 +37,7 @@ export default function Home() {
         </section>
 
         <section id="Work-&-Features" className="my-16">
-          <h2 className="text-3xl font-bold text-blue-600 mb-4">
+          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
             Work & Features
           </h2>
           <p className="mb-4">
@@ -64,7 +63,7 @@ export default function Home() {
         </section>
 
         <section id="NonProfits" className="my-16">
-          <h2 className="text-3xl font-bold text-blue-600 mb-4">
+          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
             Supporting Non-Profits
           </h2>
           <p className="mb-4">
@@ -81,7 +80,7 @@ export default function Home() {
             something remarkable together.{" "}
             <a
               href="#Lets-Talk"
-              className="text-blue-600 hover:text-blue-800 underline"
+              className="text-btv-blue-500 hover:text-btv-blue-600 underline"
             >
               Let's talk!
             </a>
@@ -89,7 +88,9 @@ export default function Home() {
         </section>
 
         <section id="The-Team" className="my-16">
-          <h2 className="text-3xl font-bold text-blue-600 mb-4">The Team</h2>
+          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
+            The Team
+          </h2>
           <p className="mb-4">We're friends, brothers, & developers.</p>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
@@ -114,7 +115,7 @@ export default function Home() {
                   href="mailto:james@btv.dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-blue-600 hover:text-blue-800"
+                  className="block text-btv-blue-500 hover:text-btv-blue-600"
                 >
                   james@btv.dev
                 </a>
@@ -122,7 +123,7 @@ export default function Home() {
                   href="https://jamesmit.dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-blue-600 hover:text-blue-800"
+                  className="block text-btv-blue-500 hover:text-btv-blue-600"
                 >
                   jamesmit.dev
                 </a>
@@ -150,7 +151,7 @@ export default function Home() {
                   href="mailto:kyle@btv.dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-blue-600 hover:text-blue-800"
+                  className="block text-btv-blue-500 hover:text-btv-blue-600"
                 >
                   kyle@btv.dev
                 </a>
@@ -158,7 +159,7 @@ export default function Home() {
                   href="https://kylemit.dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-blue-600 hover:text-blue-800"
+                  className="block text-btv-blue-500 hover:text-btv-blue-600"
                 >
                   kylemit.dev
                 </a>
@@ -168,23 +169,25 @@ export default function Home() {
         </section>
 
         <section id="Lets-Talk" className="my-16">
-          <h2 className="text-3xl font-bold text-blue-600 mb-4">Let's Talk!</h2>
+          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
+            Let's Talk!
+          </h2>
           <p className="mb-4">
             We would love to hear from you! Feel free to reach out to us at{" "}
             <a
               href="mailto:contact@btv.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 underline"
+              className="text-btv-blue-500 hover:text-btv-blue-600 underline"
             >
               contact@btv.dev
             </a>
             . We are highly responsive and always excited to discuss new ideas,
             projects, and collaborations.
           </p>
-          <Button variant="default" className="mt-4">
+          {/* <Button variant="default" className="mt-4">
             Contact Us
-          </Button>
+          </Button> */}
         </section>
       </main>
       <footer id="footer" className="bg-gray-100 py-8 text-center">
