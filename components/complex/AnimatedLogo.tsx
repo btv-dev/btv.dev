@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 
 export function AnimatedLogo() {
   const headerRef = useRef<HTMLElement>(null);
@@ -9,7 +9,7 @@ export function AnimatedLogo() {
   const dotRef = useRef<HTMLDivElement>(null);
   const staticCircleRef = useRef<HTMLDivElement>(null);
 
-  const [dotStyle, setDotStyle] = useState({
+  const [dotStyle, setDotStyle] = useState<CSSProperties>({
     position: "absolute",
     width: "30px",
     height: "30px",
@@ -52,7 +52,6 @@ export function AnimatedLogo() {
     let canLock = true;
 
     const positionDot = () => {
-      const headerRect = header.getBoundingClientRect();
       const heading1Rect = heading1.getBoundingClientRect();
       const heading2Rect = heading2.getBoundingClientRect();
 
@@ -66,16 +65,20 @@ export function AnimatedLogo() {
 
       setDotStyle((prev) => ({
         ...prev,
-        left: `${centerX - parseFloat(prev.width) / 2}px`,
-        top: `${centerY - parseFloat(prev.height) / 2}px`,
+        left: `${centerX - parseFloat(prev.width?.toString() || "0") / 2}px`,
+        top: `${centerY - parseFloat(prev.height?.toString() || "0") / 2}px`,
       }));
 
       // Position static circle at the origin
-      staticCircle.style.left = `${centerX - parseFloat(dotStyle.width) / 2}px`;
-      staticCircle.style.top = `${centerY - parseFloat(dotStyle.height) / 2}px`;
+      staticCircle.style.left = `${
+        centerX - parseFloat(dotStyle.width?.toString() || "0") / 2
+      }px`;
+      staticCircle.style.top = `${
+        centerY - parseFloat(dotStyle.height?.toString() || "0") / 2
+      }px`;
 
-      currentX = centerX - parseFloat(dotStyle.width) / 2;
-      currentY = centerY - parseFloat(dotStyle.height) / 2;
+      currentX = centerX - parseFloat(dotStyle.width?.toString() || "0") / 2;
+      currentY = centerY - parseFloat(dotStyle.height?.toString() || "0") / 2;
       targetX = currentX;
       targetY = currentY;
 
@@ -120,7 +123,12 @@ export function AnimatedLogo() {
       // While locked, show static circle and leave trails
       if (isLocked) {
         staticCircle.style.opacity = "1"; // Fade in static circle
-        createTrail(currentX, currentY, dotStyle.width, dotStyle.height);
+        createTrail(
+          currentX,
+          currentY,
+          dotStyle.width?.toString() || "0",
+          dotStyle.height?.toString() || "0"
+        );
       }
 
       currentX += (targetX - currentX) * easeFactor;
@@ -131,8 +139,10 @@ export function AnimatedLogo() {
       // If not locked and near the origin, fade out static circle
       if (!isLocked) {
         const distanceToOrigin = Math.hypot(
-          currentX - (centerX - parseFloat(dotStyle.width) / 2),
-          currentY - (centerY - parseFloat(dotStyle.height) / 2)
+          currentX -
+            (centerX - parseFloat(dotStyle.width?.toString() || "0") / 2),
+          currentY -
+            (centerY - parseFloat(dotStyle.height?.toString() || "0") / 2)
         );
         if (distanceToOrigin < resetLockDistance) {
           staticCircle.style.opacity = "0"; // Fade out when dot at rest at origin
