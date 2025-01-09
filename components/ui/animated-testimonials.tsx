@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 type Testimonial = {
   quote: string;
   name: string;
-  designation: string;
   src: string;
 };
 
@@ -125,9 +124,6 @@ export const AnimatedTestimonials = ({
             <h3 className="text-2xl font-bold text-foreground">
               {testimonials[active].name}
             </h3>
-            <p className="text-sm text-muted-foreground">
-              {testimonials[active].designation}
-            </p>
             <motion.p className="text-lg text-muted-foreground mt-8">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
