@@ -1,100 +1,194 @@
 import Image from "next/image";
+import { Button } from "../components/ui/button";
+import { AnimatedLogo } from "../components/complex/AnimatedLogo";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-white">
+      {/* <Header />
+      <LandingPageHero /> */}
+      <AnimatedLogo />
+      <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <section id="Our-Approach" className="my-16">
+          <h2 className="text-3xl font-bold text-blue-600 mb-4">
+            Our Approach
+          </h2>
+          <p className="mb-4">
+            We take a collaborative approach to ensures that our work stays
+            aligned with what you want and need. Here's how we do it:
+          </p>
+          <ol className="list-decimal list-inside space-y-2">
+            <li>
+              We start by understanding your goals, organizational personality,
+              and preferred style.
+            </li>
+            <li>
+              We brainstorm and sketch ideas on paper to capture the essence of
+              your vision.
+            </li>
+            <li>
+              We transform those ideas into a professional wireframe that
+              represents the actual look and feel of your website.
+            </li>
+            <li>
+              We bring your website to life by starting the development process
+              based on the wireframe.
+            </li>
+          </ol>
+        </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        <section id="Work-&-Features" className="my-16">
+          <h2 className="text-3xl font-bold text-blue-600 mb-4">
+            Work & Features
+          </h2>
+          <p className="mb-4">
+            At btv.dev, we specialize in building websites that are not only
+            visually appealing but also packed with features that meet your
+            specific needs.
+          </p>
+          <p className="mb-4">
+            In addition to creating static websites, we offer dynamic features
+            that include:
+          </p>
+          <ul className="list-disc list-inside space-y-2">
+            <li>
+              Easy content updating through a user-friendly editor portal.
+            </li>
+            <li>
+              Seamless integration with databases for storing and retrieving
+              information.
+            </li>
+            <li>Connecting personalized emails to your site's domain.</li>
+            <li>Building and managing email subscription lists.</li>
+          </ul>
+        </section>
+
+        <section id="NonProfits" className="my-16">
+          <h2 className="text-3xl font-bold text-blue-600 mb-4">
+            Supporting Non-Profits
+          </h2>
+          <p className="mb-4">
+            We are passionate about collaborating with mission-oriented
+            organizations and businesses that are driven by a higher purpose. If
+            you're working towards making a positive impact in the world, we
+            want to be a part of your journey. We understand the unique
+            challenges and limited resources that mission-driven organizations
+            often face.
+          </p>
+          <p className="mb-4">
+            To support your noble cause, we offer special discounts and
+            customized solutions tailored to your specific needs. Let's create
+            something remarkable together.{" "}
+            <a
+              href="#Lets-Talk"
+              className="text-blue-600 hover:text-blue-800 underline"
+            >
+              Let's talk!
+            </a>
+          </p>
+        </section>
+
+        <section id="The-Team" className="my-16">
+          <h2 className="text-3xl font-bold text-blue-600 mb-4">The Team</h2>
+          <p className="mb-4">We're friends, brothers, & developers.</p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <Image
+                width={160}
+                height={160}
+                className="w-40 h-40 rounded-full mx-auto"
+                src="/images/james.webp"
+                alt="Headshot of James Mitofsky"
+              />
+              <h3 className="text-xl font-semibold text-center">
+                James Mitofsky
+              </h3>
+              <p>
+                James has a keen interest in the impact of design on user
+                behavior. When not coding, you'll find him speaking French,
+                running through the countryside, or shredding slopes by way of
+                snowboard.
+              </p>
+              <div className="space-y-2">
+                <a
+                  href="mailto:james@btv.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-blue-600 hover:text-blue-800"
+                >
+                  james@btv.dev
+                </a>
+                <a
+                  href="https://jamesmit.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-blue-600 hover:text-blue-800"
+                >
+                  jamesmit.dev
+                </a>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <Image
+                width={160}
+                height={160}
+                className="w-40 h-40 rounded-full mx-auto"
+                src="/images/kyle.webp"
+                alt="Headshot of Kyle Mitofsky"
+              />
+              <h3 className="text-xl font-semibold text-center">
+                Kyle Mitofsky
+              </h3>
+              <p>
+                Kyle has passion for sharing knowledge, seeking creative ways to
+                educate and empower others. The proud owner of three black cats,
+                a dog, and multiple laptops, Kyle brings a unique blend of
+                expertise and personality.
+              </p>
+              <div className="space-y-2">
+                <a
+                  href="mailto:kyle@btv.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-blue-600 hover:text-blue-800"
+                >
+                  kyle@btv.dev
+                </a>
+                <a
+                  href="https://kylemit.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-blue-600 hover:text-blue-800"
+                >
+                  kylemit.dev
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="Lets-Talk" className="my-16">
+          <h2 className="text-3xl font-bold text-blue-600 mb-4">Let's Talk!</h2>
+          <p className="mb-4">
+            We would love to hear from you! Feel free to reach out to us at{" "}
+            <a
+              href="mailto:contact@btv.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 underline"
+            >
+              contact@btv.dev
+            </a>
+            . We are highly responsive and always excited to discuss new ideas,
+            projects, and collaborations.
+          </p>
+          <Button variant="default" className="mt-4">
+            Contact Us
+          </Button>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer id="footer" className="bg-gray-100 py-8 text-center">
+        {/* Footer content */}
       </footer>
     </div>
   );
