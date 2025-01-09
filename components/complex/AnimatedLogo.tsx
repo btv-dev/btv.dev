@@ -41,8 +41,8 @@ export function AnimatedLogo() {
     let targetX = 0;
     let targetY = 0;
     const easeFactor = 0.1;
-    const proximityThreshold = 600;
-    const maxDistanceFromCenter = 600;
+    const proximityThreshold = 250;
+    const maxDistanceFromCenter = 250;
     const nudgeDistance = 10;
     const resetLockDistance = 20;
 
@@ -228,10 +228,10 @@ export function AnimatedLogo() {
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-12"
         style={{ zIndex: 10 }}
       >
-        <h1 ref={heading1Ref} className="font-mono text-6xl leading-none m-0">
-          btv
+        <h1 ref={heading1Ref} className="font-sans text-6xl leading-none m-0">
+          BTV
         </h1>
-        <h1 ref={heading2Ref} className="font-mono text-6xl leading-none m-0">
+        <h1 ref={heading2Ref} className="font-sans text-6xl leading-none m-0">
           dev
         </h1>
       </div>

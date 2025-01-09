@@ -3,7 +3,6 @@ import path from "path";
 import NextImage from "next/image";
 import { AnimatedLogo } from "../components/complex/AnimatedLogo";
 import { H2, H3, Paragraph, UL, OL, LI } from "@/components/ui/typography";
-import { Button } from "@/components/ui/button";
 
 import { Logo, LogoCarousel } from "../components/complex/LogoCarousel";
 
@@ -33,8 +32,8 @@ export default function Home() {
         {/* Our Approach Section */}
         <section id="Our-Approach" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">Our Approach</H2>
-          <Paragraph className="mb-4 text-lg">
-            At btv.dev, our collaborative process ensures your vision comes to
+          <Paragraph>
+            At BTV.dev, our collaborative process ensures your vision comes to
             life—beautifully and seamlessly.
           </Paragraph>
           <OL className="space-y-2 text-md">
@@ -62,7 +61,7 @@ export default function Home() {
         {/* Work & Features Section */}
         <section id="Work-&-Features" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">Work & Features</H2>
-          <Paragraph className="mb-4 text-lg">
+          <Paragraph>
             We don't just build websites; we create digital experiences that
             captivate and convert.
           </Paragraph>
@@ -105,29 +104,28 @@ export default function Home() {
         {/* They Trust Us Section */}
         <section id="They-Trust-Us" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">They Trust Us</H2>
-          {/* <Paragraph className="mb-4 text-md">
+          <Paragraph>
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
-          </Paragraph> */}
+          </Paragraph>
 
-          {/* <InfiniteCarousel images={logos} /> */}
           <LogoCarousel logos={logos} columnCount={2} />
         </section>
 
         {/* Supporting Non-Profits Section */}
         <section id="NonProfits" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">Supporting Non-Profits</H2>
-          <Paragraph className="mb-4 text-lg">
+          <Paragraph>
             We are passionate about empowering mission-driven organizations.
             Your cause deserves a digital presence that reflects its heart and
             impact.
           </Paragraph>
-          <Paragraph className="mb-4 text-md">
+          <Paragraph>
             Understanding the challenges you face, we offer special discounts
             and tailored solutions. Through sketches, mockups, and iterative
             feedback, we ensure the final product meets your unique needs.
           </Paragraph>
-          <Paragraph className="mb-4 text-md">
+          <Paragraph>
             Let's create something remarkable together.
             <a
               href="#Lets-Talk"
@@ -141,9 +139,7 @@ export default function Home() {
         {/* The Team Section */}
         <section id="The-Team" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">The Team</H2>
-          <Paragraph className="mb-4 text-lg">
-            We're friends, brothers, & developers.
-          </Paragraph>
+          <Paragraph>We're friends, brothers, & developers.</Paragraph>
           <div className="grid md:grid-cols-2 gap-8">
             {/* James */}
             <div className="space-y-4 text-center">
@@ -205,30 +201,32 @@ export default function Home() {
         {/* Let's Talk Section */}
         <section id="Lets-Talk" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">Let's Talk!</H2>
-          <Paragraph className="mb-4 text-lg">
+          <Paragraph>
             Ready to transform your vision into reality? We're here to listen,
             collaborate, and innovate.
           </Paragraph>
-          <Paragraph className="text-md">
+          <Paragraph>
             Reach out at{" "}
             <a
-              href="mailto:contact@btv.dev"
+              href="mailto:hey@btv.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="text-btv-blue-500 hover:text-btv-blue-600 underline"
             >
-              contact@btv.dev
+              hey@btv.dev
             </a>
-            . We're responsive, enthusiastic, and eager to discuss new ideas,
-            projects, and collaborations.
+            . We're responsive and eager to discuss how we can help you take the
+            next step for your business, your art, or your cause.
           </Paragraph>
-          <Button variant="default" className="mt-4">
+          {/* <Button variant="default" className="mt-4">
             Contact Us
-          </Button>
+          </Button> */}
         </section>
       </main>
       <footer id="footer" className="bg-gray-100 py-8 text-center">
-        <Paragraph>&copy; 2023 btv.dev. All rights reserved.</Paragraph>
+        <Paragraph>
+          &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
+        </Paragraph>
       </footer>
     </div>
   );
