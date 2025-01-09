@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { AnimatedLogo } from "../components/complex/AnimatedLogo";
+import { H2, H3, Paragraph, UL, OL, LI } from "@/components/ui/typography";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -8,87 +10,79 @@ export default function Home() {
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Our Approach Section */}
         <section id="Our-Approach" className="my-16">
-          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
-            Our Approach
-          </h2>
-          <p className="mb-4 text-lg">
+          <H2 className="text-btv-blue-500 mb-4">Our Approach</H2>
+          <Paragraph className="mb-4 text-lg">
             At btv.dev, our collaborative process ensures your vision comes to
             life—beautifully and seamlessly.
-          </p>
-          <ol className="list-decimal list-inside space-y-2 text-md">
-            <li>
+          </Paragraph>
+          <OL className="space-y-2 text-md">
+            <LI>
               <strong>Discover:</strong> We start by diving deep into your
               goals, brand personality, and design preferences.
-            </li>
-            <li>
+            </LI>
+            <LI>
               <strong>Sketch & Brainstorm:</strong> We sketch ideas on paper and
               create mockups, visualizing potential directions and refining
               concepts before moving forward.
-            </li>
-            <li>
+            </LI>
+            <LI>
               <strong>Build:</strong> Bringing designs to life, we begin
               development to craft a site that exceeds expectations.
-            </li>
-          </ol>
-          <p className="mt-4 text-md">
+            </LI>
+          </OL>
+          <Paragraph className="mt-4 text-md">
             Through sketches and mockups, we explore various possibilities and
             steer the project in the right direction before committing to the
             final design, ensuring our work aligns perfectly with your vision.
-          </p>
+          </Paragraph>
         </section>
 
         {/* Work & Features Section */}
         <section id="Work-&-Features" className="my-16">
-          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
-            Work & Features
-          </h2>
-          <p className="mb-4 text-lg">
+          <H2 className="text-btv-blue-500 mb-4">Work & Features</H2>
+          <Paragraph className="mb-4 text-lg">
             We don't just build websites; we create digital experiences that
             captivate and convert.
-          </p>
-          <p className="mb-4 text-md">
+          </Paragraph>
+          <Paragraph className="mb-4 text-md">
             Beyond stunning static sites, our dynamic features include:
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-md">
-            <li>User-friendly content editor for effortless updates</li>
-            <li>Seamless database integration for reliable data management</li>
-            <li>Professional email integration tied to your domain</li>
-            <li>Robust tools for building and managing subscription lists</li>
-          </ul>
+          </Paragraph>
+          <UL className="space-y-2 text-md">
+            <LI>User-friendly content editor for effortless updates</LI>
+            <LI>Seamless database integration for reliable data management</LI>
+            <LI>Professional email integration tied to your domain</LI>
+            <LI>Robust tools for building and managing subscription lists</LI>
+          </UL>
         </section>
 
         {/* They Trust Us Section */}
         <section id="They-Trust-Us" className="my-16">
-          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
-            They Trust Us
-          </h2>
-          <p className="mb-4 text-md">
+          <H2 className="text-btv-blue-500 mb-4">They Trust Us</H2>
+          <Paragraph className="mb-4 text-md">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
-          </p>
+          </Paragraph>
           <div className="border-dashed border-2 border-gray-300 rounded-lg p-8 text-center">
-            <p className="text-gray-600">
+            <Paragraph className="text-gray-600">
               Placeholder for carousel of client logos
-            </p>
+            </Paragraph>
           </div>
         </section>
 
         {/* Supporting Non-Profits Section */}
         <section id="NonProfits" className="my-16">
-          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
-            Supporting Non-Profits
-          </h2>
-          <p className="mb-4 text-lg">
+          <H2 className="text-btv-blue-500 mb-4">Supporting Non-Profits</H2>
+          <Paragraph className="mb-4 text-lg">
             We are passionate about empowering mission-driven organizations.
             Your cause deserves a digital presence that reflects its heart and
             impact.
-          </p>
-          <p className="mb-4 text-md">
+          </Paragraph>
+          <Paragraph className="mb-4 text-md">
             Understanding the challenges you face, we offer special discounts
             and tailored solutions. Through sketches, mockups, and iterative
             feedback, we ensure the final product meets your unique needs.
-          </p>
-          <p className="mb-4 text-md">
+          </Paragraph>
+          <Paragraph className="mb-4 text-md">
             Let's create something remarkable together.
             <a
               href="#Lets-Talk"
@@ -96,15 +90,15 @@ export default function Home() {
             >
               Let's talk!
             </a>
-          </p>
+          </Paragraph>
         </section>
 
         {/* The Team Section */}
         <section id="The-Team" className="my-16">
-          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
-            The Team
-          </h2>
-          <p className="mb-4 text-lg">We're friends, brothers, & developers.</p>
+          <H2 className="text-btv-blue-500 mb-4">The Team</H2>
+          <Paragraph className="mb-4 text-lg">
+            We're friends, brothers, & developers.
+          </Paragraph>
           <div className="grid md:grid-cols-2 gap-8">
             {/* James */}
             <div className="space-y-4 text-center">
@@ -115,13 +109,13 @@ export default function Home() {
                 src="/images/james.webp"
                 alt="Headshot of James Mitofsky"
               />
-              <h3 className="text-xl font-semibold">James Mitofsky</h3>
-              <p className="text-md">
+              <H3 className="font-semibold">James Mitofsky</H3>
+              <Paragraph className="text-md">
                 A design enthusiast with a passion for how aesthetics influence
                 user behavior. When he's not coding, James is speaking French,
                 running through the countryside, or carving down snowy slopes on
                 his snowboard.
-              </p>
+              </Paragraph>
               <div className="space-y-2">
                 <a
                   href="mailto:james@btv.dev"
@@ -150,13 +144,13 @@ export default function Home() {
                 src="/images/kyle.webp"
                 alt="Headshot of Kyle Mitofsky"
               />
-              <h3 className="text-xl font-semibold">Kyle Mitofsky</h3>
-              <p className="text-md">
+              <H3 className="font-semibold">Kyle Mitofsky</H3>
+              <Paragraph className="text-md">
                 A knowledge sharer with a creative spirit, Kyle thrives on
                 educating and empowering. Proud owner of three black cats, a
                 dog, and multiple laptops, Kyle brings a unique blend of
                 expertise and personality.
-              </p>
+              </Paragraph>
               <div className="space-y-2">
                 <a
                   href="mailto:kyle@btv.dev"
@@ -181,14 +175,12 @@ export default function Home() {
 
         {/* Let's Talk Section */}
         <section id="Lets-Talk" className="my-16">
-          <h2 className="text-3xl font-bold text-btv-blue-500 mb-4">
-            Let's Talk!
-          </h2>
-          <p className="mb-4 text-lg">
+          <H2 className="text-btv-blue-500 mb-4">Let's Talk!</H2>
+          <Paragraph className="mb-4 text-lg">
             Ready to transform your vision into reality? We're here to listen,
             collaborate, and innovate.
-          </p>
-          <p className="text-md">
+          </Paragraph>
+          <Paragraph className="text-md">
             Reach out at{" "}
             <a
               href="mailto:contact@btv.dev"
@@ -200,11 +192,14 @@ export default function Home() {
             </a>
             . We're responsive, enthusiastic, and eager to discuss new ideas,
             projects, and collaborations.
-          </p>
+          </Paragraph>
+          <Button variant="default" className="mt-4">
+            Contact Us
+          </Button>
         </section>
       </main>
       <footer id="footer" className="bg-gray-100 py-8 text-center">
-        {/* Footer content can go here */}
+        <Paragraph>&copy; 2023 btv.dev. All rights reserved.</Paragraph>
       </footer>
     </div>
   );
