@@ -67,13 +67,38 @@ export default function Home() {
             captivate and convert.
           </Paragraph>
           <Paragraph className="mb-4 text-md">
-            Beyond stunning static sites, our dynamic features include:
+            We deliver according to your needs, but some of the features we find
+            reliably helpful include:
           </Paragraph>
           <UL className="space-y-2 text-md">
-            <LI>User-friendly content editor for effortless updates</LI>
-            <LI>Seamless database integration for reliable data management</LI>
-            <LI>Professional email integration tied to your domain</LI>
-            <LI>Robust tools for building and managing subscription lists</LI>
+            <LI>
+              <strong>Responsive Design & Animations:</strong> Engaging,
+              mobile-friendly layouts with subtle animations to enhance user
+              experience.
+            </LI>
+            <LI>
+              <strong>SEO Tools:</strong> Out-of-the-box SEO-friendly markup,
+              meta tag management, and structured data to boost visibility.
+            </LI>
+            <LI>
+              <strong>Contact Forms & Social Sharing:</strong> Easy-to-use
+              contact forms and social media integration to engage visitors and
+              streamline communication.
+            </LI>
+            <LI>
+              <strong>Image Optimization & Lazy Loading:</strong> Automated
+              image compression and lazy loading for faster page loads and
+              improved performance.
+            </LI>
+            <LI>
+              <strong>Analytics Integration:</strong> Setup for tracking user
+              interactions, helping you make data-driven decisions.
+            </LI>
+            <LI>
+              <strong>Integrated Blog & CMS:</strong> A simple, built-in content
+              management system allowing effortless content updates and blog
+              posts.
+            </LI>
           </UL>
         </section>
 
@@ -138,14 +163,6 @@ export default function Home() {
               </Paragraph>
               <div className="space-y-2">
                 <a
-                  href="mailto:james@btv.dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-btv-blue-500 hover:text-btv-blue-600"
-                >
-                  james@btv.dev
-                </a>
-                <a
                   href="https://jamesmit.dev"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -172,14 +189,6 @@ export default function Home() {
                 expertise and personality.
               </Paragraph>
               <div className="space-y-2">
-                <a
-                  href="mailto:kyle@btv.dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-btv-blue-500 hover:text-btv-blue-600"
-                >
-                  kyle@btv.dev
-                </a>
                 <a
                   href="https://kylemit.dev"
                   target="_blank"
