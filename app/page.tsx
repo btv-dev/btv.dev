@@ -4,8 +4,6 @@ import { AnimatedLogo } from "../components/complex/AnimatedLogo";
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      {/* <Header />
-      <LandingPageHero /> */}
       <AnimatedLogo />
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <section id="Our-Approach" className="my-16">
