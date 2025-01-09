@@ -1,9 +1,31 @@
-import Image from "next/image";
+import fs from "fs";
+import path from "path";
+import NextImage from "next/image";
 import { AnimatedLogo } from "../components/complex/AnimatedLogo";
 import { H2, H3, Paragraph, UL, OL, LI } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 
+import { Logo, LogoCarousel } from "../components/complex/LogoCarousel";
+
 export default function Home() {
+  // Read client images from the filesystem
+  const clientsDir = path.join(process.cwd(), "public", "images", "clients");
+  const files = fs.readdirSync(clientsDir);
+
+  // Filter for image files (jpg, png, gif, webp, svg)
+  const imageFiles = files.filter((file) =>
+    /\.(jpe?g|png|gif|webp|svg)$/i.test(file)
+  );
+
+  // Create Logo objects
+  const logos: Logo[] = imageFiles.map((file, i) => {
+    const src = `/images/clients/${file}`;
+    return {
+      id: i,
+      name: file,
+      img: src,
+    };
+  });
   return (
     <div className="min-h-screen bg-white leading-loose">
       <AnimatedLogo />
@@ -58,15 +80,13 @@ export default function Home() {
         {/* They Trust Us Section */}
         <section id="They-Trust-Us" className="my-16">
           <H2 className="text-btv-blue-500 mb-4">They Trust Us</H2>
-          <Paragraph className="mb-4 text-md">
+          {/* <Paragraph className="mb-4 text-md">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
-          </Paragraph>
-          <div className="border-dashed border-2 border-gray-300 rounded-lg p-8 text-center">
-            <Paragraph className="text-gray-600">
-              Placeholder for carousel of client logos
-            </Paragraph>
-          </div>
+          </Paragraph> */}
+
+          {/* <InfiniteCarousel images={logos} /> */}
+          <LogoCarousel logos={logos} columnCount={2} />
         </section>
 
         {/* Supporting Non-Profits Section */}
@@ -102,7 +122,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* James */}
             <div className="space-y-4 text-center">
-              <Image
+              <NextImage
                 width={160}
                 height={160}
                 className="w-40 h-40 rounded-full mx-auto"
@@ -137,7 +157,7 @@ export default function Home() {
             </div>
             {/* Kyle */}
             <div className="space-y-4 text-center">
-              <Image
+              <NextImage
                 width={160}
                 height={160}
                 className="w-40 h-40 rounded-full mx-auto"
