@@ -238,10 +238,16 @@ export function AnimatedLogo() {
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-12"
         style={{ zIndex: 10 }}
       >
-        <h1 ref={heading1Ref} className="font-sans text-6xl leading-none m-0">
+        <h1
+          ref={heading1Ref}
+          className=" font-rubik-mono-one text-5xl text-gray-800 leading-none m-0"
+        >
           BTV
         </h1>
-        <h1 ref={heading2Ref} className="font-sans text-6xl leading-none m-0">
+        <h1
+          ref={heading2Ref}
+          className=" font-rubik-mono-one text-5xl text-gray-800 leading-none m-0"
+        >
           dev
         </h1>
       </div>
