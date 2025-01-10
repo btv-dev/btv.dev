@@ -1,12 +1,12 @@
 import fs from "fs";
 import path from "path";
 import NextImage from "next/image";
-import { AnimatedLogo } from "../components/complex/AnimatedLogo";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 
 import { Logo, LogoCarousel } from "../components/complex/LogoCarousel";
 import { WorkAndFeatures } from "../components/sections/WorkAndFeatures";
 import OurApproach from "../components/sections/OurApproach";
+import { HeroHighlightImplemented } from "../components/complex/HeroHighlight";
 
 export default function Home() {
   // Read client images from the filesystem
@@ -29,13 +29,13 @@ export default function Home() {
   });
   return (
     <div className="min-h-screen bg-white leading-loose">
-      <AnimatedLogo />
+      <HeroHighlightImplemented />
 
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <Paragraph className="text-lg text-center font-medium text-gray-700">
+        {/* <Paragraph className="text-lg text-center font-medium text-gray-700">
           A web design and development agency crafting digital solutions that
           reflect your values and amplify your mission.
-        </Paragraph>
+        </Paragraph> */}
 
         <OurApproach />
 
