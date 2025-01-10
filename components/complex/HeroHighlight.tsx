@@ -22,14 +22,13 @@ export function HeroHighlightImplemented() {
         className="text-2xl px-4 md:text-4xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
       >
         <AnimatedLogo />A web design and development agency crafting digital
-        solutions that reflect{" "}
-        <Highlight className="text-black dark:text-white">
-          your values
-        </Highlight>
-        and amplify{" "}
-        <Highlight className="text-black dark:text-white">
-          your mission.
-        </Highlight>
+        solutions that{" "}
+        <Highlight className="text-black dark:text-white">reflect</Highlight>{" "}
+        your values and{" "}
+        <Highlight delay={1.4} className="text-black dark:text-white">
+          amplify
+        </Highlight>{" "}
+        your mission.
       </motion.h1>
     </HeroHighlight>
   );

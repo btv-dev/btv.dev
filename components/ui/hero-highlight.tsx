@@ -63,9 +63,11 @@ export const HeroHighlight = ({
 export const Highlight = ({
   children,
   className,
+  delay = 0,
 }: {
   children: React.ReactNode;
   className?: string;
+  delay?: number; // Add delay as a prop
 }) => {
   return (
     <motion.span
@@ -76,9 +78,9 @@ export const Highlight = ({
         backgroundSize: "100% 100%",
       }}
       transition={{
-        duration: 2,
-        ease: "linear",
-        delay: 0.5,
+        duration: 1,
+        ease: "circOut",
+        delay, // Use the delay prop
       }}
       style={{
         backgroundRepeat: "no-repeat",
