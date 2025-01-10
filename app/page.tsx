@@ -42,7 +42,7 @@ export default function Home() {
         <WorkAndFeatures />
 
         {/* They Trust Us Section */}
-        <section id="They-Trust-Us" className="my-16">
+        <section id="They-Trust-Us" className="my-28">
           <H2>They Trust Us</H2>
           <Paragraph className="mb-12 sm:mb-0">
             Our clients span various industries, each trusting us to bring their
@@ -53,7 +53,7 @@ export default function Home() {
         </section>
 
         {/* Supporting Non-Profits Section */}
-        <section id="NonProfits" className="my-16">
+        <section id="NonProfits" className="my-28">
           <H2>Supporting Non-Profits</H2>
           <Paragraph>
             We are passionate about empowering mission-driven organizations.
@@ -77,9 +77,11 @@ export default function Home() {
         </section>
 
         {/* The Team Section */}
-        <section id="The-Team" className="my-16">
+        <section id="The-Team" className="my-28">
           <H2>The Team</H2>
-          <Paragraph>We're friends, brothers, & developers.</Paragraph>
+          <Paragraph className="mb-8">
+            We're friends, brothers, & developers.
+          </Paragraph>
           <div className="grid md:grid-cols-2 gap-8">
             {/* James */}
             <div className="space-y-4 text-center">
@@ -139,7 +141,7 @@ export default function Home() {
         </section>
 
         {/* Let's Talk Section */}
-        <section id="Lets-Talk" className="my-16">
+        <section id="Lets-Talk" className="my-28">
           <H2>Let's Talk!</H2>
           <Paragraph>
             Ready to transform your vision into reality? We're here to listen,
