@@ -88,6 +88,8 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       const parentScrollX = parentRef.current?.scrollLeft || 0;
       const parentScrollY = parentRef.current?.scrollTop || 0;
 
+      if (!parentRef.current) return;
+
       const parentBoundsWithScroll = parentRef.current.getBoundingClientRect();
 
       const adjustedX = e.clientX - parentBoundsWithScroll.left + parentScrollX;

@@ -35,7 +35,7 @@ export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
       >
         <div className="absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800  pointer-events-none" />
         <motion.div
-          className="pointer-events-none bg-dot-thick-indigo-500 dark:bg-dot-thick-indigo-500   absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+          className="pointer-events-none bg-dot-thick-indigo-500 dark:bg-dot-thick-indigo-500  absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
           style={{
             WebkitMaskImage: useMotionTemplate`
             radial-gradient(
@@ -53,7 +53,16 @@ export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
           `,
           }}
         />
-        {/* !!! removed relative for dot canvas */}
+
+        {/* Linear Gradient Overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none z-10"
+          style={{
+            background: `linear-gradient(to top, rgb(255, 255, 255) 0%, transparent 15rem)`,
+          }}
+        />
+
+        {/* Content */}
         <div className={cn("z-20", className)}>{children}</div>
       </div>
     );
