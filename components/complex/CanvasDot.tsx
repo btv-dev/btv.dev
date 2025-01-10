@@ -1,97 +1,123 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface CanvasDotProps {
   btvRef: React.RefObject<HTMLHeadingElement>;
   devRef: React.RefObject<HTMLHeadingElement>;
+  parentRef: React.RefObject<HTMLDivElement>; // New parent ref
 }
 
-export function CanvasDot({ btvRef, devRef }: CanvasDotProps) {
+export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [showDot, setShowDot] = useState(false);
+  const [dotRadius, setDotRadius] = useState(0);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const timer = setTimeout(() => setShowDot(true), 500);
 
+    return () => clearTimeout(timer); // Cleanup timer on unmount
+  }, []);
+
+  useEffect(() => {
+    if (
+      !showDot ||
+      !canvasRef.current ||
+      !btvRef.current ||
+      !devRef.current ||
+      !parentRef.current
+    )
+      return;
+
+    const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+
     if (!ctx) return;
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = document.documentElement.scrollHeight; // Full document height
+    // Resize canvas to cover the whole page
+    const updateCanvasSize = () => {
+      canvas.width = document.body.scrollWidth;
+      canvas.height = document.body.scrollHeight;
     };
 
-    const calculateCenter = () => {
-      const btv = btvRef.current;
-      const dev = devRef.current;
+    updateCanvasSize();
+    window.addEventListener("resize", updateCanvasSize);
 
-      if (!btv || !dev) return { x: canvas.width / 2, y: canvas.height / 2 };
+    const btvBounds = btvRef.current.getBoundingClientRect();
+    const devBounds = devRef.current.getBoundingClientRect();
+    const parentBounds = parentRef.current.getBoundingClientRect();
 
-      const btvBounds = btv.getBoundingClientRect();
-      const devBounds = dev.getBoundingClientRect();
+    // Account for scroll position when calculating initial dot position
+    const centerX = (btvBounds.right + devBounds.left) / 2;
+    const centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
 
-      // Adjust positions to account for full document layout
-      const btvCenterX = btvBounds.left + btvBounds.width / 2 + window.scrollX;
-      const btvCenterY = btvBounds.top + btvBounds.height / 2 + window.scrollY;
+    let dotX = centerX;
+    let dotY = centerY;
+    let targetX = centerX;
+    let targetY = centerY;
+    const speed = 0.1;
 
-      const devCenterX = devBounds.left + devBounds.width / 2 + window.scrollX;
-      const devCenterY = devBounds.top + devBounds.height / 2 + window.scrollY;
-
-      // Calculate the midpoint
-      const centerX = (btvCenterX + devCenterX) / 2;
-      const centerY = (btvCenterY + devCenterY) / 2;
-
-      return { x: centerX, y: centerY };
+    const animateRadius = () => {
+      const growSpeed = 0.05;
+      if (dotRadius < 10) {
+        setDotRadius((prev) => Math.min(prev + growSpeed, 10));
+        requestAnimationFrame(animateRadius);
+      }
     };
 
-    const drawDot = (radius: number) => {
-      const { x, y } = calculateCenter();
+    // Trigger the radius animation
+    animateRadius();
+
+    const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Smoothly move the dot towards the target
+      dotX += (targetX - dotX) * speed;
+      dotY += (targetY - dotY) * speed;
+
+      // Draw the dot
       ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.arc(dotX, dotY, dotRadius, 0, 2 * Math.PI);
       ctx.fillStyle = "#1d83c4";
       ctx.fill();
-      ctx.closePath();
+
+      requestAnimationFrame(draw);
     };
 
-    const growDot = () => {
-      let radius = 0;
-      const targetRadius = 10;
-      const growthSpeed = 0.5;
+    const onMouseMove = (e: MouseEvent) => {
+      const parentScrollX = parentRef.current?.scrollLeft || 0;
+      const parentScrollY = parentRef.current?.scrollTop || 0;
 
-      const animate = () => {
-        drawDot(radius);
-        radius = Math.min(radius + growthSpeed, targetRadius);
+      const parentBoundsWithScroll = parentRef.current.getBoundingClientRect();
 
-        if (radius < targetRadius) {
-          requestAnimationFrame(animate);
-        }
-      };
+      const adjustedX = e.clientX - parentBoundsWithScroll.left + parentScrollX;
+      const adjustedY = e.clientY - parentBoundsWithScroll.top + parentScrollY;
 
-      animate();
+      // Restrict the target coordinates within the parent boundaries
+      targetX = Math.max(0, Math.min(parentBounds.width, adjustedX));
+
+      targetY = Math.max(0, Math.min(parentBounds.height, adjustedY));
     };
 
-    const initializeCanvas = () => {
-      resizeCanvas();
-      growDot();
-
-      window.addEventListener("resize", () => {
-        resizeCanvas();
-        drawDot(10); // Redraw the dot after resize
-      });
+    const onMouseLeave = () => {
+      // Reset to initial position when the cursor leaves the screen
+      targetX = centerX;
+      targetY = centerY;
     };
 
-    const delayTimeout = setTimeout(() => {
-      initializeCanvas();
-    }, 500);
+    parentRef.current.addEventListener("mousemove", onMouseMove);
+    parentRef.current.addEventListener("mouseleave", onMouseLeave);
+
+    draw();
 
     return () => {
-      clearTimeout(delayTimeout);
-      window.removeEventListener("resize", () => drawDot(10));
+      window.removeEventListener("resize", updateCanvasSize);
+      parentRef.current?.removeEventListener("mousemove", onMouseMove);
+      parentRef.current?.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [btvRef, devRef]);
+  }, [showDot, btvRef, devRef, parentRef, dotRadius]);
+
+  if (!showDot) return null;
 
   return (
     <canvas
@@ -100,7 +126,7 @@ export function CanvasDot({ btvRef, devRef }: CanvasDotProps) {
         position: "absolute",
         top: 0,
         left: 0,
-        width: "100%",
+        pointerEvents: "none",
         zIndex: -1,
       }}
     />

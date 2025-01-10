@@ -35,7 +35,11 @@ export function HeroHighlightImplemented() {
             >
               BTV
             </h1>
-            <CanvasDot btvRef={btvRef} devRef={devRef} />
+            <CanvasDot
+              parentRef={heroHighlightRef}
+              btvRef={btvRef}
+              devRef={devRef}
+            />
             <h1
               ref={devRef}
               className="font-rubik-mono-one text-5xl text-gray-800 leading-none m-0"
