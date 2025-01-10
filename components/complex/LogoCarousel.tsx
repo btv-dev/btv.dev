@@ -45,7 +45,7 @@ const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
   ({ logos, index, currentTime }) => {
-    const cycleInterval = 2000;
+    const cycleInterval = 5000;
     const columnDelay = index * 200;
     const adjustedTime =
       (currentTime + columnDelay) % (cycleInterval * logos.length);
