@@ -30,8 +30,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white leading-loose">
       <AnimatedLogo />
+
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        {/* Our Approach Section */}
+        <Paragraph className="text-lg text-center font-medium text-gray-700">
+          A web design and development agency crafting digital solutions that
+          reflect your values and amplify your mission.
+        </Paragraph>
 
         <OurApproach />
 

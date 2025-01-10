@@ -24,7 +24,8 @@ const rubikMonoOne = Rubik_Mono_One({
 
 export const metadata: Metadata = {
   title: "BTV.dev",
-  description: "We're a web agency looking to make the world a better place.",
+  description:
+    "A web design and development agency crafting digital solutions that reflect your values and amplify your mission.",
 };
 
 export default function RootLayout({
