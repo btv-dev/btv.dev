@@ -44,7 +44,7 @@ export default function Home() {
         {/* They Trust Us Section */}
         <section id="They-Trust-Us" className="my-28">
           <H2>They Trust Us</H2>
-          <Paragraph className="mb-12 sm:mb-0">
+          <Paragraph className="mb-12 sm:mb-18">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
           </Paragraph>
