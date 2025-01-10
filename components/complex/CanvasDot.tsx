@@ -5,18 +5,18 @@ import { useEffect, useRef, useState } from "react";
 interface CanvasDotProps {
   btvRef: React.RefObject<HTMLHeadingElement>;
   devRef: React.RefObject<HTMLHeadingElement>;
-  parentRef: React.RefObject<HTMLDivElement>; // New parent ref
+  parentRef: React.RefObject<HTMLDivElement>;
 }
 
 export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const radiusRef = useRef(0); // Use a ref to track radius directly
+  const startTimeRef = useRef<number | null>(null);
   const [showDot, setShowDot] = useState(false);
-  const [dotRadius, setDotRadius] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowDot(true), 500);
-
-    return () => clearTimeout(timer); // Cleanup timer on unmount
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
 
     if (!ctx) return;
 
-    // Resize canvas to cover the whole page
     const updateCanvasSize = () => {
       canvas.width = document.body.scrollWidth;
       canvas.height = document.body.scrollHeight;
@@ -47,7 +46,6 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
     const devBounds = devRef.current.getBoundingClientRect();
     const parentBounds = parentRef.current.getBoundingClientRect();
 
-    // Account for scroll position when calculating initial dot position
     const centerX = (btvBounds.right + devBounds.left) / 2;
     const centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
 
@@ -57,27 +55,36 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
     let targetY = centerY;
     const speed = 0.1;
 
-    const animateRadius = () => {
-      const growSpeed = 0.05;
-      if (dotRadius < 10) {
-        setDotRadius((prev) => Math.min(prev + growSpeed, 10));
+    const targetRadius = 10;
+    const animationDuration = 500; // Animation duration in ms
+
+    // Ease-in-out quad function
+    const easeInOutQuad = (t: number) =>
+      t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    const animateRadius = (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp;
+
+      const elapsed = timestamp - startTimeRef.current;
+      const progress = Math.min(elapsed / animationDuration, 1);
+
+      radiusRef.current = easeInOutQuad(progress) * targetRadius;
+
+      if (progress < 1) {
         requestAnimationFrame(animateRadius);
       }
     };
 
-    // Trigger the radius animation
-    animateRadius();
+    requestAnimationFrame(animateRadius);
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Smoothly move the dot towards the target
       dotX += (targetX - dotX) * speed;
       dotY += (targetY - dotY) * speed;
 
-      // Draw the dot
       ctx.beginPath();
-      ctx.arc(dotX, dotY, dotRadius, 0, 2 * Math.PI);
+      ctx.arc(dotX, dotY, radiusRef.current, 0, 2 * Math.PI);
       ctx.fillStyle = "#1d83c4";
       ctx.fill();
 
@@ -95,14 +102,11 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       const adjustedX = e.clientX - parentBoundsWithScroll.left + parentScrollX;
       const adjustedY = e.clientY - parentBoundsWithScroll.top + parentScrollY;
 
-      // Restrict the target coordinates within the parent boundaries
       targetX = Math.max(0, Math.min(parentBounds.width, adjustedX));
-
       targetY = Math.max(0, Math.min(parentBounds.height, adjustedY));
     };
 
     const onMouseLeave = () => {
-      // Reset to initial position when the cursor leaves the screen
       targetX = centerX;
       targetY = centerY;
     };
@@ -117,7 +121,7 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       parentRef.current?.removeEventListener("mousemove", onMouseMove);
       parentRef.current?.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [showDot, btvRef, devRef, parentRef, dotRadius]);
+  }, [showDot, btvRef, devRef, parentRef]);
 
   if (!showDot) return null;
 

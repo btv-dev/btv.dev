@@ -25,7 +25,7 @@ export function HeroHighlightImplemented() {
             duration: 0.5,
             ease: [0.4, 0.0, 0.2, 1],
           }}
-          className="text-2xl px-4 md:text-4xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
+          className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
         >
           {/* !!! Removed relative from below to get dot canvas to take up everything */}
           <div className="flex flex-col gap-20 mb-32">
@@ -48,9 +48,11 @@ export function HeroHighlightImplemented() {
             </h1>
           </div>
           A web design and development agency crafting digital solutions that{" "}
-          <Highlight className="dark:text-white">reflect</Highlight> your values
-          and{" "}
-          <Highlight delay={1.4} className="dark:text-white">
+          <Highlight delay={2} className="dark:text-white">
+            reflect
+          </Highlight>{" "}
+          your values and{" "}
+          <Highlight delay={4.5} className="dark:text-white">
             amplify
           </Highlight>{" "}
           your mission.
