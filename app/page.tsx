@@ -1,12 +1,12 @@
 import fs from "fs";
 import path from "path";
 import NextImage from "next/image";
-import { AnimatedLogo } from "../components/complex/AnimatedLogo";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 
 import { Logo, LogoCarousel } from "../components/complex/LogoCarousel";
 import { WorkAndFeatures } from "../components/sections/WorkAndFeatures";
 import OurApproach from "../components/sections/OurApproach";
+import { HeroHighlightImplemented } from "../components/complex/HeroHighlight";
 
 export default function Home() {
   // Read client images from the filesystem
@@ -29,27 +29,31 @@ export default function Home() {
   });
   return (
     <div className="min-h-screen bg-white leading-loose">
-      <AnimatedLogo />
+      <HeroHighlightImplemented />
+
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        {/* Our Approach Section */}
+        {/* <Paragraph className="text-lg text-center font-medium text-gray-700">
+          A web design and development agency crafting digital solutions that
+          reflect your values and amplify your mission.
+        </Paragraph> */}
 
         <OurApproach />
 
         <WorkAndFeatures />
 
         {/* They Trust Us Section */}
-        <section id="They-Trust-Us" className="my-16">
+        <section id="They-Trust-Us" className="my-28">
           <H2>They Trust Us</H2>
-          <Paragraph className="mb-12 sm:mb-0">
+          <Paragraph className="mb-12 sm:mb-18">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
           </Paragraph>
 
-          <LogoCarousel logos={logos} columnCount={2} />
+          <LogoCarousel logos={logos} columnCount={3} />
         </section>
 
         {/* Supporting Non-Profits Section */}
-        <section id="NonProfits" className="my-16">
+        <section id="NonProfits" className="my-28">
           <H2>Supporting Non-Profits</H2>
           <Paragraph>
             We are passionate about empowering mission-driven organizations.
@@ -73,9 +77,11 @@ export default function Home() {
         </section>
 
         {/* The Team Section */}
-        <section id="The-Team" className="my-16">
+        <section id="The-Team" className="my-28">
           <H2>The Team</H2>
-          <Paragraph>We're friends, brothers, & developers.</Paragraph>
+          <Paragraph className="mb-8">
+            We're friends, brothers, & developers.
+          </Paragraph>
           <div className="grid md:grid-cols-2 gap-8">
             {/* James */}
             <div className="space-y-4 text-center">
@@ -135,7 +141,7 @@ export default function Home() {
         </section>
 
         {/* Let's Talk Section */}
-        <section id="Lets-Talk" className="my-16">
+        <section id="Lets-Talk" className="my-28">
           <H2>Let's Talk!</H2>
           <Paragraph>
             Ready to transform your vision into reality? We're here to listen,

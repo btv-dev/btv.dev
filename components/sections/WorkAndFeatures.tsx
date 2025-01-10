@@ -63,7 +63,7 @@ const cardVariants = {
 
 const WorkAndFeatures = () => {
   return (
-    <section id="Work-&-Features" className="my-16">
+    <section id="Work-&-Features" className="my-28">
       <motion.div
         className="max-w-5xl mx-auto px-4"
         initial="hidden"

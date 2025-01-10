@@ -1,4 +1,10 @@
+import tailwindcssAnimate from "tailwindcss-animate";
+import svgToDataUri from "mini-svg-data-uri";
+import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette";
+
+import type { PluginAPI } from "tailwindcss/types/config";
 import type { Config } from "tailwindcss";
+
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
@@ -76,6 +82,42 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    tailwindcssAnimate,
+    addVariablesForColors,
+    function ({
+      matchUtilities,
+      theme,
+    }: {
+      matchUtilities: PluginAPI["matchUtilities"];
+      theme: PluginAPI["theme"];
+    }) {
+      matchUtilities(
+        {
+          "bg-dot-thick": (value: string) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none">
+                <circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="2.5"></circle>
+              </svg>`
+            )}")`,
+          }),
+        },
+        { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+      );
+    },
+  ],
 };
 export default config;
+
+// added for compliance with https://ui.aceternity.com/components/hero-highlight
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }: PluginAPI) {
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
