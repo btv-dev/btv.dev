@@ -41,8 +41,8 @@ export function AnimatedLogo() {
     let targetX = 0;
     let targetY = 0;
     const easeFactor = 0.1;
-    const proximityThreshold = 250;
-    const maxDistanceFromCenter = 250;
+    const proximityThreshold = 650;
+    const maxDistanceFromCenter = 650;
     const nudgeDistance = 10;
     const resetLockDistance = 20;
 
