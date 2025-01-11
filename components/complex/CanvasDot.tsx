@@ -34,26 +34,43 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
 
     if (!ctx) return;
 
-    const updateCanvasSize = () => {
-      canvas.width = document.body.scrollWidth;
-      canvas.height = document.body.scrollHeight;
-    };
-
-    updateCanvasSize();
-    window.addEventListener("resize", updateCanvasSize);
-
     const btvBounds = btvRef.current.getBoundingClientRect();
     const devBounds = devRef.current.getBoundingClientRect();
     const parentBounds = parentRef.current.getBoundingClientRect();
 
-    const centerX = (btvBounds.right + devBounds.left) / 2;
-    const centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
+    let centerX = (btvBounds.right + devBounds.left) / 2;
+    let centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
 
     let dotX = centerX;
     let dotY = centerY;
     let targetX = centerX;
     let targetY = centerY;
     const speed = 0.1;
+
+    const updateCanvasSize = () => {
+      canvas.width = document.body.scrollWidth;
+      canvas.height = document.body.scrollHeight;
+
+      // Recalculate origin coordinates
+      const btvBounds = btvRef.current?.getBoundingClientRect();
+      const devBounds = devRef.current?.getBoundingClientRect();
+
+      if (btvBounds && devBounds) {
+        centerX = (btvBounds.right + devBounds.left) / 2;
+        centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
+
+        // Adjust dot position if it is at or near the current origin
+        if (Math.abs(dotX - targetX) < 1 && Math.abs(dotY - targetY) < 1) {
+          dotX = centerX;
+          dotY = centerY;
+          targetX = centerX;
+          targetY = centerY;
+        }
+      }
+    };
+
+    updateCanvasSize();
+    window.addEventListener("resize", updateCanvasSize);
 
     const targetRadius = 10;
     const animationDuration = 500; // Animation duration in ms
@@ -102,11 +119,26 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       const adjustedX = e.clientX - parentBoundsWithScroll.left + parentScrollX;
       const adjustedY = e.clientY - parentBoundsWithScroll.top + parentScrollY;
 
-      targetX = Math.max(0, Math.min(parentBounds.width, adjustedX));
-      targetY = Math.max(0, Math.min(parentBounds.height, adjustedY));
+      const mouseX = Math.max(0, Math.min(parentBounds.width, adjustedX));
+      const mouseY = Math.max(0, Math.min(parentBounds.height, adjustedY));
+
+      // Calculate the distance from the dot's current position
+      const distance = Math.sqrt((mouseX - dotX) ** 2 + (mouseY - dotY) ** 2);
+
+      const maxDistance = 200; // Maximum allowed distance
+
+      // Update target position
+      if (distance > maxDistance) {
+        targetX = centerX;
+        targetY = centerY;
+      } else {
+        targetX = mouseX;
+        targetY = mouseY;
+      }
     };
 
     const onMouseLeave = () => {
+      // Reset target to origin on mouse leave
       targetX = centerX;
       targetY = centerY;
     };
