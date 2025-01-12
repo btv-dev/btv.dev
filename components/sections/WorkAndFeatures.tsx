@@ -95,7 +95,7 @@ const WorkAndFeatures = () => {
             return (
               <motion.div
                 key={index}
-                className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-80"
+                className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full sm:w-72"
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"

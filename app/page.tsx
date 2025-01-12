@@ -50,7 +50,7 @@ export default function Home() {
             digital visions to life.
           </Paragraph>
 
-          <LogoCarousel logos={logos} columnCount={3} />
+          <LogoCarousel logos={logos} />
         </Section>
 
         {/* Supporting Non-Profits Section */}

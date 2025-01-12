@@ -73,7 +73,9 @@ export const DotsBackground = forwardRef<HTMLDivElement, HeroHighlightProps>(
         />
 
         {/* Content */}
-        <div className={cn("z-20 py-64 w-full", className)}>{children}</div>
+        <div className={cn("z-20 py-32 sm:py-64 w-full", className)}>
+          {children}
+        </div>
       </div>
     );
   }
