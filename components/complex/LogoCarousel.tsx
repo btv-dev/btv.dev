@@ -14,6 +14,7 @@ interface LogoColumnProps {
   logos: Logo[];
   index: number;
   currentTime: number;
+  speed: number;
 }
 
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -26,17 +27,61 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 };
 
 const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
-  const shuffled = shuffleArray(allLogos);
+  const shuffled = shuffleArray([...allLogos]);
   const columns: Logo[][] = Array.from({ length: columnCount }, () => []);
 
-  shuffled.forEach((logo, index) => {
-    columns[index % columnCount].push(logo);
-  });
+  // Keep track of the last used logo in each row
+  const getLastUsedInRow = (rowIndex: number): Logo | null => {
+    for (let col = columnCount - 1; col >= 0; col--) {
+      if (columns[col][rowIndex]) {
+        return columns[col][rowIndex];
+      }
+    }
+    return null;
+  };
 
+  // Fill columns while avoiding adjacent duplicates
+  let currentRow = 0;
+  let availableLogos = [...shuffled];
+
+  while (
+    availableLogos.length > 0 &&
+    columns.some((col) => col.length < Math.ceil(shuffled.length / columnCount))
+  ) {
+    for (let col = 0; col < columnCount; col++) {
+      if (columns[col].length <= currentRow) {
+        const lastUsedLogo = getLastUsedInRow(currentRow);
+
+        // Filter out the logo that was just used in the previous column
+        let validLogos = availableLogos.filter((logo) => logo !== lastUsedLogo);
+
+        // If we have no valid logos left, reset available logos while keeping restrictions
+        if (validLogos.length === 0) {
+          validLogos = shuffleArray(
+            allLogos.filter((logo) => logo !== lastUsedLogo)
+          );
+        }
+
+        // Select and place a logo
+        const selectedLogo =
+          validLogos[Math.floor(Math.random() * validLogos.length)];
+        columns[col].push(selectedLogo);
+
+        // Remove the used logo from available logos
+        availableLogos = availableLogos.filter((logo) => logo !== selectedLogo);
+      }
+    }
+    currentRow++;
+  }
+
+  // Ensure all columns have the same length
   const maxLength = Math.max(...columns.map((col) => col.length));
   columns.forEach((col) => {
     while (col.length < maxLength) {
-      col.push(shuffled[Math.floor(Math.random() * shuffled.length)]);
+      // Find valid logos for padding (avoiding adjacent duplicates)
+      const lastUsedLogo = col[col.length - 1];
+      const validLogos = shuffled.filter((logo) => logo !== lastUsedLogo);
+      col.push(validLogos[Math.floor(Math.random() * validLogos.length)]);
     }
   });
 
@@ -44,8 +89,8 @@ const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
 };
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
-  ({ logos, index, currentTime }) => {
-    const cycleInterval = 4000;
+  ({ logos, index, currentTime, speed }) => {
+    const cycleInterval = speed;
     const columnDelay = index * 200;
     const adjustedTime =
       (currentTime + columnDelay) % (cycleInterval * logos.length);
@@ -112,17 +157,22 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
 LogoColumn.displayName = "LogoColumn";
 
 interface LogoCarouselProps {
-  columnCount?: number;
   logos: Logo[];
 }
 
-export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
+export function LogoCarousel({ logos }: LogoCarouselProps) {
   const [logoSets, setLogoSets] = useState<Logo[][]>([]);
   const [currentTime, setCurrentTime] = useState(0);
 
   const updateTime = useCallback(() => {
     setCurrentTime((prevTime) => prevTime + 100);
   }, []);
+
+  const isBase =
+    typeof window !== "undefined" && window.innerWidth > 640 ? false : true;
+  const columnCount = isBase ? 2 : 3;
+
+  const speed = isBase ? 2500 : 4000;
 
   useEffect(() => {
     const intervalId = setInterval(updateTime, 100);
@@ -142,6 +192,7 @@ export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
           logos={logos}
           index={index}
           currentTime={currentTime}
+          speed={speed}
         />
       ))}
     </div>
