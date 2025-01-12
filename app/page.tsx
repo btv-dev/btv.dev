@@ -94,10 +94,11 @@ export default function Home() {
               />
               <H3 className="font-semibold">James Mitofsky</H3>
               <Paragraph className="text-md text-justify">
-                A design enthusiast with a passion for how aesthetics influence
-                user behavior. When he's not coding, James is speaking French,
-                running through the countryside, or carving down snowy slopes on
-                his snowboard.
+                With a bachelor's in Computer Science from CESI, a French
+                engineering school, James is a design enthusiast with a passion
+                for understanding user behavior. When not coding, James is
+                running through the countryside, advocating for social issues,
+                or carving down Vermont's snowy slopes.
               </Paragraph>
               {/* <div className="space-y-2">
                 <a
@@ -121,7 +122,8 @@ export default function Home() {
               />
               <H3 className="font-semibold">Kyle Mitofsky</H3>
               <Paragraph className="text-md text-justify">
-                A knowledge sharer with a creative spirit, Kyle thrives on
+                Posessing a master's in Managing Information Science from
+                Champlain College, Kyle is a knowledge sharer who thrives on
                 educating and empowering. Proud owner of three black cats, a
                 dog, and multiple laptops, Kyle brings a unique blend of
                 expertise and personality.
