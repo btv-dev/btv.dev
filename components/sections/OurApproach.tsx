@@ -31,7 +31,7 @@ const headerVariants = {
 
 const OurApproach = () => {
   return (
-    <Section id="Our-Approach" className="my-8 sm:my-16 px-4">
+    <Section id="Our-Approach">
       <MotionH2>Our Approach</MotionH2>
 
       <MotionParagraph>

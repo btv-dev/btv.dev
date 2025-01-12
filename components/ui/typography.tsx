@@ -52,7 +52,7 @@ export const H3 = forwardRef<HTMLHeadingElement, TypographyProps>(
       <h3
         ref={ref}
         className={cn(
-          "scroll-m-20 text-2xl font-semibold tracking-tight",
+          "scroll-m-20 text-center text-[1.2rem] font-semibold tracking-tight",
           className
         )}
       >

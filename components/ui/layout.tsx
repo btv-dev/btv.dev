@@ -12,14 +12,15 @@ export const Section = ({
   id?: string;
   withBackground?: boolean;
 }) => {
+  const classesToApplyToInner = "max-w-4xl mx-auto px-4";
   return (
     <section id={id} className={cn("py-18", className)}>
       {withBackground ? (
-        <DotsBackground className="max-w-5xl mx-auto px-4" fadeTop fadeBottom>
+        <DotsBackground className={classesToApplyToInner} fadeTop fadeBottom>
           {children}
         </DotsBackground>
       ) : (
-        <div className="max-w-5xl mx-auto px-4">{children}</div>
+        <div className={classesToApplyToInner}>{children}</div>
       )}
     </section>
   );
