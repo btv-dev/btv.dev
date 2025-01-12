@@ -55,6 +55,7 @@ export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
         />
 
         {/* Linear Gradient Overlay */}
+        {/* Linear Gradient Overlays */}
         <div
           className="absolute inset-0 pointer-events-none z-10"
           style={{

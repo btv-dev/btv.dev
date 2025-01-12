@@ -54,7 +54,7 @@ export default function Home() {
         </Section>
 
         {/* Supporting Non-Profits Section */}
-        <Section id="NonProfits">
+        <Section id="NonProfits" withBackground>
           <H2>Supporting Non-Profits</H2>
           <Paragraph>
             We are passionate about empowering mission-driven organizations.
@@ -144,7 +144,7 @@ export default function Home() {
         </Section>
 
         {/* Let's Talk Section */}
-        <Section id="Lets-Talk">
+        <Section id="Lets-Talk" withBackground>
           <H2>Let's Talk!</H2>
           <Paragraph>
             Ready to transform your vision into reality? We're here to listen,
@@ -168,7 +168,7 @@ export default function Home() {
           </Button> */}
         </Section>
       </main>
-      <footer id="footer" className="bg-gray-100 py-8 text-center">
+      <footer id="footer" className="text-center pb-8">
         <Paragraph>
           &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
         </Paragraph>
