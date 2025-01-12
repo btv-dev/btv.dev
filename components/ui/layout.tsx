@@ -16,7 +16,6 @@ export const Section = ({
     <section id={id} className={cn("py-18", className)}>
       {withBackground ? (
         <DotsBackground className="max-w-5xl mx-auto px-4" fadeTop fadeBottom>
-          {/* <div className="bg-[#ffffff8c]">{children}</div> */}
           {children}
         </DotsBackground>
       ) : (
@@ -25,5 +24,3 @@ export const Section = ({
     </section>
   );
 };
-
-//  mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 className="max-w-5xl mx-auto px-4"
