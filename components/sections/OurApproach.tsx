@@ -1,5 +1,6 @@
 "use client";
 
+import { Section } from "../ui/layout";
 import { MotionH2, MotionParagraph } from "../ui/motion-typography";
 
 const steps = [
@@ -30,7 +31,7 @@ const headerVariants = {
 
 const OurApproach = () => {
   return (
-    <section id="Our-Approach" className="my-8 sm:my-16 px-4">
+    <Section id="Our-Approach" className="my-8 sm:my-16 px-4">
       <MotionH2>Our Approach</MotionH2>
 
       <MotionParagraph>
@@ -54,7 +55,7 @@ const OurApproach = () => {
         the project in the right direction before committing to the final
         design, ensuring our work aligns perfectly with your vision.
       </MotionParagraph>
-    </section>
+    </Section>
   );
 };
 

@@ -7,6 +7,7 @@ import { Logo, LogoCarousel } from "../components/complex/LogoCarousel";
 import { WorkAndFeatures } from "../components/sections/WorkAndFeatures";
 import OurApproach from "../components/sections/OurApproach";
 import { HeroHighlightImplemented } from "../components/complex/HeroHighlight";
+import { Section } from "../components/ui/layout";
 
 export default function Home() {
   // Read client images from the filesystem
@@ -31,7 +32,7 @@ export default function Home() {
     <div className="min-h-screen bg-white leading-loose">
       <HeroHighlightImplemented />
 
-      <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <main>
         {/* <Paragraph className="text-lg text-center font-medium text-gray-700">
           A web design and development agency crafting digital solutions that
           reflect your values and amplify your mission.
@@ -42,7 +43,7 @@ export default function Home() {
         <WorkAndFeatures />
 
         {/* They Trust Us Section */}
-        <section id="They-Trust-Us" className="my-28">
+        <Section id="They-Trust-Us">
           <H2>They Trust Us</H2>
           <Paragraph className="mb-12 sm:mb-18">
             Our clients span various industries, each trusting us to bring their
@@ -50,10 +51,10 @@ export default function Home() {
           </Paragraph>
 
           <LogoCarousel logos={logos} columnCount={3} />
-        </section>
+        </Section>
 
         {/* Supporting Non-Profits Section */}
-        <section id="NonProfits" className="my-28">
+        <Section id="NonProfits">
           <H2>Supporting Non-Profits</H2>
           <Paragraph>
             We are passionate about empowering mission-driven organizations.
@@ -74,10 +75,10 @@ export default function Home() {
               Let's talk!
             </a>
           </Paragraph>
-        </section>
+        </Section>
 
         {/* The Team Section */}
-        <section id="The-Team" className="my-28">
+        <Section id="The-Team">
           <H2>The Team</H2>
           <Paragraph className="mb-8">
             We're friends, brothers, & developers.
@@ -140,10 +141,10 @@ export default function Home() {
               </div> */}
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Let's Talk Section */}
-        <section id="Lets-Talk" className="my-28">
+        <Section id="Lets-Talk">
           <H2>Let's Talk!</H2>
           <Paragraph>
             Ready to transform your vision into reality? We're here to listen,
@@ -165,7 +166,7 @@ export default function Home() {
           {/* <Button variant="default" className="mt-4">
             Contact Us
           </Button> */}
-        </section>
+        </Section>
       </main>
       <footer id="footer" className="bg-gray-100 py-8 text-center">
         <Paragraph>

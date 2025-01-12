@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { H3 } from "../ui/typography";
 import { MotionH2, MotionParagraph } from "../ui/motion-typography";
+import { Section } from "../ui/layout";
 
 const features = [
   {
@@ -63,9 +64,8 @@ const cardVariants = {
 
 const WorkAndFeatures = () => {
   return (
-    <section id="Work-&-Features" className="my-28">
+    <Section id="Work-&-Features">
       <motion.div
-        className="max-w-5xl mx-auto px-4"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -112,7 +112,7 @@ const WorkAndFeatures = () => {
           })}
         </div>
       </motion.div>
-    </section>
+    </Section>
   );
 };
 
