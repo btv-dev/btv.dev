@@ -96,10 +96,11 @@ export const Highlight = ({
         backgroundRepeat: "no-repeat",
         backgroundPosition: "left center",
         display: "inline",
+        whiteSpace: "nowrap",
       }}
       className={cn(
         `
-relative inline-block pb-1 px-1 rounded-lg 
+relative inline whitespace-nowrap pb-1 px-1 rounded-lg 
 bg-gradient-to-r 
 from-[#58AED2] to-[#74D7E2]
 dark:from-[#3F90BB] dark:to-[#51B3C7]

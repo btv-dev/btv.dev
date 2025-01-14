@@ -33,10 +33,6 @@ export default function Home() {
       <HeroHighlightImplemented />
 
       <main>
-        {/* <Paragraph className="text-lg text-center font-medium text-gray-700">
-          A web design and development agency crafting digital solutions that
-          reflect your values and amplify your mission.
-        </Paragraph> */}
 
         <OurApproach />
 
