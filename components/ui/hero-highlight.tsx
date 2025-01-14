@@ -54,7 +54,6 @@ export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
           }}
         />
 
-        {/* Linear Gradient Overlay */}
         {/* Linear Gradient Overlays */}
         <div
           className="absolute inset-0 pointer-events-none z-10"
@@ -83,14 +82,24 @@ export const Highlight = ({
     <motion.span
       initial={{
         backgroundSize: "0% 100%",
+        scale: 1,
       }}
       animate={{
         backgroundSize: "100% 100%",
+        scale: [1, 1.02, 1],
       }}
       transition={{
-        duration: 1,
-        ease: "circOut",
-        delay, // Use the delay prop
+        backgroundSize: {
+          duration: 0.4,
+          ease: "circInOut",
+          delay,
+        },
+        scale: {
+          duration: 0.5,
+          times: [0, 0.6, 1],
+          ease: "anticipate",
+          delay,
+        },
       }}
       style={{
         backgroundRepeat: "no-repeat",
