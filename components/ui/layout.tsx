@@ -5,18 +5,22 @@ export const Section = ({
   children,
   className,
   id,
-  withBackground = false,
+  fade,
 }: {
   children: React.ReactNode;
   className?: string;
   id?: string;
-  withBackground?: boolean;
+  fade?: "top" | "bottom" | "all";
 }) => {
   const classesToApplyToInner = "max-w-4xl mx-auto px-4";
   return (
     <section id={id} className={cn("py-18", className)}>
-      {withBackground ? (
-        <DotsBackground className={classesToApplyToInner} fadeTop fadeBottom>
+      {fade ? (
+        <DotsBackground
+          className={classesToApplyToInner}
+          fadeTop={fade === "all" || fade === "top"}
+          fadeBottom={fade === "all" || fade === "bottom"}
+        >
           {children}
         </DotsBackground>
       ) : (
