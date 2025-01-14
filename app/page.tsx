@@ -144,7 +144,7 @@ export default function Home() {
         </Section>
 
         {/* Let's Talk Section */}
-        <Section id="Lets-Talk" fade="top">
+        <Section id="Lets-Talk" fade="top" innerClassname="pb-0">
           <H2>Let's Talk!</H2>
           <Paragraph>
             Ready to transform your vision into reality? We're here to listen,
@@ -166,7 +166,7 @@ export default function Home() {
           {/* <Button variant="default" className="mt-4">
             Contact Us
           </Button> */}
-          <footer id="footer" className="text-center mt-32">
+          <footer id="footer" className="text-center my-16">
             <Paragraph>
               &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
             </Paragraph>
