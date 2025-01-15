@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
@@ -15,90 +15,19 @@ interface LogoColumnProps {
   index: number;
   currentTime: number;
   speed: number;
+  columnCount: number;
 }
 
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
-
-const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
-  const shuffled = shuffleArray([...allLogos]);
-  const columns: Logo[][] = Array.from({ length: columnCount }, () => []);
-
-  // Keep track of the last used logo in each row
-  const getLastUsedInRow = (rowIndex: number): Logo | null => {
-    for (let col = columnCount - 1; col >= 0; col--) {
-      if (columns[col][rowIndex]) {
-        return columns[col][rowIndex];
-      }
-    }
-    return null;
-  };
-
-  // Fill columns while avoiding adjacent duplicates
-  let currentRow = 0;
-  let availableLogos = [...shuffled];
-
-  while (
-    availableLogos.length > 0 &&
-    columns.some((col) => col.length < Math.ceil(shuffled.length / columnCount))
-  ) {
-    for (let col = 0; col < columnCount; col++) {
-      if (columns[col].length <= currentRow) {
-        const lastUsedLogo = getLastUsedInRow(currentRow);
-
-        // Filter out the logo that was just used in the previous column
-        let validLogos = availableLogos.filter((logo) => logo !== lastUsedLogo);
-
-        // If we have no valid logos left, reset available logos while keeping restrictions
-        if (validLogos.length === 0) {
-          validLogos = shuffleArray(
-            allLogos.filter((logo) => logo !== lastUsedLogo)
-          );
-        }
-
-        // Select and place a logo
-        const selectedLogo =
-          validLogos[Math.floor(Math.random() * validLogos.length)];
-        columns[col].push(selectedLogo);
-
-        // Remove the used logo from available logos
-        availableLogos = availableLogos.filter((logo) => logo !== selectedLogo);
-      }
-    }
-    currentRow++;
-  }
-
-  // Ensure all columns have the same length
-  const maxLength = Math.max(...columns.map((col) => col.length));
-  columns.forEach((col) => {
-    while (col.length < maxLength) {
-      // Find valid logos for padding (avoiding adjacent duplicates)
-      const lastUsedLogo = col[col.length - 1];
-      const validLogos = shuffled.filter((logo) => logo !== lastUsedLogo);
-      col.push(validLogos[Math.floor(Math.random() * validLogos.length)]);
-    }
-  });
-
-  return columns;
-};
-
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
-  ({ logos, index, currentTime, speed }) => {
-    const cycleInterval = speed;
-    const columnDelay = index * 200;
-    const adjustedTime =
-      (currentTime + columnDelay) % (cycleInterval * logos.length);
-    const currentIndex = Math.floor(adjustedTime / cycleInterval);
-    const currentLogoUrl = useMemo(
-      () => logos[currentIndex].img,
-      [logos, currentIndex]
-    );
+  ({ logos, index, currentTime, speed, columnCount }) => {
+    // Add column-based offset for logo selection
+    const logoOffset = index * Math.ceil(logos.length / columnCount);
+    // Add time delay between columns (200ms between each column)
+    const timeOffset = index * 200;
+    const adjustedTime = (currentTime + timeOffset + logoOffset * speed) % (speed * logos.length);
+    const currentIndex = Math.floor(adjustedTime / speed) % logos.length;
+
+    const currentLogo = logos[currentIndex];
 
     return (
       <motion.div
@@ -113,7 +42,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${logos[currentIndex].id}-${currentIndex}`}
+            key={`${currentLogo.id}-${currentIndex}`}
             className="absolute inset-0 flex items-center justify-center"
             initial={{ y: "10%", opacity: 0, filter: "blur(8px)" }}
             animate={{
@@ -141,10 +70,10 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
             }}
           >
             <Image
-              src={currentLogoUrl}
+              src={currentLogo.img}
               height={160}
               width={160}
-              alt={logos[currentIndex].name}
+              alt={currentLogo.name}
               className="h-32 w-32 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32"
             />
           </motion.div>
@@ -161,42 +90,47 @@ interface LogoCarouselProps {
 }
 
 export function LogoCarousel({ logos }: LogoCarouselProps) {
-  const [logoSets, setLogoSets] = useState<Logo[][]>([]);
   const [currentTime, setCurrentTime] = useState(0);
+  const [columnCount, setColumnCount] = useState(3); // Default to desktop view
+  const [speed, setSpeed] = useState(4000); // Default to desktop speed
+
+  // Handle responsive layout after mount
+  useEffect(() => {
+    const handleResize = () => {
+      const isBase = window.innerWidth <= 640;
+      setColumnCount(isBase ? 2 : 3);
+      setSpeed(isBase ? 2500 : 4000);
+    };
+
+    // Set initial values
+    handleResize();
+
+    // Add resize listener
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const updateTime = useCallback(() => {
     setCurrentTime((prevTime) => prevTime + 100);
   }, []);
-
-  const isBase =
-    typeof window !== "undefined" && window.innerWidth > 640 ? false : true;
-  const columnCount = isBase ? 2 : 3;
-
-  const speed = isBase ? 2500 : 4000;
 
   useEffect(() => {
     const intervalId = setInterval(updateTime, 100);
     return () => clearInterval(intervalId);
   }, [updateTime]);
 
-  useEffect(() => {
-    const distributedLogos = distributeLogos(logos, columnCount);
-    setLogoSets(distributedLogos);
-  }, [logos, columnCount]);
-
   return (
     <div className="flex space-x-4">
-      {logoSets.map((logos, index) => (
+      {Array.from({ length: columnCount }).map((_, index) => (
         <LogoColumn
           key={index}
           logos={logos}
           index={index}
           currentTime={currentTime}
           speed={speed}
+          columnCount={columnCount}
         />
       ))}
     </div>
   );
 }
-
-export { LogoColumn };
