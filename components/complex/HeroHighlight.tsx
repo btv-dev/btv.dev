@@ -30,7 +30,7 @@ export function HeroHighlightImplemented() {
           {/* !!! Removed relative from below to get dot canvas to take up everything */}
           <div className="flex flex-col gap-5 mb-32">
             <h1
-              className="font-rubik-mono-one text-5xl text-gray-800 leading-none m-0"
+              className="font-rubik-mono-one text-7xl text-gray-800 leading-none m-0"
             >
               BTV
             </h1>
@@ -40,7 +40,7 @@ export function HeroHighlightImplemented() {
             />
             <motion.h1
               ref={dotRef}
-              className="font-rubik-mono-one text-5xl text-btv-blue leading-none m-0"
+              className="font-rubik-mono-one text-7xl text-btv-blue leading-none m-0"
               initial={{ scale: 1 }}
               animate={{ scale: 0 }}
               transition={{ 
@@ -53,7 +53,7 @@ export function HeroHighlightImplemented() {
               DOT
             </motion.h1>
             <h1
-              className="font-rubik-mono-one text-5xl text-gray-800 leading-none m-0"
+              className="font-rubik-mono-one text-7xl text-gray-800 leading-none m-0"
             >
               dev
             </h1>

@@ -7,7 +7,7 @@ interface CanvasDotProps {
   parentRef: React.RefObject<HTMLDivElement>;
 }
 
-const DOT_SHOW_DELAY = 700;
+const DOT_SHOW_DELAY = 750;
 
 export function CanvasDot({ dotRef, parentRef }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -68,8 +68,8 @@ export function CanvasDot({ dotRef, parentRef }: CanvasDotProps) {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    const targetRadius = 10;
-    const animationDuration = 100;
+    const targetRadius = 13;
+    const animationDuration = 50;
 
     const easeInOutQuad = (t: number) =>
       t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
