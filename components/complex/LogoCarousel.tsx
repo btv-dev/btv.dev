@@ -81,6 +81,8 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
     }
     
     const currentLogo = currentSet[index];
+    // Reverse the animation delay to go right-to-left
+    const animationDelay = ((3 - 1) - index) * 0.1;
 
     return (
       <motion.div
@@ -88,7 +90,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          delay: index * 0.1,
+          delay: animationDelay,
           duration: 0.5,
           ease: "easeOut",
         }}
@@ -109,6 +111,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
                 mass: 1,
                 bounce: 0.2,
                 duration: 0.5,
+                delay: animationDelay,
               },
             }}
             exit={{
