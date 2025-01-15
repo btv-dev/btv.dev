@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
@@ -8,97 +8,74 @@ export interface Logo {
   name: string;
   id: number;
   img: string;
+  width: number;
+  height: number;
 }
+
+const isSignificantlyWider = (logo: Logo): boolean => {
+  // Only consider it wide if width is at least 10% greater than height
+  return logo.width > logo.height * 1.1;
+};
+
+const createLogoSets = (logos: Logo[]): Logo[][] => {
+  const wideLogos = logos.filter(isSignificantlyWider);
+  const tallLogos = logos.filter(logo => !isSignificantlyWider(logo));
+  const sets: Logo[][] = [];
+
+  // If we have both wide and tall logos, create alternating arrangements
+  if (wideLogos.length > 0 && tallLogos.length > 0) {
+    let wideIndex = 0;
+    let tallIndex = 0;
+
+    while (wideIndex < wideLogos.length && tallIndex < tallLogos.length) {
+      // First arrangement: wide logos on sides, tall in middle
+      if (wideIndex + 1 < wideLogos.length && tallIndex < tallLogos.length) {
+        sets.push([
+          wideLogos[wideIndex],
+          tallLogos[tallIndex],
+          wideLogos[wideIndex + 1]
+        ]);
+        wideIndex += 2;
+        tallIndex += 1;
+      }
+
+      // Second arrangement: tall logos on sides, wide in middle
+      if (wideIndex < wideLogos.length && tallIndex + 1 < tallLogos.length) {
+        sets.push([
+          tallLogos[tallIndex],
+          wideLogos[wideIndex],
+          tallLogos[tallIndex + 1]
+        ]);
+        wideIndex += 1;
+        tallIndex += 2;
+      }
+    }
+  }
+
+  // If we don't have enough logos for the special arrangements,
+  // or if we've used all the special combinations,
+  // add regular sequential sets
+  if (sets.length === 0) {
+    for (let i = 0; i < logos.length - 2; i++) {
+      sets.push([
+        logos[i % logos.length],
+        logos[(i + 1) % logos.length],
+        logos[(i + 2) % logos.length]
+      ]);
+    }
+  }
+
+  return sets;
+};
 
 interface LogoColumnProps {
-  logos: Logo[];
   index: number;
-  currentTime: number;
-  speed: number;
+  currentSet: Logo[];
 }
 
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
-
-const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
-  const shuffled = shuffleArray([...allLogos]);
-  const columns: Logo[][] = Array.from({ length: columnCount }, () => []);
-
-  // Keep track of the last used logo in each row
-  const getLastUsedInRow = (rowIndex: number): Logo | null => {
-    for (let col = columnCount - 1; col >= 0; col--) {
-      if (columns[col][rowIndex]) {
-        return columns[col][rowIndex];
-      }
-    }
-    return null;
-  };
-
-  // Fill columns while avoiding adjacent duplicates
-  let currentRow = 0;
-  let availableLogos = [...shuffled];
-
-  while (
-    availableLogos.length > 0 &&
-    columns.some((col) => col.length < Math.ceil(shuffled.length / columnCount))
-  ) {
-    for (let col = 0; col < columnCount; col++) {
-      if (columns[col].length <= currentRow) {
-        const lastUsedLogo = getLastUsedInRow(currentRow);
-
-        // Filter out the logo that was just used in the previous column
-        let validLogos = availableLogos.filter((logo) => logo !== lastUsedLogo);
-
-        // If we have no valid logos left, reset available logos while keeping restrictions
-        if (validLogos.length === 0) {
-          validLogos = shuffleArray(
-            allLogos.filter((logo) => logo !== lastUsedLogo)
-          );
-        }
-
-        // Select and place a logo
-        const selectedLogo =
-          validLogos[Math.floor(Math.random() * validLogos.length)];
-        columns[col].push(selectedLogo);
-
-        // Remove the used logo from available logos
-        availableLogos = availableLogos.filter((logo) => logo !== selectedLogo);
-      }
-    }
-    currentRow++;
-  }
-
-  // Ensure all columns have the same length
-  const maxLength = Math.max(...columns.map((col) => col.length));
-  columns.forEach((col) => {
-    while (col.length < maxLength) {
-      // Find valid logos for padding (avoiding adjacent duplicates)
-      const lastUsedLogo = col[col.length - 1];
-      const validLogos = shuffled.filter((logo) => logo !== lastUsedLogo);
-      col.push(validLogos[Math.floor(Math.random() * validLogos.length)]);
-    }
-  });
-
-  return columns;
-};
-
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
-  ({ logos, index, currentTime, speed }) => {
-    const cycleInterval = speed;
-    const columnDelay = index * 200;
-    const adjustedTime =
-      (currentTime + columnDelay) % (cycleInterval * logos.length);
-    const currentIndex = Math.floor(adjustedTime / cycleInterval);
-    const currentLogoUrl = useMemo(
-      () => logos[currentIndex].img,
-      [logos, currentIndex]
-    );
+  ({ index, currentSet }) => {
+    const currentLogo = currentSet[index];
 
     return (
       <motion.div
@@ -113,7 +90,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${logos[currentIndex].id}-${currentIndex}`}
+            key={`${currentLogo.id}-${index}`}
             className="absolute inset-0 flex items-center justify-center"
             initial={{ y: "10%", opacity: 0, filter: "blur(8px)" }}
             animate={{
@@ -141,11 +118,11 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
             }}
           >
             <Image
-              src={currentLogoUrl}
+              src={currentLogo.img}
               height={160}
               width={160}
-              alt={logos[currentIndex].name}
-              className="h-32 w-32 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32"
+              alt={currentLogo.name}
+              className="h-32 w-32 max-h-[60%] max-w-[90%] object-contain md:h-full md:w-auto"
             />
           </motion.div>
         </AnimatePresence>
@@ -161,42 +138,42 @@ interface LogoCarouselProps {
 }
 
 export function LogoCarousel({ logos }: LogoCarouselProps) {
-  const [logoSets, setLogoSets] = useState<Logo[][]>([]);
   const [currentTime, setCurrentTime] = useState(0);
+  const [logoSets, setLogoSets] = useState<Logo[][]>([]);
+  const COLUMN_COUNT = 3;
+  const ANIMATION_SPEED = 4000;
+  const COLUMN_DELAY = 200; // 200ms delay between columns
+
+  useEffect(() => {
+    setLogoSets(createLogoSets(logos));
+  }, [logos]);
 
   const updateTime = useCallback(() => {
     setCurrentTime((prevTime) => prevTime + 100);
   }, []);
-
-  const isBase =
-    typeof window !== "undefined" && window.innerWidth > 640 ? false : true;
-  const columnCount = isBase ? 2 : 3;
-
-  const speed = isBase ? 2500 : 4000;
 
   useEffect(() => {
     const intervalId = setInterval(updateTime, 100);
     return () => clearInterval(intervalId);
   }, [updateTime]);
 
-  useEffect(() => {
-    const distributedLogos = distributeLogos(logos, columnCount);
-    setLogoSets(distributedLogos);
-  }, [logos, columnCount]);
+  const getSetForColumn = (index: number) => {
+    // Reverse the delay by subtracting from COLUMN_COUNT - 1
+    const reverseIndex = (COLUMN_COUNT - 1) - index;
+    const adjustedTime = currentTime - (reverseIndex * COLUMN_DELAY);
+    const currentSetIndex = Math.floor(adjustedTime / ANIMATION_SPEED) % logoSets.length;
+    return logoSets[currentSetIndex] || logos.slice(0, COLUMN_COUNT);
+  };
 
   return (
     <div className="flex space-x-4">
-      {logoSets.map((logos, index) => (
+      {Array.from({ length: COLUMN_COUNT }).map((_, index) => (
         <LogoColumn
           key={index}
-          logos={logos}
           index={index}
-          currentTime={currentTime}
-          speed={speed}
+          currentSet={getSetForColumn(index)}
         />
       ))}
     </div>
   );
 }
-
-export { LogoColumn };
