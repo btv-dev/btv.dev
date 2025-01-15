@@ -26,6 +26,28 @@ export const metadata: Metadata = {
   title: "BTV.dev",
   description:
     "A Vermont based web design agency, we develop solutions that reflect your values and amplify your mission.",
+  openGraph: {
+    title: "BTV.dev",
+    description: "A Vermont based web design agency, we develop solutions that reflect your values and amplify your mission.",
+    url: "https://btv.dev",
+    siteName: "BTV.dev",
+    images: [
+      {
+        url: '/images/opengraph.png',
+        width: 1200,
+        height: 630,
+        alt: "BTV.dev - Vermont Web Design Agency",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BTV.dev",
+    description: "A Vermont based web design agency, we develop solutions that reflect your values and amplify your mission.",
+    images: ['/images/opengraph.png'],
+  },
 };
 
 export default function RootLayout({
