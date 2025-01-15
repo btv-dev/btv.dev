@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import sharp from 'sharp';
 import NextImage from "next/image";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 
@@ -9,7 +10,7 @@ import OurApproach from "../components/sections/OurApproach";
 import { HeroHighlightImplemented } from "../components/complex/HeroHighlight";
 import { Section } from "../components/ui/layout";
 
-export default function Home() {
+export default async function Home() {
   // Read client images from the filesystem
   const clientsDir = path.join(process.cwd(), "public", "images", "clients");
   const files = fs.readdirSync(clientsDir);
@@ -20,14 +21,21 @@ export default function Home() {
   );
 
   // Create Logo objects
-  const logos: Logo[] = imageFiles.map((file, i) => {
+  const logos: Logo[] = await Promise.all(imageFiles.map(async (file, i) => {
     const src = `/images/clients/${file}`;
+    const imagePath = path.join(clientsDir, file);
+    
+    // Get actual image dimensions using sharp
+    const metadata = await sharp(imagePath).metadata();
+    
     return {
       id: i,
       name: file,
       img: src,
+      width: metadata.width || 0,
+      height: metadata.height || 0,
     };
-  });
+  }));
   return (
     <div className="min-h-screen bg-white leading-loose">
       <HeroHighlightImplemented />

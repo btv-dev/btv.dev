@@ -8,26 +8,76 @@ export interface Logo {
   name: string;
   id: number;
   img: string;
+  width: number;
+  height: number;
 }
 
+const isSignificantlyWider = (logo: Logo): boolean => {
+  // Only consider it wide if width is at least 10% greater than height
+  return logo.width > logo.height * 1.1;
+};
+
+const createLogoSets = (logos: Logo[]): Logo[][] => {
+  const wideLogos = logos.filter(isSignificantlyWider);
+  const tallLogos = logos.filter(logo => !isSignificantlyWider(logo));
+  const sets: Logo[][] = [];
+
+  // If we have both wide and tall logos, create alternating arrangements
+  if (wideLogos.length > 0 && tallLogos.length > 0) {
+    let wideIndex = 0;
+    let tallIndex = 0;
+
+    while (wideIndex < wideLogos.length && tallIndex < tallLogos.length) {
+      // First arrangement: wide logos on sides, tall in middle
+      if (wideIndex + 1 < wideLogos.length && tallIndex < tallLogos.length) {
+        sets.push([
+          wideLogos[wideIndex],
+          tallLogos[tallIndex],
+          wideLogos[wideIndex + 1]
+        ]);
+        wideIndex += 2;
+        tallIndex += 1;
+      }
+
+      // Second arrangement: tall logos on sides, wide in middle
+      if (wideIndex < wideLogos.length && tallIndex + 1 < tallLogos.length) {
+        sets.push([
+          tallLogos[tallIndex],
+          wideLogos[wideIndex],
+          tallLogos[tallIndex + 1]
+        ]);
+        wideIndex += 1;
+        tallIndex += 2;
+      }
+    }
+  }
+
+  // If we don't have enough logos for the special arrangements,
+  // or if we've used all the special combinations,
+  // add regular sequential sets
+  if (sets.length === 0) {
+    for (let i = 0; i < logos.length - 2; i++) {
+      sets.push([
+        logos[i % logos.length],
+        logos[(i + 1) % logos.length],
+        logos[(i + 2) % logos.length]
+      ]);
+    }
+  }
+
+  return sets;
+};
+
 interface LogoColumnProps {
-  logos: Logo[];
   index: number;
   currentTime: number;
   speed: number;
-  columnCount: number;
+  currentSet: Logo[];
 }
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
-  ({ logos, index, currentTime, speed, columnCount }) => {
-    // Add column-based offset for logo selection
-    const logoOffset = index * Math.ceil(logos.length / columnCount);
-    // Add time delay between columns (200ms between each column)
-    const timeOffset = index * 200;
-    const adjustedTime = (currentTime + timeOffset + logoOffset * speed) % (speed * logos.length);
-    const currentIndex = Math.floor(adjustedTime / speed) % logos.length;
-
-    const currentLogo = logos[currentIndex];
+  ({ index, currentTime, speed, currentSet }) => {
+    const currentLogo = currentSet[index];
 
     return (
       <motion.div
@@ -42,7 +92,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${currentLogo.id}-${currentIndex}`}
+            key={`${currentLogo.id}-${index}`}
             className="absolute inset-0 flex items-center justify-center"
             initial={{ y: "10%", opacity: 0, filter: "blur(8px)" }}
             animate={{
@@ -91,24 +141,14 @@ interface LogoCarouselProps {
 
 export function LogoCarousel({ logos }: LogoCarouselProps) {
   const [currentTime, setCurrentTime] = useState(0);
-  const [columnCount, setColumnCount] = useState(3); // Default to desktop view
-  const [speed, setSpeed] = useState(4000); // Default to desktop speed
+  const [logoSets, setLogoSets] = useState<Logo[][]>([]);
+  const COLUMN_COUNT = 3;
+  const ANIMATION_SPEED = 4000;
+  const COLUMN_DELAY = 200; // 200ms delay between columns
 
-  // Handle responsive layout after mount
   useEffect(() => {
-    const handleResize = () => {
-      const isBase = window.innerWidth <= 640;
-      setColumnCount(isBase ? 2 : 3);
-      setSpeed(isBase ? 2500 : 4000);
-    };
-
-    // Set initial values
-    handleResize();
-
-    // Add resize listener
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    setLogoSets(createLogoSets(logos));
+  }, [logos]);
 
   const updateTime = useCallback(() => {
     setCurrentTime((prevTime) => prevTime + 100);
@@ -119,16 +159,23 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
     return () => clearInterval(intervalId);
   }, [updateTime]);
 
+  const getSetForColumn = (index: number) => {
+    // Reverse the delay by subtracting from COLUMN_COUNT - 1
+    const reverseIndex = (COLUMN_COUNT - 1) - index;
+    const adjustedTime = currentTime - (reverseIndex * COLUMN_DELAY);
+    const currentSetIndex = Math.floor(adjustedTime / ANIMATION_SPEED) % logoSets.length;
+    return logoSets[currentSetIndex] || logos.slice(0, COLUMN_COUNT);
+  };
+
   return (
     <div className="flex space-x-4">
-      {Array.from({ length: columnCount }).map((_, index) => (
+      {Array.from({ length: COLUMN_COUNT }).map((_, index) => (
         <LogoColumn
           key={index}
-          logos={logos}
           index={index}
           currentTime={currentTime}
-          speed={speed}
-          columnCount={columnCount}
+          speed={ANIMATION_SPEED}
+          currentSet={getSetForColumn(index)}
         />
       ))}
     </div>
