@@ -75,6 +75,11 @@ interface LogoColumnProps {
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
   ({ index, currentSet }) => {
+    // Safety check for valid logo
+    if (!currentSet || index >= currentSet.length) {
+      return null;
+    }
+    
     const currentLogo = currentSet[index];
 
     return (
@@ -144,26 +149,36 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
   const ANIMATION_SPEED = 4000;
   const COLUMN_DELAY = 200; // 200ms delay between columns
 
+  // Create initial set immediately
   useEffect(() => {
-    setLogoSets(createLogoSets(logos));
+    if (logos.length >= COLUMN_COUNT) {
+      const initialSets = createLogoSets(logos);
+      setLogoSets(initialSets);
+    }
   }, [logos]);
 
-  const updateTime = useCallback(() => {
-    setCurrentTime((prevTime) => prevTime + 100);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(prev => prev + 100);
+    }, 100);
+
+    return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    const intervalId = setInterval(updateTime, 100);
-    return () => clearInterval(intervalId);
-  }, [updateTime]);
-
   const getSetForColumn = (index: number) => {
-    // Reverse the delay by subtracting from COLUMN_COUNT - 1
+    if (logos.length < COLUMN_COUNT || !logoSets.length) {
+      return [];
+    }
+
     const reverseIndex = (COLUMN_COUNT - 1) - index;
-    const adjustedTime = currentTime - (reverseIndex * COLUMN_DELAY);
+    const adjustedTime = Math.max(0, currentTime - (reverseIndex * COLUMN_DELAY));
     const currentSetIndex = Math.floor(adjustedTime / ANIMATION_SPEED) % logoSets.length;
-    return logoSets[currentSetIndex] || logos.slice(0, COLUMN_COUNT);
+    return logoSets[currentSetIndex];
   };
+
+  if (logos.length < COLUMN_COUNT) {
+    return null;
+  }
 
   return (
     <div className="flex space-x-4">
