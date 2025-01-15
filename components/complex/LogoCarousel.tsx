@@ -74,7 +74,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               height={160}
               width={160}
               alt={currentLogo.name}
-              className="h-32 w-32 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32"
+              className="h-32 w-32 max-h-[60%] max-w-[90%] object-contain md:h-full md:w-auto"
             />
           </motion.div>
         </AnimatePresence>
