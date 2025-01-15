@@ -185,14 +185,16 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
   }
 
   return (
-    <div className="flex space-x-4">
-      {Array.from({ length: COLUMN_COUNT }).map((_, index) => (
-        <LogoColumn
-          key={index}
-          index={index}
-          currentSet={getSetForColumn(index)}
-        />
-      ))}
+    <div className="h-32 md:h-48 w-full">
+      <div className="flex space-x-4 h-full">
+        {Array.from({ length: COLUMN_COUNT }).map((_, index) => (
+          <LogoColumn
+            key={index}
+            index={index}
+            currentSet={getSetForColumn(index)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
