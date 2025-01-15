@@ -70,13 +70,11 @@ const createLogoSets = (logos: Logo[]): Logo[][] => {
 
 interface LogoColumnProps {
   index: number;
-  currentTime: number;
-  speed: number;
   currentSet: Logo[];
 }
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
-  ({ index, currentTime, speed, currentSet }) => {
+  ({ index, currentSet }) => {
     const currentLogo = currentSet[index];
 
     return (
@@ -173,8 +171,6 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
         <LogoColumn
           key={index}
           index={index}
-          currentTime={currentTime}
-          speed={ANIMATION_SPEED}
           currentSet={getSetForColumn(index)}
         />
       ))}
