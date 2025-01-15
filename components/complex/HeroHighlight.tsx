@@ -5,6 +5,23 @@ import { CanvasDot } from "./CanvasDot";
 import { motion } from "framer-motion";
 import { HeroHighlight, Highlight } from "../ui/hero-highlight";
 
+// Animation timing constants (in seconds)
+const TIMING = {
+  BASE_UNIT: 0.3,
+  DOT: {
+    START_SHRINK: 0.6,
+    DURATION: 0.3,
+  },
+  SUBTITLE: {
+    START: 1.2,
+    DURATION: 0.9,
+  },
+  HIGHLIGHTS: {
+    FIRST: 2.1,
+    SECOND: 3.0,
+  }
+} as const;
+
 export function HeroHighlightImplemented() {
   const heroHighlightRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLHeadingElement>(null);
@@ -44,8 +61,8 @@ export function HeroHighlightImplemented() {
               initial={{ scale: 1 }}
               animate={{ scale: 0 }}
               transition={{ 
-                delay: .6,
-                duration: .3,
+                delay: TIMING.DOT.START_SHRINK,
+                duration: TIMING.DOT.DURATION,
                 ease: "easeIn"
               }}
               style={{ transformOrigin: "center center" }}
@@ -58,15 +75,32 @@ export function HeroHighlightImplemented() {
               dev
             </h1>
           </div>
-          A Vermont based web design agency, we develop solutions that{" "}
-          <Highlight delay={1.1} className="dark:text-white">
-            reflect your values
-          </Highlight>{" "}
-           and{" "}
-          <Highlight delay={2.1} className="dark:text-white">
-            amplify your mission
-          </Highlight>
-          .
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              y: [20, -5, 0],
+            }}
+            transition={{
+              duration: TIMING.SUBTITLE.DURATION,
+              ease: [0.4, 0.0, 0.2, 1],
+              delay: TIMING.SUBTITLE.START
+            }}
+            className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-5xl leading-relaxed lg:leading-snug text-center mx-auto"
+          >
+            A Vermont based web design agency, we develop solutions that{" "}
+            <Highlight delay={TIMING.HIGHLIGHTS.FIRST} className="dark:text-white">
+              reflect your values
+            </Highlight>{" "}
+            and{" "}
+            <Highlight delay={TIMING.HIGHLIGHTS.SECOND} className="dark:text-white">
+              amplify your mission
+            </Highlight>
+            .
+          </motion.div>
         </motion.h1>
       </HeroHighlight>
     </>

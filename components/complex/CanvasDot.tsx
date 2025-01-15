@@ -7,7 +7,8 @@ interface CanvasDotProps {
   parentRef: React.RefObject<HTMLDivElement>;
 }
 
-const DOT_SHOW_DELAY = 750;
+// Synchronized with HeroHighlight timing
+const DOT_SHOW_DELAY = 800; // Show dot right after text finishes shrinking (600ms + 300ms)
 
 export function CanvasDot({ dotRef, parentRef }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
