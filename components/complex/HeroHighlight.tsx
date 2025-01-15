@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { CanvasDot } from "./CanvasDot";
 import { motion } from "framer-motion";
 import { HeroHighlight, Highlight } from "../ui/hero-highlight";
+import { VisualDot } from "./VisualDot";
 
 // Animation timing constants (in seconds)
 const TIMING = {
@@ -51,9 +52,12 @@ export function HeroHighlightImplemented() {
             >
               BTV
             </h1>
-            <CanvasDot
+            {/* <CanvasDot
               parentRef={heroHighlightRef}
               dotRef={dotRef}
+            /> */}
+            <VisualDot
+              targetRef={dotRef}
             />
             <motion.h1
               ref={dotRef}
