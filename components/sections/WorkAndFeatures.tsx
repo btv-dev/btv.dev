@@ -64,7 +64,7 @@ const cardVariants = {
 
 const WorkAndFeatures = () => {
   return (
-    <Section id="Work-&-Features" withBackground>
+    <Section id="Work-&-Features" fade="all">
       <motion.div
         initial="hidden"
         whileInView="visible"

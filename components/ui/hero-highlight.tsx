@@ -35,7 +35,7 @@ export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
       >
         <div className="absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800  pointer-events-none" />
         <motion.div
-          className="pointer-events-none bg-dot-thick-indigo-500 dark:bg-dot-thick-indigo-500  absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+          className="pointer-events-none bg-dot-thick-btv-blue-500 dark:bg-dot-thick-btv-blue-500  absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
           style={{
             WebkitMaskImage: useMotionTemplate`
             radial-gradient(
@@ -54,7 +54,6 @@ export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
           }}
         />
 
-        {/* Linear Gradient Overlay */}
         {/* Linear Gradient Overlays */}
         <div
           className="absolute inset-0 pointer-events-none z-10"
@@ -83,23 +82,34 @@ export const Highlight = ({
     <motion.span
       initial={{
         backgroundSize: "0% 100%",
+        scale: 1,
       }}
       animate={{
         backgroundSize: "100% 100%",
+        scale: [1, 1.02, 1],
       }}
       transition={{
-        duration: 1,
-        ease: "circOut",
-        delay, // Use the delay prop
+        backgroundSize: {
+          duration: 0.4,
+          ease: "circInOut",
+          delay,
+        },
+        scale: {
+          duration: 0.5,
+          times: [0, 0.6, 1],
+          ease: "anticipate",
+          delay,
+        },
       }}
       style={{
         backgroundRepeat: "no-repeat",
         backgroundPosition: "left center",
         display: "inline",
+        whiteSpace: "nowrap",
       }}
       className={cn(
         `
-relative inline-block pb-1 px-1 rounded-lg 
+relative inline whitespace-nowrap pb-1 px-1 rounded-lg 
 bg-gradient-to-r 
 from-[#58AED2] to-[#74D7E2]
 dark:from-[#3F90BB] dark:to-[#51B3C7]

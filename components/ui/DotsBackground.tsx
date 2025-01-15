@@ -37,7 +37,7 @@ export const DotsBackground = forwardRef<HTMLDivElement, HeroHighlightProps>(
       >
         <div className="absolute inset-0 bg-dot-thick-neutral-200 dark:bg-dot-thick-neutral-800  pointer-events-none" />
         <motion.div
-          className="pointer-events-none bg-dot-thick-indigo-400 dark:bg-dot-thick-indigo-500  absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+          className="pointer-events-none bg-dot-thick-btv-blue-400 dark:bg-dot-thick-btv-blue-500  absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
           style={{
             WebkitMaskImage: useMotionTemplate`
             radial-gradient(
