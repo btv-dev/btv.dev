@@ -107,12 +107,8 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               opacity: 1,
               filter: "blur(0px)",
               transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-                mass: 1,
-                bounce: 0.2,
-                duration: 0.5,
+                duration: 0.3,
+                ease: "easeOut",
                 delay: animationDelay,
               },
             }}
@@ -151,7 +147,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [logoSets, setLogoSets] = useState<Logo[][]>([]);
   const ANIMATION_SPEED = 4000;
-  const COLUMN_DELAY = 200; // 200ms delay between columns
+  const COLUMN_DELAY = 100; // 200ms delay between columns
 
   // Create initial set immediately
   useEffect(() => {
