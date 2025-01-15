@@ -17,6 +17,8 @@ const isSignificantlyWider = (logo: Logo): boolean => {
   return logo.width > logo.height * 1.1;
 };
 
+const COLUMN_COUNT = 3;
+
 const createLogoSets = (logos: Logo[]): Logo[][] => {
   const wideLogos = logos.filter(isSignificantlyWider);
   const tallLogos = logos.filter(logo => !isSignificantlyWider(logo));
@@ -82,7 +84,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
     
     const currentLogo = currentSet[index];
     // Reverse the animation delay to go right-to-left
-    const animationDelay = ((3 - 1) - index) * 0.1;
+    const animationDelay = ((COLUMN_COUNT - 1) - index) * 0.1;
 
     return (
       <motion.div
@@ -148,7 +150,6 @@ interface LogoCarouselProps {
 export function LogoCarousel({ logos }: LogoCarouselProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [logoSets, setLogoSets] = useState<Logo[][]>([]);
-  const COLUMN_COUNT = 3;
   const ANIMATION_SPEED = 4000;
   const COLUMN_DELAY = 200; // 200ms delay between columns
 
