@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
@@ -16,6 +16,8 @@ const isSignificantlyWider = (logo: Logo): boolean => {
   // Only consider it wide if width is at least 10% greater than height
   return logo.width > logo.height * 1.1;
 };
+
+const COLUMN_COUNT = 3;
 
 const createLogoSets = (logos: Logo[]): Logo[][] => {
   const wideLogos = logos.filter(isSignificantlyWider);
@@ -75,7 +77,14 @@ interface LogoColumnProps {
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
   ({ index, currentSet }) => {
+    // Safety check for valid logo
+    if (!currentSet || index >= currentSet.length) {
+      return null;
+    }
+    
     const currentLogo = currentSet[index];
+    // Reverse the animation delay to go right-to-left
+    const animationDelay = ((COLUMN_COUNT - 1) - index) * 0.1;
 
     return (
       <motion.div
@@ -83,7 +92,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          delay: index * 0.1,
+          delay: animationDelay,
           duration: 0.5,
           ease: "easeOut",
         }}
@@ -98,12 +107,9 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               opacity: 1,
               filter: "blur(0px)",
               transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-                mass: 1,
-                bounce: 0.2,
-                duration: 0.5,
+                duration: 0.3,
+                ease: "easeOut",
+                delay: animationDelay,
               },
             }}
             exit={{
@@ -140,40 +146,51 @@ interface LogoCarouselProps {
 export function LogoCarousel({ logos }: LogoCarouselProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [logoSets, setLogoSets] = useState<Logo[][]>([]);
-  const COLUMN_COUNT = 3;
   const ANIMATION_SPEED = 4000;
-  const COLUMN_DELAY = 200; // 200ms delay between columns
+  const COLUMN_DELAY = 100; // 200ms delay between columns
 
+  // Create initial set immediately
   useEffect(() => {
-    setLogoSets(createLogoSets(logos));
+    if (logos.length >= COLUMN_COUNT) {
+      const initialSets = createLogoSets(logos);
+      setLogoSets(initialSets);
+    }
   }, [logos]);
 
-  const updateTime = useCallback(() => {
-    setCurrentTime((prevTime) => prevTime + 100);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(prev => prev + 100);
+    }, 100);
+
+    return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    const intervalId = setInterval(updateTime, 100);
-    return () => clearInterval(intervalId);
-  }, [updateTime]);
-
   const getSetForColumn = (index: number) => {
-    // Reverse the delay by subtracting from COLUMN_COUNT - 1
+    if (logos.length < COLUMN_COUNT || !logoSets.length) {
+      return [];
+    }
+
     const reverseIndex = (COLUMN_COUNT - 1) - index;
-    const adjustedTime = currentTime - (reverseIndex * COLUMN_DELAY);
+    const adjustedTime = Math.max(0, currentTime - (reverseIndex * COLUMN_DELAY));
     const currentSetIndex = Math.floor(adjustedTime / ANIMATION_SPEED) % logoSets.length;
-    return logoSets[currentSetIndex] || logos.slice(0, COLUMN_COUNT);
+    return logoSets[currentSetIndex];
   };
 
+  if (logos.length < COLUMN_COUNT) {
+    return null;
+  }
+
   return (
-    <div className="flex space-x-4">
-      {Array.from({ length: COLUMN_COUNT }).map((_, index) => (
-        <LogoColumn
-          key={index}
-          index={index}
-          currentSet={getSetForColumn(index)}
-        />
-      ))}
+    <div className="h-32 md:h-48 w-full">
+      <div className="flex space-x-4 h-full">
+        {Array.from({ length: COLUMN_COUNT }).map((_, index) => (
+          <LogoColumn
+            key={index}
+            index={index}
+            currentSet={getSetForColumn(index)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
