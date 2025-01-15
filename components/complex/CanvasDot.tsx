@@ -3,19 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 
 interface CanvasDotProps {
-  btvRef: React.RefObject<HTMLHeadingElement>;
-  devRef: React.RefObject<HTMLHeadingElement>;
+  dotRef: React.RefObject<HTMLHeadingElement>;
   parentRef: React.RefObject<HTMLDivElement>;
 }
 
-export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
+const DOT_SHOW_DELAY = 700;
+
+export function CanvasDot({ dotRef, parentRef }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const radiusRef = useRef(0); // Use a ref to track radius directly
+  const radiusRef = useRef(0);
   const startTimeRef = useRef<number | null>(null);
   const [showDot, setShowDot] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowDot(true), 500);
+    const timer = setTimeout(() => setShowDot(true), DOT_SHOW_DELAY);
     return () => clearTimeout(timer);
   }, []);
 
@@ -23,8 +24,7 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
     if (
       !showDot ||
       !canvasRef.current ||
-      !btvRef.current ||
-      !devRef.current ||
+      !dotRef.current ||
       !parentRef.current
     )
       return;
@@ -34,12 +34,11 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
 
     if (!ctx) return;
 
-    const btvBounds = btvRef.current.getBoundingClientRect();
-    const devBounds = devRef.current.getBoundingClientRect();
+    const dotBounds = dotRef.current.getBoundingClientRect();
     const parentBounds = parentRef.current.getBoundingClientRect();
 
-    let centerX = (btvBounds.right + devBounds.left) / 2;
-    let centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
+    let centerX = dotBounds.left + (dotBounds.width / 2);
+    let centerY = dotBounds.top + (dotBounds.height / 2) + window.scrollY;
 
     let dotX = centerX;
     let dotY = centerY;
@@ -51,15 +50,12 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       canvas.width = document.body.scrollWidth;
       canvas.height = document.body.scrollHeight;
 
-      // Recalculate origin coordinates
-      const btvBounds = btvRef.current?.getBoundingClientRect();
-      const devBounds = devRef.current?.getBoundingClientRect();
+      const dotBounds = dotRef.current?.getBoundingClientRect();
 
-      if (btvBounds && devBounds) {
-        centerX = (btvBounds.right + devBounds.left) / 2;
-        centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
+      if (dotBounds) {
+        centerX = dotBounds.left + (dotBounds.width / 2);
+        centerY = dotBounds.top + (dotBounds.height / 2) + window.scrollY;
 
-        // Adjust dot position if it is at or near the current origin
         if (Math.abs(dotX - targetX) < 1 && Math.abs(dotY - targetY) < 1) {
           dotX = centerX;
           dotY = centerY;
@@ -73,9 +69,8 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
     window.addEventListener("resize", updateCanvasSize);
 
     const targetRadius = 10;
-    const animationDuration = 500; // Animation duration in ms
+    const animationDuration = 100;
 
-    // Ease-in-out quad function
     const easeInOutQuad = (t: number) =>
       t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
@@ -122,13 +117,9 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       const mouseX = Math.max(0, Math.min(parentBounds.width, adjustedX));
       const mouseY = Math.max(0, Math.min(parentBounds.height, adjustedY));
 
-      // Calculate the distance from the dot's current position
       const distance = Math.sqrt((mouseX - dotX) ** 2 + (mouseY - dotY) ** 2);
 
-      const maxDistance = 200; // Maximum allowed distance
-
-      // Update target position
-      if (distance > maxDistance) {
+      if (distance > 200) {
         targetX = centerX;
         targetY = centerY;
       } else {
@@ -138,7 +129,6 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
     };
 
     const onMouseLeave = () => {
-      // Reset target to origin on mouse leave
       targetX = centerX;
       targetY = centerY;
     };
@@ -153,7 +143,7 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       parentRef.current?.removeEventListener("mousemove", onMouseMove);
       parentRef.current?.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [showDot, btvRef, devRef, parentRef]);
+  }, [showDot, dotRef, parentRef]);
 
   if (!showDot) return null;
 

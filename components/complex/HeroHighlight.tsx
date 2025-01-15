@@ -1,13 +1,13 @@
 "use client";
-import { motion } from "framer-motion";
-import { HeroHighlight, Highlight } from "../ui/hero-highlight";
+
 import { useRef } from "react";
 import { CanvasDot } from "./CanvasDot";
+import { motion } from "framer-motion";
+import { HeroHighlight, Highlight } from "../ui/hero-highlight";
 
 export function HeroHighlightImplemented() {
   const heroHighlightRef = useRef<HTMLDivElement>(null);
-  const btvRef = useRef<HTMLHeadingElement>(null);
-  const devRef = useRef<HTMLHeadingElement>(null);
+  const dotRef = useRef<HTMLHeadingElement>(null);
 
   return (
     <>
@@ -28,31 +28,42 @@ export function HeroHighlightImplemented() {
           className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-5xl leading-relaxed lg:leading-snug text-center mx-auto"
         >
           {/* !!! Removed relative from below to get dot canvas to take up everything */}
-          <div className="flex flex-col gap-20 mb-32">
+          <div className="flex flex-col gap-5 mb-32">
             <h1
-              ref={btvRef}
               className="font-rubik-mono-one text-5xl text-gray-800 leading-none m-0"
             >
               BTV
             </h1>
             <CanvasDot
               parentRef={heroHighlightRef}
-              btvRef={btvRef}
-              devRef={devRef}
+              dotRef={dotRef}
             />
+            <motion.h1
+              ref={dotRef}
+              className="font-rubik-mono-one text-5xl text-btv-blue leading-none m-0"
+              initial={{ scale: 1 }}
+              animate={{ scale: 0 }}
+              transition={{ 
+                delay: .6,
+                duration: .3,
+                ease: "easeIn"
+              }}
+              style={{ transformOrigin: "center center" }}
+            >
+              DOT
+            </motion.h1>
             <h1
-              ref={devRef}
               className="font-rubik-mono-one text-5xl text-gray-800 leading-none m-0"
             >
               dev
             </h1>
           </div>
           A Vermont based web design agency, we develop solutions that{" "}
-          <Highlight delay={0.5} className="dark:text-white">
+          <Highlight delay={1.1} className="dark:text-white">
             reflect your values
           </Highlight>{" "}
            and{" "}
-          <Highlight delay={1.5} className="dark:text-white">
+          <Highlight delay={2.1} className="dark:text-white">
             amplify your mission
           </Highlight>
           .
