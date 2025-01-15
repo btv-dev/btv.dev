@@ -1,73 +1,83 @@
 "use client";
-
 import { cn } from "@/lib/utils";
 import { useMotionValue, motion, useMotionTemplate } from "framer-motion";
 import React, { forwardRef } from "react";
-
-// Animation timing constant (sync with HeroHighlight.tsx)
-const CARD_ANIMATION_DELAY = 0.9; // Start just after dot appears
-
-interface HeroHighlightProps {
+interface HeroHighlightProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   containerClassName?: string;
 }
 
 export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
-  ({ className, children, containerClassName }, ref) => {
+  ({ children, className, containerClassName }, ref) => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    function handleMouseMove({ clientX, clientY, currentTarget }: React.MouseEvent) {
+    function handleMouseMove({
+      currentTarget,
+      clientX,
+      clientY,
+    }: React.MouseEvent<HTMLDivElement>) {
+      if (!currentTarget) return;
       const { left, top } = currentTarget.getBoundingClientRect();
+
       mouseX.set(clientX - left);
       mouseY.set(clientY - top);
     }
-    
     return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          delay: CARD_ANIMATION_DELAY,
-          duration: 0.6,
-          ease: "easeOut",
-        }}
+      <div
         className={cn(
           "relative h-[100vh] flex items-center bg-white dark:bg-black justify-center w-full group",
           containerClassName
         )}
         onMouseMove={handleMouseMove}
+        ref={ref}
       >
-        {/* Gradient background */}
+        <div className="absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800  pointer-events-none" />
         <motion.div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
+          className="pointer-events-none bg-dot-thick-btv-blue-500 dark:bg-dot-thick-btv-blue-500  absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
           style={{
-            background: useMotionTemplate`
-              radial-gradient(
-                650px circle at ${mouseX}px ${mouseY}px,
-                rgba(29, 131, 196, 0.05),
-                transparent 80%
-              )
-            `,
+            WebkitMaskImage: useMotionTemplate`
+            radial-gradient(
+              200px circle at ${mouseX}px ${mouseY}px,
+              black 0%,
+              transparent 100%
+            )
+          `,
+            maskImage: useMotionTemplate`
+            radial-gradient(
+              200px circle at ${mouseX}px ${mouseY}px,
+              black 0%,
+              transparent 100%
+            )
+          `,
+          }}
+        />
+
+        {/* Linear Gradient Overlays */}
+        <div
+          className="absolute inset-0 pointer-events-none z-10"
+          style={{
+            background: `linear-gradient(to top, rgb(255, 255, 255) 0%, transparent 15rem)`,
           }}
         />
 
         {/* Content */}
         <div className={cn("z-20", className)}>{children}</div>
-      </motion.div>
+      </div>
     );
   }
 );
 
-interface HighlightProps {
+export const Highlight = ({
+  children,
+  className,
+  delay = 0,
+}: {
   children: React.ReactNode;
-  delay?: number;
   className?: string;
-}
-
-export function Highlight({ children, delay = 0, className }: HighlightProps) {
+  delay?: number; // Add delay as a prop
+}) => {
   return (
     <motion.span
       initial={{
@@ -110,6 +120,6 @@ dark:from-[#3F90BB] dark:to-[#51B3C7]
       {children}
     </motion.span>
   );
-}
+};
 
 HeroHighlight.displayName = "HeroHighlight";
