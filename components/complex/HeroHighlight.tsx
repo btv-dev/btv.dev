@@ -47,12 +47,12 @@ export function HeroHighlightImplemented() {
               dev
             </h1>
           </div>
-          A web design and development agency crafting digital solutions that{" "}
-          <Highlight delay={1} className="dark:text-white">
+          A Vermont based web design agency, we develop solutions that{" "}
+          <Highlight delay={0.5} className="dark:text-white">
             reflect your values
           </Highlight>{" "}
            and{" "}
-          <Highlight delay={2} className="dark:text-white">
+          <Highlight delay={1.5} className="dark:text-white">
             amplify your mission
           </Highlight>
           .
