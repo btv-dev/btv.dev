@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MotionValue, useTransform } from "framer-motion";
+import { MotionValue } from "framer-motion";
 
 interface CanvasDotProps {
   dotRef: React.RefObject<HTMLHeadingElement>;
@@ -33,7 +33,7 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
         y: initialYRef.current
       });
     }
-  }, []);
+  }, [dotRef, heroRef]);
 
   // Subscribe to y motion value changes
   useEffect(() => {
@@ -47,12 +47,12 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
     });
 
     return () => unsubscribe();
-  }, [yMotionValue]);
+  }, [yMotionValue, initialYRef]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowDot(true), DOT_SHOW_DELAY);
     return () => clearTimeout(timer);
-  }, []);
+  }, [DOT_SHOW_DELAY]);
 
   useEffect(() => {
     if (
@@ -150,7 +150,7 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [showDot, dotRef, heroRef, dotPosition]);
+  }, [showDot, dotRef, heroRef, dotPosition, targetRadius]);
 
   if (!showDot) return null;
 
