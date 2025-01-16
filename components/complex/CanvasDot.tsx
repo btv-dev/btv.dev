@@ -1,31 +1,66 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { MotionValue } from "framer-motion";
 
 interface CanvasDotProps {
-  btvRef: React.RefObject<HTMLHeadingElement>;
-  devRef: React.RefObject<HTMLHeadingElement>;
-  parentRef: React.RefObject<HTMLDivElement>;
+  dotRef: React.RefObject<HTMLHeadingElement>;
+  heroRef: React.RefObject<HTMLDivElement>;
+  yMotionValue: MotionValue<number>;
 }
 
-export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
+// Synchronized with HeroHighlight timing
+const DOT_SHOW_DELAY = 750; // Show dot right after text finishes shrinking (600ms + 300ms)
+
+export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const radiusRef = useRef(0); // Use a ref to track radius directly
+  const radiusRef = useRef(0);
   const startTimeRef = useRef<number | null>(null);
   const [showDot, setShowDot] = useState(false);
+  const initialYRef = useRef<number | null>(null);
+  const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
+  const targetRadius = 13;
+
+  // Get initial Y position when component mounts
+  useEffect(() => {
+    if (dotRef.current && heroRef.current) {
+      const dotBounds = dotRef.current.getBoundingClientRect();
+      const heroBounds = heroRef.current.getBoundingClientRect();
+      initialYRef.current = dotBounds.top - heroBounds.top + (dotBounds.height / 2);
+      // Set initial X position
+      setDotPosition({
+        x: dotBounds.left - heroBounds.left + (dotBounds.width / 2),
+        y: initialYRef.current
+      });
+    }
+  }, [dotRef, heroRef]);
+
+  // Subscribe to y motion value changes
+  useEffect(() => {
+    const unsubscribe = yMotionValue.onChange(latest => {
+      if (initialYRef.current !== null) {
+        setDotPosition(prev => ({
+          ...prev,
+          y: initialYRef.current! + latest
+        }));
+      }
+    });
+
+    return () => unsubscribe();
+  }, [yMotionValue, initialYRef]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowDot(true), 500);
+    const timer = setTimeout(() => setShowDot(true), DOT_SHOW_DELAY);
     return () => clearTimeout(timer);
-  }, []);
+  }, [DOT_SHOW_DELAY]);
 
   useEffect(() => {
     if (
       !showDot ||
       !canvasRef.current ||
-      !btvRef.current ||
-      !devRef.current ||
-      !parentRef.current
+      !dotRef.current ||
+      !heroRef.current ||
+      initialYRef.current === null
     )
       return;
 
@@ -34,59 +69,32 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
 
     if (!ctx) return;
 
-    const btvBounds = btvRef.current.getBoundingClientRect();
-    const devBounds = devRef.current.getBoundingClientRect();
-    const parentBounds = parentRef.current.getBoundingClientRect();
-
-    let centerX = (btvBounds.right + devBounds.left) / 2;
-    let centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
-
-    let dotX = centerX;
-    let dotY = centerY;
-    let targetX = centerX;
-    let targetY = centerY;
+    let dotX = dotPosition.x;
+    let dotY = dotPosition.y;
+    let targetX = dotPosition.x;
+    let targetY = dotPosition.y;
     const speed = 0.1;
 
     const updateCanvasSize = () => {
-      canvas.width = document.body.scrollWidth;
-      canvas.height = document.body.scrollHeight;
+      const currentHeroBounds = heroRef.current?.getBoundingClientRect();
+      if (!currentHeroBounds) return;
 
-      // Recalculate origin coordinates
-      const btvBounds = btvRef.current?.getBoundingClientRect();
-      const devBounds = devRef.current?.getBoundingClientRect();
-
-      if (btvBounds && devBounds) {
-        centerX = (btvBounds.right + devBounds.left) / 2;
-        centerY = (btvBounds.bottom + devBounds.top) / 2 + window.scrollY;
-
-        // Adjust dot position if it is at or near the current origin
-        if (Math.abs(dotX - targetX) < 1 && Math.abs(dotY - targetY) < 1) {
-          dotX = centerX;
-          dotY = centerY;
-          targetX = centerX;
-          targetY = centerY;
-        }
-      }
+      canvas.width = currentHeroBounds.width;
+      canvas.height = currentHeroBounds.height;
     };
 
-    updateCanvasSize();
-    window.addEventListener("resize", updateCanvasSize);
-
-    const targetRadius = 10;
-    const animationDuration = 500; // Animation duration in ms
-
-    // Ease-in-out quad function
-    const easeInOutQuad = (t: number) =>
-      t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-
+    // Animate radius
+    const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    
     const animateRadius = (timestamp: number) => {
       if (!startTimeRef.current) startTimeRef.current = timestamp;
-
+      
       const elapsed = timestamp - startTimeRef.current;
-      const progress = Math.min(elapsed / animationDuration, 1);
-
+      const duration = 100; // Animation duration in ms
+      const progress = Math.min(elapsed / duration, 1);
+      
       radiusRef.current = easeInOutQuad(progress) * targetRadius;
-
+      
       if (progress < 1) {
         requestAnimationFrame(animateRadius);
       }
@@ -97,9 +105,11 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Smooth movement towards target
       dotX += (targetX - dotX) * speed;
       dotY += (targetY - dotY) * speed;
 
+      // Draw the dot
       ctx.beginPath();
       ctx.arc(dotX, dotY, radiusRef.current, 0, 2 * Math.PI);
       ctx.fillStyle = "#1d83c4";
@@ -108,65 +118,46 @@ export function CanvasDot({ btvRef, devRef, parentRef }: CanvasDotProps) {
       requestAnimationFrame(draw);
     };
 
+    window.addEventListener("resize", updateCanvasSize);
+    updateCanvasSize();
+    draw();
+
     const onMouseMove = (e: MouseEvent) => {
-      const parentScrollX = parentRef.current?.scrollLeft || 0;
-      const parentScrollY = parentRef.current?.scrollTop || 0;
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
 
-      if (!parentRef.current) return;
-
-      const parentBoundsWithScroll = parentRef.current.getBoundingClientRect();
-
-      const adjustedX = e.clientX - parentBoundsWithScroll.left + parentScrollX;
-      const adjustedY = e.clientY - parentBoundsWithScroll.top + parentScrollY;
-
-      const mouseX = Math.max(0, Math.min(parentBounds.width, adjustedX));
-      const mouseY = Math.max(0, Math.min(parentBounds.height, adjustedY));
-
-      // Calculate the distance from the dot's current position
       const distance = Math.sqrt((mouseX - dotX) ** 2 + (mouseY - dotY) ** 2);
 
-      const maxDistance = 200; // Maximum allowed distance
-
-      // Update target position
-      if (distance > maxDistance) {
-        targetX = centerX;
-        targetY = centerY;
-      } else {
+      if (distance < 200) {
         targetX = mouseX;
         targetY = mouseY;
+      } else {
+        targetX = dotPosition.x;
+        targetY = dotPosition.y;
       }
     };
 
     const onMouseLeave = () => {
-      // Reset target to origin on mouse leave
-      targetX = centerX;
-      targetY = centerY;
+      targetX = dotPosition.x;
+      targetY = dotPosition.y;
     };
 
-    parentRef.current.addEventListener("mousemove", onMouseMove);
-    parentRef.current.addEventListener("mouseleave", onMouseLeave);
-
-    draw();
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       window.removeEventListener("resize", updateCanvasSize);
-      parentRef.current?.removeEventListener("mousemove", onMouseMove);
-      parentRef.current?.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [showDot, btvRef, devRef, parentRef]);
+  }, [showDot, dotRef, heroRef, dotPosition, targetRadius]);
 
   if (!showDot) return null;
 
   return (
     <canvas
       ref={canvasRef}
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        pointerEvents: "none",
-        zIndex: -1,
-      }}
+      className="absolute inset-0 w-full h-full pointer-events-none"
     />
   );
 }
