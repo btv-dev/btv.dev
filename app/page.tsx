@@ -9,6 +9,7 @@ import { WorkAndFeatures } from "../components/sections/WorkAndFeatures";
 import OurApproach from "../components/sections/OurApproach";
 import { HeroHighlightImplemented } from "../components/complex/HeroHighlight";
 import { Section } from "../components/ui/layout";
+import { ParallaxImplemented } from "@/components/complex/ParallaxImplemented";
 
 export default async function Home() {
   // Read client images from the filesystem
@@ -53,9 +54,16 @@ export default async function Home() {
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
           </Paragraph>
+          <Paragraph className="mb-12 sm:mb-18">
+            We build beautiful products with the latest technologies and frameworks.
+            We are a team of passionate developers and designers that love to build
+            amazing products.
+          </Paragraph>
 
           <LogoCarousel logos={logos} />
+
         </Section>
+        <ParallaxImplemented />
 
         {/* Supporting Non-Profits Section */}
         <Section id="NonProfits" fade="all">

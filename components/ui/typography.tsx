@@ -32,9 +32,9 @@ export const H2 = forwardRef<HTMLHeadingElement, TypographyProps>(
       <h2
         ref={ref}
         className={cn(
-          "scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0 font-rubik-mono-one",
+          "scroll-m-20 pb-2 text-3xl md:text-5xl font-semibold tracking-tight first:mt-0 font-rubik-mono-one",
+          "text-btv-blue mb-4",
           className,
-          "text-btv-blue mb-4"
         )}
       >
         {children}
