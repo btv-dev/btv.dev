@@ -48,19 +48,19 @@ export default async function Home() {
         <WorkAndFeatures />
 
         {/* They Trust Us Section */}
-        <Section id="They-Trust-Us">
+        <Section id="They-Trust-Us" className="mb-0">
           <H2>They Trust Us</H2>
           <Paragraph className="mb-12 sm:mb-18">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
           </Paragraph>
+          <LogoCarousel logos={logos} />
           <Paragraph className="mb-12 sm:mb-18">
             We build beautiful products with the latest technologies and frameworks.
             We are a team of passionate developers and designers that love to build
             amazing products.
           </Paragraph>
 
-          <LogoCarousel logos={logos} />
 
         </Section>
         <ParallaxImplemented />
