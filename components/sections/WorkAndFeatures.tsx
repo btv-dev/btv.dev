@@ -8,6 +8,8 @@ import {
   Image as ImageIcon, // for Image Optimization & Lazy Loading
   TrendingUp, // for Analytics Integration
   FileText, // for Integrated Blog & CMS
+  Shield, // for Security Features
+  Zap, // for Performance Optimization
 } from "lucide-react";
 import { H3 } from "../ui/typography";
 import { MotionH2, MotionParagraph } from "../ui/motion-typography";
@@ -19,6 +21,18 @@ const features = [
     description:
       "Engaging, mobile-friendly layouts with subtle animations to enhance user experience.",
     icon: LayoutGrid,
+  },
+  {
+    title: "Security Features",
+    description:
+      "Built-in protection against vulnerabilities on the web, SSL integration, and secure data handling.",
+    icon: Shield,
+  },
+  {
+    title: "Performance Optimization",
+    description:
+      "Advanced caching, code splitting, and bundle optimization for lightning-fast load times.",
+    icon: Zap,
   },
   {
     title: "SEO Tools",
