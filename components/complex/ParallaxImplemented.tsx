@@ -20,9 +20,9 @@ const exampleWork = [
         thumbnail: `${ROOT_DIR}trek-the-nek.png`,
     },
     {
-        title: 'MiLeMed',
+        title: 'Moho Access',
         link: '',
-        thumbnail: `${ROOT_DIR}milemed.png`,
+        thumbnail: `${ROOT_DIR}moho.png`,
     },
     {
         title: 'Sage & Scribe Literary Agency',
@@ -35,23 +35,18 @@ const exampleWork = [
         thumbnail: `${ROOT_DIR}chaussettes.png`,
     },
     {
+        title: 'MiLeMed',
+        link: '',
+        thumbnail: `${ROOT_DIR}milemed.png`,
+    },
+    {
         title: 'Green Hills Public Affairs',
         link: '',
         thumbnail: `${ROOT_DIR}greenhills.png`,
     },
     {
-        title: 'Moho Access',
-        link: '',
-        thumbnail: `${ROOT_DIR}moho.png`,
-    },
-    {
         title: 'ESN Votes',
         link: '',
         thumbnail: `${ROOT_DIR}esn-votes.png`,
-    },
-    {
-        title: 'Moho Access',
-        link: '',
-        thumbnail: `${ROOT_DIR}moho.png`,
     },
 ];
