@@ -12,41 +12,41 @@ const exampleWork = [
     {
         title: 'Trek the NEK',
         link: '',
-        thumbnail: `${ROOT_DIR}trek-the-nek.png`,
+        thumbnail: `${ROOT_DIR}trek-the-nek.webp`,
     },
     {
         title: 'Civic Engagement Non-Profit',
         link: '',
-        thumbnail: `${ROOT_DIR}voting.png`,
+        thumbnail: `${ROOT_DIR}voting.webp`,
     },
     {
         title: 'Sage & Scribe Literary Agency',
         link: '',
-        thumbnail: `${ROOT_DIR}sage.png`,
+        thumbnail: `${ROOT_DIR}sage.webp`,
     },
     {
         title: 'Moho Access',
         link: '',
-        thumbnail: `${ROOT_DIR}moho.png`,
+        thumbnail: `${ROOT_DIR}moho.webp`,
     },// END OF FIRST ROW
     {
         title: 'ESN Votes',
         link: '',
-        thumbnail: `${ROOT_DIR}esn-votes.png`,
+        thumbnail: `${ROOT_DIR}esn-votes.webp`,
     },
     {
         title: 'Les Frères Chaussettes',
         link: '',
-        thumbnail: `${ROOT_DIR}chaussettes.png`,
+        thumbnail: `${ROOT_DIR}chaussettes.webp`,
     },
     {
         title: 'Green Hills Public Affairs',
         link: '',
-        thumbnail: `${ROOT_DIR}greenhills.png`,
+        thumbnail: `${ROOT_DIR}greenhills.webp`,
     },
     {
         title: 'MiLeMed',
         link: '',
-        thumbnail: `${ROOT_DIR}milemed.png`,
+        thumbnail: `${ROOT_DIR}milemed.webp`,
     },
 ];
