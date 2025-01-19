@@ -55,11 +55,6 @@ export default async function Home() {
             digital visions to life.
           </Paragraph>
           <LogoCarousel logos={logos} />
-          <Paragraph className="mb-12 sm:mb-18">
-            We build beautiful products with the latest technologies and frameworks.
-            We are a team of passionate developers and designers that love to build
-            amazing products.
-          </Paragraph>
 
 
         </Section>
@@ -75,8 +70,7 @@ export default async function Home() {
           </Paragraph>
           <Paragraph>
             Understanding the challenges you face, we offer special discounts
-            and tailored solutions. Through sketches, mockups, and iterative
-            feedback, we ensure the final product meets your unique needs.
+            and tailored solutions.
           </Paragraph>
           <Paragraph>
             Let's create something remarkable together.
