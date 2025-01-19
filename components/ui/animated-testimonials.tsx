@@ -122,6 +122,20 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
+            <div className="flex justify-center gap-6 mb-8">
+              <button
+                onClick={handlePrev}
+                className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center group/button"
+              >
+                <IconArrowLeft className="h-6 w-6 text-foreground group-hover/button:rotate-12 transition-transform duration-300" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center group/button"
+              >
+                <IconArrowRight className="h-6 w-6 text-foreground group-hover/button:-rotate-12 transition-transform duration-300" />
+              </button>
+            </div>
             <H3>
               {testimonials[active].name}
             </H3>
@@ -151,20 +165,6 @@ export const AnimatedTestimonials = ({
               ))}
             </motion.p>
           </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
-            <button
-              onClick={handlePrev}
-              className="h-7 w-7 rounded-full bg-secondary flex items-center justify-center group/button"
-            >
-              <IconArrowLeft className="h-5 w-5 text-foreground group-hover/button:rotate-12 transition-transform duration-300" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="h-7 w-7 rounded-full bg-secondary flex items-center justify-center group/button"
-            >
-              <IconArrowRight className="h-5 w-5 text-foreground group-hover/button:-rotate-12 transition-transform duration-300" />
-            </button>
-          </div>
         </div>
       </div>
     </div>

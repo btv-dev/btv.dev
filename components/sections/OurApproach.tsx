@@ -5,19 +5,19 @@ import { MotionH2, MotionParagraph } from "../ui/motion-typography";
 
 const steps = [
   {
-    name: "1 – Discover",
+    name: "1: Discover",
     quote:
       "We start by diving deep into your goals, brand personality, and design preferences.",
     src: "/images/approach/research.webp",
   },
   {
-    name: "2 – Sketch & Brainstorm",
+    name: "2: Sketch & Brainstorm",
     quote:
       "We sketch ideas on paper and create mockups, visualizing potential directions and refining concepts before moving forward.",
     src: "/images/approach/sketch.webp",
   },
   {
-    name: "3 – Build",
+    name: "3: Build",
     quote:
       "Bringing designs to life, we begin development to craft a site that exceeds expectations.",
     src: "/images/approach/build.webp",
