@@ -82,7 +82,7 @@ const WorkAndFeatures = () => {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.08 }}
         transition={{ staggerChildren: 0.15 }}
       >
         <MotionH2 variants={headerVariants}>Work & Features</MotionH2>
