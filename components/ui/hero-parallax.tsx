@@ -142,7 +142,7 @@ export const Header = () => {
         Practical & beautiful
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-        Products that perform well and look great thanks to the latest technology.
+        Our products are expressive and high performance because we put cutting edge technology to work.
       </p>
     </div>
   );
