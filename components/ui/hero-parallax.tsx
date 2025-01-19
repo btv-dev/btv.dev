@@ -41,7 +41,7 @@ export const HeroParallax = ({
         setRows({
           firstRow: products.slice(0, 3),
           secondRow: products.slice(3, 6),
-          thirdRow: products.slice(6, 8)
+          thirdRow: products.slice(5, 8)
         });
       }
     };
