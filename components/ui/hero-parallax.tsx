@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { H1, H2, Paragraph } from "./typography";
+import { H2, Paragraph } from "./typography";
 
 export const HeroParallax = ({
   products,
