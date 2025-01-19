@@ -10,19 +10,14 @@ const ROOT_DIR = "/images/example-work/";
 
 const exampleWork = [
     {
-        title: 'Civic Engagement Non-Profit',
-        link: '',
-        thumbnail: `${ROOT_DIR}voting.png`,
-    },
-    {
         title: 'Trek the NEK',
         link: '',
         thumbnail: `${ROOT_DIR}trek-the-nek.png`,
     },
     {
-        title: 'Moho Access',
+        title: 'Civic Engagement Non-Profit',
         link: '',
-        thumbnail: `${ROOT_DIR}moho.png`,
+        thumbnail: `${ROOT_DIR}voting.png`,
     },
     {
         title: 'Sage & Scribe Literary Agency',
@@ -30,14 +25,19 @@ const exampleWork = [
         thumbnail: `${ROOT_DIR}sage.png`,
     },
     {
+        title: 'Moho Access',
+        link: '',
+        thumbnail: `${ROOT_DIR}moho.png`,
+    },// END OF FIRST ROW
+    {
+        title: 'ESN Votes',
+        link: '',
+        thumbnail: `${ROOT_DIR}esn-votes.png`,
+    },
+    {
         title: 'Les Frères Chausettes',
         link: '',
         thumbnail: `${ROOT_DIR}chaussettes.png`,
-    },
-    {
-        title: 'MiLeMed',
-        link: '',
-        thumbnail: `${ROOT_DIR}milemed.png`,
     },
     {
         title: 'Green Hills Public Affairs',
@@ -45,8 +45,8 @@ const exampleWork = [
         thumbnail: `${ROOT_DIR}greenhills.png`,
     },
     {
-        title: 'ESN Votes',
+        title: 'MiLeMed',
         link: '',
-        thumbnail: `${ROOT_DIR}esn-votes.png`,
+        thumbnail: `${ROOT_DIR}milemed.png`,
     },
 ];

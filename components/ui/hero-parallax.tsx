@@ -19,9 +19,42 @@ export const HeroParallax = ({
     thumbnail: string;
   }[];
 }) => {
-  const firstRow = products.slice(0, 3);
-  const secondRow = products.slice(3, 6);
-  const thirdRow = products.slice(5, 8);
+  const [rows, setRows] = React.useState({
+    firstRow: products.slice(0, 4),
+    secondRow: products.slice(4, 8),
+    thirdRow: [] as typeof products,
+  });
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+
+    const handleResize = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) {
+        // Desktop layout - two rows with 4 items each
+        setRows({
+          firstRow: products.slice(0, 4),
+          secondRow: products.slice(4, 8),
+          thirdRow: []
+        });
+      } else {
+        // Mobile layout - three rows with fewer items
+        setRows({
+          firstRow: products.slice(0, 3),
+          secondRow: products.slice(3, 6),
+          thirdRow: products.slice(6, 8)
+        });
+      }
+    };
+
+    // Initial check
+    handleResize(mediaQuery);
+
+    // Add listener for subsequent changes
+    mediaQuery.addEventListener("change", handleResize);
+
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, [products]);
+
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -51,13 +84,13 @@ export const HeroParallax = ({
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
+    useTransform(scrollYProgress, [0, 0.2], [-700, 200]),
     springConfig
   );
   return (
     <div
       ref={ref}
-      className="h-[300vh] py-20 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[300vh] md:h-[250vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
       <Header />
       <motion.div
@@ -70,7 +103,7 @@ export const HeroParallax = ({
         className=""
       >
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
-          {firstRow.map((product) => (
+          {rows.firstRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateX}
@@ -78,8 +111,8 @@ export const HeroParallax = ({
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row  mb-20 space-x-20 ">
-          {secondRow.map((product) => (
+        <motion.div className="flex flex-row mb-20 space-x-20">
+          {rows.secondRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateXReverse}
@@ -88,7 +121,7 @@ export const HeroParallax = ({
           ))}
         </motion.div>
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
-          {thirdRow.map((product) => (
+          {rows.thirdRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateX}
