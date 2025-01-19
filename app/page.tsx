@@ -9,6 +9,7 @@ import { WorkAndFeatures } from "../components/sections/WorkAndFeatures";
 import OurApproach from "../components/sections/OurApproach";
 import { HeroHighlightImplemented } from "../components/complex/HeroHighlight";
 import { Section } from "../components/ui/layout";
+import { ParallaxImplemented } from "@/components/complex/ParallaxImplemented";
 
 export default async function Home() {
   // Read client images from the filesystem
@@ -44,17 +45,20 @@ export default async function Home() {
 
         <OurApproach />
 
+        <ParallaxImplemented />
+
         <WorkAndFeatures />
 
         {/* They Trust Us Section */}
-        <Section id="They-Trust-Us">
+        <Section id="They-Trust-Us" className="mb-0">
           <H2>They Trust Us</H2>
           <Paragraph className="mb-12 sm:mb-18">
             Our clients span various industries, each trusting us to bring their
             digital visions to life.
           </Paragraph>
-
           <LogoCarousel logos={logos} />
+
+
         </Section>
 
         {/* Supporting Non-Profits Section */}
@@ -67,11 +71,10 @@ export default async function Home() {
           </Paragraph>
           <Paragraph>
             Understanding the challenges you face, we offer special discounts
-            and tailored solutions. Through sketches, mockups, and iterative
-            feedback, we ensure the final product meets your unique needs.
+            and tailored solutions.
           </Paragraph>
           <Paragraph>
-            Let's create something remarkable together.
+            Let's create something remarkable together.{" "}
             <a
               href="mailto:hey@btv.dev"
               className="ml-2 text-btv-blue-500 hover:text-btv-blue-600 underline"
@@ -98,12 +101,11 @@ export default async function Home() {
                 alt="Headshot of James Mitofsky"
               />
               <H3 className="font-semibold">James Mitofsky</H3>
-              <Paragraph className="text-md text-justify">
+              <Paragraph className="md:text-md text-justify">
                 With a bachelor's in Computer Science from CESI, a French
                 engineering school, James is a design enthusiast with a passion
-                for understanding user behavior. When not coding, James is
-                running through the countryside, advocating for social issues,
-                or carving down Vermont's snowy slopes.
+                for understanding user behavior. James enjoys
+                learning languages, running through the countryside, and advocating for social issues.
               </Paragraph>
               {/* <div className="space-y-2">
                 <a
@@ -126,8 +128,8 @@ export default async function Home() {
                 alt="Headshot of Kyle Mitofsky"
               />
               <H3 className="font-semibold">Kyle Mitofsky</H3>
-              <Paragraph className="text-md text-justify">
-                Posessing a master's in Managing Information Science from
+              <Paragraph className="md:text-md text-justify">
+                Possessing a master's in Managing Information Science from
                 Champlain College, Kyle is a knowledge sharer who thrives on
                 educating and empowering. Proud owner of three black cats, a
                 dog, and multiple laptops, Kyle brings a unique blend of
@@ -170,10 +172,8 @@ export default async function Home() {
           {/* <Button variant="default" className="mt-4">
             Contact Us
           </Button> */}
-          <footer id="footer" className="text-center my-16">
-            <Paragraph>
-              &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
-            </Paragraph>
+          <footer id="footer" className="text-center mt-7 mb-4 md:mt-16 md:mb-7 text-sm text-gray-500">
+            &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
           </footer>
         </Section>
       </main>

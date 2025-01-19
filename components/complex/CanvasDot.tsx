@@ -52,7 +52,7 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
   useEffect(() => {
     const timer = setTimeout(() => setShowDot(true), DOT_SHOW_DELAY);
     return () => clearTimeout(timer);
-  }, [DOT_SHOW_DELAY]);
+  }, []);
 
   useEffect(() => {
     if (
