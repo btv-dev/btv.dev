@@ -104,9 +104,8 @@ export default async function Home() {
               <Paragraph className="md:text-md text-justify">
                 With a bachelor's in Computer Science from CESI, a French
                 engineering school, James is a design enthusiast with a passion
-                for understanding user behavior. When not coding, James is
-                running through the countryside, advocating for social issues,
-                or carving down Vermont's snowy slopes.
+                for understanding user behavior. James enjoys
+                learning languages, running through the countryside, and advocating for social issues.
               </Paragraph>
               {/* <div className="space-y-2">
                 <a
