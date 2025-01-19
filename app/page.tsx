@@ -45,6 +45,8 @@ export default async function Home() {
 
         <OurApproach />
 
+        <ParallaxImplemented />
+
         <WorkAndFeatures />
 
         {/* They Trust Us Section */}
@@ -58,7 +60,6 @@ export default async function Home() {
 
 
         </Section>
-        <ParallaxImplemented />
 
         {/* Supporting Non-Profits Section */}
         <Section id="NonProfits" fade="all">
@@ -100,7 +101,7 @@ export default async function Home() {
                 alt="Headshot of James Mitofsky"
               />
               <H3 className="font-semibold">James Mitofsky</H3>
-              <Paragraph className="text-md text-justify">
+              <Paragraph className="md:text-md text-justify">
                 With a bachelor's in Computer Science from CESI, a French
                 engineering school, James is a design enthusiast with a passion
                 for understanding user behavior. When not coding, James is
@@ -128,7 +129,7 @@ export default async function Home() {
                 alt="Headshot of Kyle Mitofsky"
               />
               <H3 className="font-semibold">Kyle Mitofsky</H3>
-              <Paragraph className="text-md text-justify">
+              <Paragraph className="md:text-md text-justify">
                 Posessing a master's in Managing Information Science from
                 Champlain College, Kyle is a knowledge sharer who thrives on
                 educating and empowering. Proud owner of three black cats, a

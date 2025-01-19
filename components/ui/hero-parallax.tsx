@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { H1, H2, Paragraph } from "./typography";
 
 export const HeroParallax = ({
   products,
@@ -90,7 +91,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[300vh] md:h-[250vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[300vh] md:h-[220vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
       <Header />
       <motion.div
@@ -136,14 +137,14 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 min-h-[40rem]">
-      <h1 className="text-2xl font-rubik-mono-one md:text-4xl font-bold dark:text-white">
-        {/* Because <br/> */}
-        Practical & beautiful
-      </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-        Our products are expressive and high performance because we put cutting edge technology to work.
-      </p>
+    <div className="relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 min-h-[40rem] max-w-4xl px-4">
+      <H2>
+        Our Work
+        {/* Practical & beautiful */}
+      </H2>
+      <Paragraph>
+        Our products are expressive and high performance because we use cutting edge technology, helping you attract and retain visitors.
+      </Paragraph>
     </div>
   );
 };

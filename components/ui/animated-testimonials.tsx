@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { H3 } from "./typography";
 
 type Testimonial = {
   quote: string;
@@ -121,9 +122,9 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold text-foreground">
+            <H3>
               {testimonials[active].name}
-            </h3>
+            </H3>
             <motion.p className="text-lg text-muted-foreground mt-8">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span

@@ -85,14 +85,14 @@ const WorkAndFeatures = () => {
         viewport={{ once: true, amount: 0.08 }}
         transition={{ staggerChildren: 0.15 }}
       >
-        <MotionH2 variants={headerVariants}>Work & Features</MotionH2>
+        <MotionH2 variants={headerVariants}>Features</MotionH2>
         <MotionParagraph
           className="mb-10"
           variants={headerVariants}
           transition={{ delay: 0.1 }}
         >
           We don't just build websites; we create digital experiences that
-          captivate and convert. We deliver according to your needs, and here
+          captivate and convert. We deliver according to your needs, but here
           are some features our clients love:
         </MotionParagraph>
 

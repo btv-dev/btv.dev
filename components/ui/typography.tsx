@@ -52,7 +52,7 @@ export const H3 = forwardRef<HTMLHeadingElement, TypographyProps>(
       <h3
         ref={ref}
         className={cn(
-          "scroll-m-20 text-center text-[1.2rem] font-semibold tracking-tight",
+          "scroll-m-20 text-center text-xl font-semibold tracking-tight",
           className
         )}
       >
@@ -70,7 +70,7 @@ export const Paragraph = forwardRef<HTMLParagraphElement, TypographyProps>(
     return (
       <p
         ref={ref}
-        className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+        className={cn("leading-7 [&:not(:first-child)]:mt-6 text-lg md:text-xl", className)}
       >
         {children}
       </p>
