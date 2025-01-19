@@ -143,7 +143,7 @@ export const Header = () => {
         {/* Practical & beautiful */}
       </H2>
       <Paragraph>
-        Our products are expressive and high performance because we use cutting edge technology, helping you attract and retain visitors.
+        We help you attract and retain clients by developing using cutting edge tools that ensure your website is expressive without compromising on speed.
       </Paragraph>
     </div>
   );

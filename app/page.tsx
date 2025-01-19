@@ -172,10 +172,8 @@ export default async function Home() {
           {/* <Button variant="default" className="mt-4">
             Contact Us
           </Button> */}
-          <footer id="footer" className="text-center my-16">
-            <Paragraph>
-              &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
-            </Paragraph>
+          <footer id="footer" className="text-center mt-7 mb-4 md:my-16 text-sm text-gray-500">
+            &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
           </footer>
         </Section>
       </main>
