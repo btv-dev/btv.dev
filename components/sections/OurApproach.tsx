@@ -11,7 +11,7 @@ const steps = [
     src: "/images/approach/research.webp",
   },
   {
-    name: "2: Sketch & Brainstorm",
+    name: "2: Brainstorm",
     quote:
       "We sketch ideas on paper and create mockups, visualizing potential directions and refining concepts before moving forward.",
     src: "/images/approach/sketch.webp",
