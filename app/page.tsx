@@ -74,7 +74,7 @@ export default async function Home() {
             and tailored solutions.
           </Paragraph>
           <Paragraph>
-            Let's create something remarkable together.
+            Let's create something remarkable together.{" "}
             <a
               href="mailto:hey@btv.dev"
               className="ml-2 text-btv-blue-500 hover:text-btv-blue-600 underline"
@@ -129,7 +129,7 @@ export default async function Home() {
               />
               <H3 className="font-semibold">Kyle Mitofsky</H3>
               <Paragraph className="md:text-md text-justify">
-                Posessing a master's in Managing Information Science from
+                Possessing a master's in Managing Information Science from
                 Champlain College, Kyle is a knowledge sharer who thrives on
                 educating and empowering. Proud owner of three black cats, a
                 dog, and multiple laptops, Kyle brings a unique blend of
@@ -172,7 +172,7 @@ export default async function Home() {
           {/* <Button variant="default" className="mt-4">
             Contact Us
           </Button> */}
-          <footer id="footer" className="text-center mt-7 mb-4 md:my-16 text-sm text-gray-500">
+          <footer id="footer" className="text-center mt-7 mb-4 md:mt-16 md:mb-7 text-sm text-gray-500">
             &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
           </footer>
         </Section>

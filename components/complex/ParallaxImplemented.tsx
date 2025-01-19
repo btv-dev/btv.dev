@@ -35,7 +35,7 @@ const exampleWork = [
         thumbnail: `${ROOT_DIR}esn-votes.png`,
     },
     {
-        title: 'Les Frères Chausettes',
+        title: 'Les Frères Chaussettes',
         link: '',
         thumbnail: `${ROOT_DIR}chaussettes.png`,
     },
