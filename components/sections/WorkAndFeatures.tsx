@@ -11,8 +11,9 @@ import {
   Shield, // for Security Features
   Zap, // for Performance Optimization
 } from "lucide-react";
-import { H2, H3, Paragraph } from "../ui/typography";
-import { Section } from "../ui/layout";
+import { H2, H3, Paragraph } from "@/components/ui/typography";
+import { Section } from "@/components/ui/layout";
+import { fadeUpVariant, staggerContainer } from "@/lib/animations";
 
 const features = [
   {
@@ -65,21 +66,18 @@ const features = [
   },
 ];
 
-const headerVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1 },
-};
-
-const WorkAndFeatures = () => {
+export function WorkAndFeatures() {
   return (
-    <Section id="Work-&-Features" fade="all">
-        <H2>Features</H2>
-        <Paragraph className="mb-10">
+    <Section id="Work-And-Features" fade="all">
+      {/* Features Section */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <H2 variants={fadeUpVariant} useParentAnimation>Features</H2>
+        <Paragraph className="mb-10" variants={fadeUpVariant} useParentAnimation>
           We don't just build websites; we create digital experiences that
           captivate and convert. We deliver according to your needs, but here
           are some features our clients love:
@@ -94,11 +92,10 @@ const WorkAndFeatures = () => {
                 <div key={index} className="w-full sm:flex-1 min-w-[280px]">
                   <motion.div
                     className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg h-full"
-                    variants={cardVariants}
+                    variants={fadeUpVariant}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5 }}
                   >
                     <Icon className="text-btv-blue-500 mb-4" size={48} />
                     <H3>{feature.title}</H3>
@@ -111,8 +108,7 @@ const WorkAndFeatures = () => {
             })}
           </div>
         </div>
+      </motion.div>
     </Section>
   );
-};
-
-export { WorkAndFeatures };
+}
