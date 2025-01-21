@@ -38,7 +38,7 @@ const OurApproach = () => {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.4 }}
         variants={staggerContainer}
       >
         <H2 variants={fadeUpVariant} useParentAnimation>Our Approach</H2>

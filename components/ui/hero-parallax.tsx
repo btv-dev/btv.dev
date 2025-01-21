@@ -140,13 +140,13 @@ export const Header = () => {
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.4 }}
       variants={staggerContainer}
       className="relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 min-h-[40rem] max-w-4xl px-4"
     >
       <H2 variants={fadeUpVariant} useParentAnimation>Our Work</H2>
       <Paragraph className="mb-10" variants={fadeUpVariant} useParentAnimation>
-        We help you attract and retain clients by developing using cutting edge tools that ensure your website is expressive without compromising on speed.
+        We help you attract and retain clients by developing with cutting edge tools that ensure your website can be expressive without compromising on performance.
       </Paragraph>
     </motion.div>
   );
