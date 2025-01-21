@@ -74,7 +74,7 @@ export default async function Home() {
             and tailored solutions.
           </Paragraph>
           <Paragraph>
-            Let's create something remarkable together.{" "}
+            Let's create something remarkable together.
             <a
               href="mailto:hey@btv.dev"
               className="ml-2 text-btv-blue-500 hover:text-btv-blue-600 underline"
