@@ -8,7 +8,6 @@ import {
   MotionValue,
 } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { H2, Paragraph } from "./typography";
 import { staggerContainer, fadeUpVariant } from "@/lib/animations";
 
