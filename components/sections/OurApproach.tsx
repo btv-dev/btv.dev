@@ -32,7 +32,7 @@ const headerVariants = {
 const OurApproach = () => {
   return (
     <Section id="Our-Approach">
-      <MotionH2>Our Approach</MotionH2>
+      <H2>Our Approach</H2>
 
       <MotionParagraph>
         At BTV.dev, our collaborative process ensures your vision comes to
@@ -62,6 +62,7 @@ const OurApproach = () => {
 export default OurApproach;
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { H2 } from "../ui/typography";
 
 function AnimatedTestimonialsDemo() {
   const testimonials = [

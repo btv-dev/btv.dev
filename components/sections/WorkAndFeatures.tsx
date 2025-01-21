@@ -11,7 +11,7 @@ import {
   Shield, // for Security Features
   Zap, // for Performance Optimization
 } from "lucide-react";
-import { H3 } from "../ui/typography";
+import { H2, H3 } from "../ui/typography";
 import { MotionH2, MotionParagraph } from "../ui/motion-typography";
 import { Section } from "../ui/layout";
 
@@ -85,7 +85,7 @@ const WorkAndFeatures = () => {
         viewport={{ once: true, amount: 0.08 }}
         transition={{ staggerChildren: 0.15 }}
       >
-        <MotionH2 variants={headerVariants}>Features</MotionH2>
+        <H2>Features</H2>
         <MotionParagraph
           className="mb-10"
           variants={headerVariants}
