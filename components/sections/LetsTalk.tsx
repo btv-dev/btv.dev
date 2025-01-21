@@ -50,11 +50,9 @@ export function LetsTalk() {
           . We're eager to discuss how we can help you improve your presence
           on the web.
         </Paragraph>
-        <motion.div variants={fadeUpVariant}>
-          <footer id="footer" className="text-center mt-7 mb-4 md:mt-16 md:mb-7 text-sm text-gray-500">
-            &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
-          </footer>
-        </motion.div>
+        <footer id="footer" className="text-center mt-12 md:mt-16 mb-6 text-sm text-gray-500">
+          &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.
+        </footer>
       </motion.div>
     </Section>
   );
