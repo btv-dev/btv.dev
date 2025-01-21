@@ -82,33 +82,33 @@ export function WorkAndFeatures() {
           captivate and convert. We deliver according to your needs, but here
           are some features our clients love:
         </Paragraph>
-
-        <div className="flex flex-col gap-6">
-          {/* Row container */}
-          <div className="flex flex-wrap gap-6">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <div key={index} className="w-full sm:flex-1 min-w-[280px]">
-                  <motion.div
-                    className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg h-full"
-                    variants={fadeUpVariant}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
-                  >
-                    <Icon className="text-btv-blue-500 mb-4" size={48} />
-                    <H3>{feature.title}</H3>
-                    <p className="text-center text-gray-600">
-                      {feature.description}
-                    </p>
-                  </motion.div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </motion.div>
+
+      <div className="flex flex-col gap-6">
+        {/* Row container */}
+        <div className="flex flex-wrap gap-6">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <div key={index} className="w-full sm:flex-1 min-w-[280px]">
+                <motion.div
+                  className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg h-full"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={fadeUpVariant}
+                >
+                  <Icon className="text-btv-blue-500 mb-4" size={48} />
+                  <H3 initial={false} animate={false} variants={undefined}>{feature.title}</H3>
+                  <p className="text-center text-gray-600">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </Section>
   );
 }
