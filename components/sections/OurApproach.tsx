@@ -1,5 +1,7 @@
 "use client";
 
+import { staggerContainer, fadeUpVariant } from "@/lib/animations";
+import { motion } from "framer-motion";
 import { Section } from "../ui/layout";
 import { H2, Paragraph } from "../ui/typography";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
@@ -33,13 +35,18 @@ const headerVariants = {
 const OurApproach = () => {
   return (
     <Section id="Our-Approach">
-      <H2>Our Approach</H2>
-
-      <Paragraph>
-        At BTV.dev, our collaborative process ensures your vision comes to
-        life—beautifully and seamlessly.
-      </Paragraph>
-
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <H2 variants={fadeUpVariant} useParentAnimation>Our Approach</H2>
+        <Paragraph variants={fadeUpVariant} useParentAnimation>
+          At BTV.dev, our collaborative process ensures your vision comes to
+          life—beautifully and seamlessly.
+        </Paragraph>
+      </motion.div>
       <div className="flex flex-wrap justify-center gap-6">
         <AnimatedTestimonials testimonials={steps} />
       </div>

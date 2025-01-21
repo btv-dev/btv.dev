@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { H2, Paragraph } from "./typography";
+import { staggerContainer, fadeUpVariant } from "@/lib/animations";
 
 export const HeroParallax = ({
   products,
@@ -137,15 +138,18 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <div className="relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 min-h-[40rem] max-w-4xl px-4">
-      <H2>
-        Our Work
-        {/* Practical & beautiful */}
-      </H2>
-      <Paragraph>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={staggerContainer}
+      className="relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 min-h-[40rem] max-w-4xl px-4"
+    >
+      <H2 variants={fadeUpVariant} useParentAnimation>Our Work</H2>
+      <Paragraph className="mb-10" variants={fadeUpVariant} useParentAnimation>
         We help you attract and retain clients by developing using cutting edge tools that ensure your website is expressive without compromising on speed.
       </Paragraph>
-    </div>
+    </motion.div>
   );
 };
 
