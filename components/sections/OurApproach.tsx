@@ -1,7 +1,8 @@
 "use client";
 
 import { Section } from "../ui/layout";
-import { MotionH2, MotionParagraph } from "../ui/motion-typography";
+import { H2, Paragraph } from "../ui/typography";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const steps = [
   {
@@ -34,16 +35,16 @@ const OurApproach = () => {
     <Section id="Our-Approach">
       <H2>Our Approach</H2>
 
-      <MotionParagraph>
+      <Paragraph>
         At BTV.dev, our collaborative process ensures your vision comes to
         life—beautifully and seamlessly.
-      </MotionParagraph>
+      </Paragraph>
 
       <div className="flex flex-wrap justify-center gap-6">
         <AnimatedTestimonials testimonials={steps} />
       </div>
 
-      <MotionParagraph
+      <Paragraph
         className="text-center mt-8 mx-auto max-w-2xl"
         variants={headerVariants}
         initial="hidden"
@@ -54,15 +55,12 @@ const OurApproach = () => {
         Through sketches and mockups, we explore various possibilities and steer
         the project in the right direction before committing to the final
         design, ensuring our work aligns perfectly with your vision.
-      </MotionParagraph>
+      </Paragraph>
     </Section>
   );
 };
 
 export default OurApproach;
-
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import { H2 } from "../ui/typography";
 
 function AnimatedTestimonialsDemo() {
   const testimonials = [
