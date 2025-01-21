@@ -77,7 +77,7 @@ export function WorkAndFeatures() {
         variants={staggerContainer}
       >
         <H2 variants={fadeUpVariant} useParentAnimation>Features</H2>
-        <Paragraph className="mb-10" variants={fadeUpVariant} useParentAnimation>
+        <Paragraph className="mb-14" variants={fadeUpVariant} useParentAnimation>
           We don't just build websites; we create digital experiences that
           captivate and convert. We deliver according to your needs, but here
           are some features our clients love:
@@ -86,7 +86,7 @@ export function WorkAndFeatures() {
 
       <div className="flex flex-col gap-6">
         {/* Row container */}
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap gap-12">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
