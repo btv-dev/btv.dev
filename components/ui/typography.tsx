@@ -173,7 +173,7 @@ export const Subtitle = forwardRef<HTMLParagraphElement, TypographyProps>(
 Subtitle.displayName = "Subtitle";
 
 // UL
-export const UL = forwardRef<HTMLUListElement, TypographyProps>(
+export const UL = forwardRef<HTMLUListElement, HTMLMotionProps<"ul">>(
   ({ children, className, variants = listVariants, initial = "hidden", viewport = defaultViewport, ...props }, ref) => {
     return (
       <motion.ul
@@ -194,7 +194,7 @@ export const UL = forwardRef<HTMLUListElement, TypographyProps>(
 UL.displayName = "UL";
 
 // OL
-export const OL = forwardRef<HTMLOListElement, TypographyProps>(
+export const OL = forwardRef<HTMLOListElement, HTMLMotionProps<"ol">>(
   ({ children, className, variants = listVariants, initial = "hidden", viewport = defaultViewport, ...props }, ref) => {
     return (
       <motion.ol
@@ -215,7 +215,7 @@ export const OL = forwardRef<HTMLOListElement, TypographyProps>(
 OL.displayName = "OL";
 
 // LI
-export const LI = forwardRef<HTMLLIElement, TypographyProps>(
+export const LI = forwardRef<HTMLLIElement, HTMLMotionProps<"li">>(
   ({ children, className, variants = listItemVariants, initial = "hidden", viewport = defaultViewport, ...props }, ref) => {
     return (
       <motion.li 
