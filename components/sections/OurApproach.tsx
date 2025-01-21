@@ -1,7 +1,10 @@
 "use client";
 
+import { staggerContainer, fadeUpVariant } from "@/lib/animations";
+import { motion } from "framer-motion";
 import { Section } from "../ui/layout";
-import { MotionH2, MotionParagraph } from "../ui/motion-typography";
+import { H2, Paragraph } from "../ui/typography";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const steps = [
   {
@@ -32,18 +35,23 @@ const headerVariants = {
 const OurApproach = () => {
   return (
     <Section id="Our-Approach">
-      <MotionH2>Our Approach</MotionH2>
-
-      <MotionParagraph>
-        At BTV.dev, our collaborative process ensures your vision comes to
-        life—beautifully and seamlessly.
-      </MotionParagraph>
-
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        variants={staggerContainer}
+      >
+        <H2 variants={fadeUpVariant} useParentAnimation>Our Approach</H2>
+        <Paragraph variants={fadeUpVariant} useParentAnimation>
+          At BTV.dev, our collaborative process ensures your vision comes to
+          life—beautifully and seamlessly.
+        </Paragraph>
+      </motion.div>
       <div className="flex flex-wrap justify-center gap-6">
         <AnimatedTestimonials testimonials={steps} />
       </div>
 
-      <MotionParagraph
+      <Paragraph
         className="text-center mt-8 mx-auto max-w-2xl"
         variants={headerVariants}
         initial="hidden"
@@ -54,14 +62,12 @@ const OurApproach = () => {
         Through sketches and mockups, we explore various possibilities and steer
         the project in the right direction before committing to the final
         design, ensuring our work aligns perfectly with your vision.
-      </MotionParagraph>
+      </Paragraph>
     </Section>
   );
 };
 
 export default OurApproach;
-
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 function AnimatedTestimonialsDemo() {
   const testimonials = [

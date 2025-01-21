@@ -8,8 +8,8 @@ import {
   MotionValue,
 } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { H2, Paragraph } from "./typography";
+import { staggerContainer, fadeUpVariant } from "@/lib/animations";
 
 export const HeroParallax = ({
   products,
@@ -137,15 +137,18 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <div className="relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 min-h-[40rem] max-w-4xl px-4">
-      <H2>
-        Our Work
-        {/* Practical & beautiful */}
-      </H2>
-      <Paragraph>
-        We help you attract and retain clients by developing using cutting edge tools that ensure your website is expressive without compromising on speed.
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.4 }}
+      variants={staggerContainer}
+      className="relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 min-h-[40rem] max-w-4xl px-4"
+    >
+      <H2 variants={fadeUpVariant} useParentAnimation>Our Work</H2>
+      <Paragraph className="mb-10" variants={fadeUpVariant} useParentAnimation>
+        We help you attract and retain clients by developing with cutting edge tools that ensure your website is expressive, fast, and delight-inspiring.
       </Paragraph>
-    </div>
+    </motion.div>
   );
 };
 
@@ -171,10 +174,10 @@ export const ProductCard = ({
       key={product.title}
       className="group/product h-96 w-[30rem] relative flex-shrink-0"
     >
-      <Link
+      {/* <Link
         href={product.link}
         className="block group-hover/product:shadow-2xl "
-      >
+      > */}
         <Image
           src={product.thumbnail}
           height="600"
@@ -182,7 +185,7 @@ export const ProductCard = ({
           className="object-cover object-center absolute h-full w-full inset-0"
           alt={product.title}
         />
-      </Link>
+      {/* </Link> */}
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
       <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
         {product.title}
