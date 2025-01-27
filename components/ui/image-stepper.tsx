@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
-import { H2 } from './typography';
+import { H3 } from './typography';
 
 interface Slide {
   src: string;
@@ -83,8 +83,8 @@ export default function ImageStepper() {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-      <div className="flex flex-col lg:flex-row lg:space-x-8">
-        <div className="relative w-full lg:w-3/5" ref={containerRef}>
+      <div className="flex flex-col sm:flex-row sm:space-x-8">
+        <div className="relative w-full sm:w-3/5" ref={containerRef}>
           <div className="relative h-96 sm:h-80 md:h-96 overflow-hidden rounded-xl">
             {slides.map((slide, index) => (
               <div
@@ -142,11 +142,11 @@ export default function ImageStepper() {
           `}</style>
         </div>
 
-        <div className="mt-6 lg:mt-0 lg:w-2/5">
+        <div className="mt-6 sm:mt-0 sm:w-2/5">
           <div className="space-y-4">
-            <H2 className="text-xl font-bold tracking-tight text-gray-900">
+            <H3 className="font-rubik-mono-one text-2xl sm:text-xl md:text-3xl font-bold tracking-tight text-gray-900">
               {slides[currentIndex].title}
-            </H2>
+            </H3>
             <p className="text-gray-600">
               {slides[currentIndex].description}
             </p>
