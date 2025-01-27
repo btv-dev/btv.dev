@@ -35,7 +35,8 @@ export default function ImageStepper() {
   const [shouldAutoSlide, setShouldAutoSlide] = useState<boolean>(false);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  
+  const timerRef = useRef<NodeJS.Timeout>();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -68,17 +69,32 @@ export default function ImageStepper() {
   useEffect(() => {
     if (!shouldAutoSlide) return;
 
-    const timer = setInterval(() => {
+    // Clear any existing timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    // Create new timer
+    timerRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex === slides.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
 
-    return () => clearInterval(timer);
-  }, [shouldAutoSlide]);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [shouldAutoSlide, currentIndex]);
 
   const goToSlide = (index: number): void => {
     setCurrentIndex(index);
+    // Reset animation
+    setIsAnimating(false);
+    setTimeout(() => {
+      setIsAnimating(true);
+    }, 50);
   };
 
   return (
