@@ -23,20 +23,20 @@ const rubikMonoOne = Rubik_Mono_One({
 });
 
 export const metadata: Metadata = {
-  title: "BTV.dev",
+  title: "BTV dot Dev",
   description:
     "A Vermont based web design agency, we develop solutions that reflect your values and amplify your mission.",
   openGraph: {
-    title: "BTV.dev",
+    title: "BTV dot Dev",
     description: "A Vermont based web design agency, we develop solutions that reflect your values and amplify your mission.",
     url: "https://btv.dev",
-    siteName: "BTV.dev",
+    siteName: "BTV dot Dev",
     images: [
       {
         url: '/images/opengraph.png',
         width: 1200,
         height: 630,
-        alt: "BTV.dev - Vermont Web Design Agency",
+        alt: "BTV dot Dev - Vermont Web Design Agency",
       },
     ],
     locale: "en_US",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BTV.dev",
+    title: "BTV dot Dev",
     description: "A Vermont based web design agency, we develop solutions that reflect your values and amplify your mission.",
     images: ['/images/opengraph.png'],
   },
