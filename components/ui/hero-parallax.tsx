@@ -145,7 +145,7 @@ export const Header = () => {
     >
       <H2 variants={fadeUpVariant} useParentAnimation>Our Work</H2>
       <Paragraph className="mb-10" variants={fadeUpVariant} useParentAnimation>
-        We help you attract and retain clients by developing with cutting edge tools that ensure your website is expressive, fast, and communicates your brand.
+        We help you attract and retain clients by ensuring your website is expressive, fast, and communicates your brand.
       </Paragraph>
     </motion.div>
   );
