@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
 import NextImage from "next/image";
 import { CustomLink } from "../ui/custom-link";
+import { AnimatedButton } from "../ui/animated-button";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -60,7 +61,12 @@ export function SupportingNonProfits() {
           variants={fadeUpVariant}
           className="flex flex-col items-end"
         >
-         
+          <AnimatedButton
+            href="#Lets-Talk"
+            className="mt-8"
+          >
+            Let's Talk
+          </AnimatedButton>
         </motion.div>
       </motion.div>
     </Section>
