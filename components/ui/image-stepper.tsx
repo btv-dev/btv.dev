@@ -41,7 +41,7 @@ export default function ImageStepper() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
+          if (entry.isIntersecting) {
             setShouldAutoSlide(true);
             setIsAnimating(true);
           } else {
