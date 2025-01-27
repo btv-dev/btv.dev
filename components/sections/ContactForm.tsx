@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
+import Lottie from "lottie-react";
 
 type FormStep = "service" | "budget" | "timeline" | "contact";
 type SubmissionStatus = "idle" | "submitting" | "success" | "error";
@@ -31,18 +32,31 @@ const Spinner = () => (
   </motion.svg>
 );
 
-const CheckmarkIcon = () => (
-  <div className="mb-4 text-btv-blue">
-    <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M5 13l4 4L19 7"
+const CheckmarkAnimation = () => {
+  const [animationData, setAnimationData] = useState(null);
+
+  useEffect(() => {
+    fetch('/check-animation.json')
+      .then(response => response.json())
+      .then(data => setAnimationData(data))
+      .catch(error => console.error('Error loading animation:', error));
+  }, []);
+
+  if (!animationData) return null;
+
+  return (
+    <div className="w-32 h-32 mx-auto">
+      <Lottie
+        animationData={animationData}
+        loop={false}
+        style={{ 
+          width: "100%", 
+          height: "100%",
+        }}
       />
-    </svg>
-  </div>
-);
+    </div>
+  );
+};
 
 interface FormData {
   service: string;
@@ -158,7 +172,7 @@ export default function ContactForm() {
           transition={{ delay: 0.2 }}
         >
           <div className="mb-4 text-btv-blue">
-            <CheckmarkIcon />
+            <CheckmarkAnimation />
           </div>
           <motion.h2
             className="text-2xl font-bold mb-4"
