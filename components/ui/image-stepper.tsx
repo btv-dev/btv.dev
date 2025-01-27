@@ -33,6 +33,7 @@ const slides: Slide[] = [
 export default function ImageStepper() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [shouldAutoSlide, setShouldAutoSlide] = useState<boolean>(false);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -41,13 +42,15 @@ export default function ImageStepper() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
             setShouldAutoSlide(true);
+            setIsAnimating(true);
           } else {
             setShouldAutoSlide(false);
+            setIsAnimating(false);
           }
         });
       },
       {
-        threshold: 0.8, // 80% of the element must be visible
+        threshold: 0.8,
       }
     );
 
@@ -107,13 +110,36 @@ export default function ImageStepper() {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'w-8 bg-gray-900' : 'w-3 bg-gray-300 hover:bg-gray-400'
+                className={`h-4 rounded-full transition-all duration-300 relative ${
+                  index === currentIndex 
+                    ? 'w-12 bg-btv-blue-500 overflow-hidden' 
+                    : 'w-4 bg-btv-blue-300 hover:bg-btv-blue-400'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
-              />
+              >
+                {index === currentIndex && isAnimating && (
+                  <div 
+                    className="absolute inset-0 bg-btv-blue-300 origin-left"
+                    style={{
+                      animation: 'progress 5s linear infinite',
+                      animationPlayState: shouldAutoSlide ? 'running' : 'paused'
+                    }}
+                  />
+                )}
+              </button>
             ))}
           </div>
+
+          <style jsx>{`
+            @keyframes progress {
+              0% {
+                transform: scaleX(0);
+              }
+              100% {
+                transform: scaleX(1);
+              }
+            }
+          `}</style>
         </div>
 
         <div className="mt-6 lg:mt-0 lg:w-2/5">
