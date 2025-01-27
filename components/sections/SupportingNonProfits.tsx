@@ -58,7 +58,7 @@ export function SupportingNonProfits() {
           variants={fadeUpVariant}
           className="flex flex-col items-end"
         >
-          <AnimatedButton href="#Lets-Talk">
+          <AnimatedButton href="#Lets-Talk" className="mt-8 md:mt-0">
             Let's talk!
           </AnimatedButton>
         </motion.div>

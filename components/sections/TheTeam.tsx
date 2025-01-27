@@ -45,7 +45,7 @@ export function TheTeam() {
           alt="Kyle delivering a code talk"
         />
         <Paragraph className="mb-8" variants={fadeUpVariant} useParentAnimation>
-          With a combined 24 years of experience in web development and design, we're friends, brothers, & developers.
+          We're friends, brothers, & developers. With 24 years of experience between us, we share a passion for creating exceptional digital experiences.
         </Paragraph>
         <motion.div
           className="grid md:grid-cols-2 gap-8"
