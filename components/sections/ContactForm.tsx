@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useForm } from "react-hook-form";
 import clsx from "clsx";
 
 type FormStep = "service" | "budget" | "timeline" | "contact";
@@ -20,17 +21,7 @@ interface FormData {
 
 export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState<FormStep>("service");
-  const [formData, setFormData] = useState<FormData>({
-    service: "",
-    budget: "",
-    timeline: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-  });
+  const { register, handleSubmit, setValue, watch } = useForm<FormData>();
 
   const services = [
     "A new website",
@@ -56,31 +47,28 @@ export default function ContactForm() {
   ];
 
   const handleOptionSelect = (field: keyof FormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setValue(field, value);
     if (field === "service") setCurrentStep("budget");
     if (field === "budget") setCurrentStep("timeline");
     if (field === "timeline") setCurrentStep("contact");
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const onSubmit = async (data: FormData) => {
+    // TODO: Implement form submission logic
+    console.log(data);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement form submission logic
-    console.log(formData);
-  };
+  const watchedFields = watch();
 
   const OptionButton = ({ value, field }: { value: string; field: keyof FormData }) => (
     <button
+      type="button"
       onClick={() => handleOptionSelect(field, value)}
       className={clsx(
         "px-6 py-3 rounded-lg transition-all duration-200",
         "border border-gray-200 hover:border-gray-300",
         "text-left w-full",
-        formData[field] === value && "border-blue-500 bg-blue-50"
+        watchedFields[field] === value && "border-blue-500 bg-blue-50"
       )}
     >
       {value}
@@ -89,7 +77,7 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <AnimatePresence mode="wait">
           {currentStep === "service" && (
             <motion.div
@@ -147,28 +135,22 @@ export default function ContactForm() {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-6"
             >
-              <h2 className="text-2xl font-bold mb-6">Tell us about yourself</h2>
+              <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">First Name</label>
                   <input
                     type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
                     className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                    required
+                    {...register("firstName", { required: true })}
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Last Name</label>
                   <input
                     type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
                     className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                    required
+                    {...register("lastName", { required: true })}
                   />
                 </div>
               </div>
@@ -177,21 +159,16 @@ export default function ContactForm() {
                   <label className="block text-sm font-medium mb-2">Email</label>
                   <input
                     type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
                     className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                    required
+                    {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Phone</label>
                   <input
                     type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
                     className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                    {...register("phone")}
                   />
                 </div>
               </div>
@@ -199,25 +176,21 @@ export default function ContactForm() {
                 <label className="block text-sm font-medium mb-2">Company</label>
                 <input
                   type="text"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleInputChange}
                   className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                  {...register("company")}
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Additional Information</label>
                 <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
                   className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
                   placeholder="Tell us more about your project..."
+                  {...register("message")}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors"
+                className="w-full bg-btv-blue text-white py-3 px-6 rounded-lg hover:bg-btv-blue-600 transition-colors"
               >
                 Submit
               </button>
