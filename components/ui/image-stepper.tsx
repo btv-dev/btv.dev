@@ -35,19 +35,23 @@ export default function ImageStepper() {
   const [shouldAutoSlide, setShouldAutoSlide] = useState<boolean>(false);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  
+  const timerRef = useRef<NodeJS.Timeout>();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
+          if (entry.isIntersecting) {
             setShouldAutoSlide(true);
             setIsAnimating(true);
+          } else {
+            setShouldAutoSlide(false);
+            setIsAnimating(false);
           }
         });
       },
       {
-        threshold: 0.8,
+        threshold: 0
       }
     );
 
@@ -65,17 +69,32 @@ export default function ImageStepper() {
   useEffect(() => {
     if (!shouldAutoSlide) return;
 
-    const timer = setInterval(() => {
+    // Clear any existing timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    // Create new timer
+    timerRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex === slides.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
 
-    return () => clearInterval(timer);
-  }, [shouldAutoSlide]);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [shouldAutoSlide, currentIndex]);
 
   const goToSlide = (index: number): void => {
     setCurrentIndex(index);
+    // Reset animation
+    setIsAnimating(false);
+    setTimeout(() => {
+      setIsAnimating(true);
+    }, 50);
   };
 
   return (
@@ -118,7 +137,7 @@ export default function ImageStepper() {
                   <div 
                     className="absolute inset-0 bg-btv-blue-300 origin-left"
                     style={{
-                      animation: 'progress 5s linear infinite',
+                      animation: 'progress 5s cubic-bezier(0.3, 0.1, 0.4, 1) infinite',
                       animationPlayState: shouldAutoSlide ? 'running' : 'paused'
                     }}
                   />
