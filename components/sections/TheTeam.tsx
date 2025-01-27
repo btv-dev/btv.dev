@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
@@ -19,8 +19,8 @@ const fadeUpVariant = {
 
 export function TheTeam() {
   return (
-    <Section id="The-Team">
-      <H2>The Team</H2>
+    <Section id="About">
+      <H2>About</H2>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -35,9 +35,19 @@ export function TheTeam() {
         }}
       >
         <Paragraph className="mb-8" variants={fadeUpVariant} useParentAnimation>
-          We're friends, brothers, & developers.
+          Named after Vermont's international airport code (<span className="font-rubik-mono-one text-btv-blue">BTV</span>), we are a boutique software development studio with roots in Burlington, Vermont. We specialize in crafting expressive, user-focused web applications and digital solutions that blend technical excellence with intuitive design. Our approach combines Vermont's values of authenticity and craftsmanship with modern development practices.
         </Paragraph>
-        <motion.div 
+        <NextImage
+          width={800}
+          height={400}
+          className="w-full h-auto rounded-sm mx-auto"
+          src="/images/kyle-lecture.webp"
+          alt="Kyle delivering a code talk"
+        />
+        <Paragraph className="mb-8" variants={fadeUpVariant} useParentAnimation>
+          We're friends, brothers, & developers. With 24 years of experience between us, we share a passion for creating exceptional digital experiences.
+        </Paragraph>
+        <motion.div
           className="grid md:grid-cols-2 gap-8"
           variants={fadeUpVariant}
         >
@@ -52,10 +62,9 @@ export function TheTeam() {
             />
             <H3 className="font-semibold" variants={fadeUpVariant} useParentAnimation>James Mitofsky</H3>
             <Paragraph className="md:text-md text-justify" variants={fadeUpVariant} useParentAnimation>
-              With a bachelor's in Computer Science from CESI, a French
+              Diplomaed in Computer Science from CESI, a French
               engineering school, James is a design enthusiast with a passion
-              for understanding user behavior. James enjoys
-              learning languages, running through the countryside, and advocating for social issues.
+              for understanding user behavior. When not coding, he is an avid runner, outdoorist, and advocate for social issues.
             </Paragraph>
           </div>
           {/* Kyle */}

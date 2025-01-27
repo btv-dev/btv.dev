@@ -45,7 +45,7 @@ const exampleWork = [
         thumbnail: `${ROOT_DIR}greenhills.webp`,
     },
     {
-        title: 'MiLeMed',
+        title: 'University of Bonn — MiLeMed',
         link: '',
         thumbnail: `${ROOT_DIR}milemed.webp`,
     },

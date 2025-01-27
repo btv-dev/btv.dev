@@ -3,11 +3,12 @@
 import { H2, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
+import ContactForm from "./ContactForm";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
@@ -18,8 +19,11 @@ const fadeUpVariant = {
 
 export function LetsTalk() {
   return (
-    <Section id="Lets-Talk" fade="top" innerClassname="pb-0">
-      <H2>Let's Talk!</H2>
+    <Section fade="top" innerClassname="pb-0">
+      <H2 id="Lets-Talk">Let's Talk!</H2>
+
+
+
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -33,12 +37,13 @@ export function LetsTalk() {
           },
         }}
       >
-        <Paragraph variants={fadeUpVariant} useParentAnimation>
+        <Paragraph variants={fadeUpVariant} useParentAnimation className="mb-8">
           Ready to transform your vision into reality? We're here to listen,
           collaborate, and innovate.
         </Paragraph>
+        <ContactForm />
         <Paragraph variants={fadeUpVariant} useParentAnimation>
-          Reach out at{" "}
+        <b>Forms not your thing?</b> No worries. Reach out at{" "}
           <a
             href="mailto:hey@btv.dev"
             target="_blank"
@@ -47,8 +52,7 @@ export function LetsTalk() {
           >
             hey@btv.dev
           </a>
-          . We're eager to discuss how we can help you improve your presence
-          on the web.
+          .
         </Paragraph>
         <footer id="footer" className="text-center mt-12 md:mt-16 mb-6 text-sm text-gray-500">
           &copy; 2020 – {new Date().getFullYear()} BTV.dev. All rights reserved.

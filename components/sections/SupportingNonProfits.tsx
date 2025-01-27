@@ -3,6 +3,9 @@
 import { H2, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
+import NextImage from "next/image";
+import { CustomLink } from "../ui/custom-link";
+import { AnimatedButton } from "../ui/animated-button";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -38,19 +41,33 @@ export function SupportingNonProfits() {
           Your cause deserves a digital presence that reflects its heart and
           impact.
         </Paragraph>
+        <NextImage
+          width={800}
+          height={400}
+          className="w-full h-auto rounded-sm mx-auto mt-8"
+          src="/images/red-cross.webp"
+          alt="James working with the red cross"
+        />
         <Paragraph variants={fadeUpVariant} useParentAnimation>
           Understanding the challenges you face, we offer special discounts
           and tailored solutions.
         </Paragraph>
         <Paragraph variants={fadeUpVariant} useParentAnimation>
-          Let's create something remarkable together.
-          <a
-            href="mailto:hey@btv.dev"
-            className="ml-2 text-btv-blue-500 hover:text-btv-blue-600 underline"
-          >
-            Let's talk!
-          </a>
+          Let's  <CustomLink href="#Lets-Talk">
+            create something remarkable 
+          </CustomLink> together.
         </Paragraph>
+        <motion.div 
+          variants={fadeUpVariant}
+          className="flex flex-col items-end"
+        >
+          <AnimatedButton
+            href="#Lets-Talk"
+            className="mt-8"
+          >
+            Let's Talk
+          </AnimatedButton>
+        </motion.div>
       </motion.div>
     </Section>
   );
