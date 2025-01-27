@@ -38,14 +38,14 @@ export function TheTeam() {
           Named after Vermont's international airport code (<span className="font-rubik-mono-one text-btv-blue">BTV</span>), we are a boutique software development studio with roots in Burlington, Vermont. We specialize in crafting expressive, user-focused web applications and digital solutions that blend technical excellence with intuitive design. Our approach combines Vermont's values of authenticity and craftsmanship with modern development practices.
         </Paragraph>
         <NextImage
-              width={800}
-              height={400}
-              className="w-full h-auto rounded-sm mx-auto"
-              src="/images/kyle-lecture.webp"
-              alt="Kyle delivering a code talk"
-            />
+          width={800}
+          height={400}
+          className="w-full h-auto rounded-sm mx-auto"
+          src="/images/kyle-lecture.webp"
+          alt="Kyle delivering a code talk"
+        />
         <Paragraph className="mb-8" variants={fadeUpVariant} useParentAnimation>
-        With a combined 24 years of experience in web development and design, we're friends, brothers, & developers.
+          With a combined 24 years of experience in web development and design, we're friends, brothers, & developers.
         </Paragraph>
         <motion.div
           className="grid md:grid-cols-2 gap-8"

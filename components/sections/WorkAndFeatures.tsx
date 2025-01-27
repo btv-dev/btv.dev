@@ -14,6 +14,7 @@ import {
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { fadeUpVariant, staggerContainer } from "@/lib/animations";
+import { AnimatedButton } from "../ui/animated-button";
 
 const features = [
   {
@@ -109,6 +110,9 @@ export function WorkAndFeatures() {
           })}
         </div>
       </div>
+      <AnimatedButton className="mt-20" variant="fullWidth" href="#Lets-Talk">
+        Let's talk!
+      </AnimatedButton>
     </Section>
   );
 }
