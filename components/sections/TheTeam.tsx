@@ -62,9 +62,9 @@ export function TheTeam() {
             />
             <H3 className="font-semibold" variants={fadeUpVariant} useParentAnimation>James Mitofsky</H3>
             <Paragraph className="md:text-md text-justify" variants={fadeUpVariant} useParentAnimation>
-              With a bachelor's in Computer Science from CESI, a French
+              Diplomaed in Computer Science from CESI, a French
               engineering school, James is a design enthusiast with a passion
-              for understanding user behavior. Outside of work, he is an avid runner, outdoorist, and advocate for social issues.
+              for understanding user behavior. When not coding, he is an avid runner, outdoorist, and advocate for social issues.
             </Paragraph>
           </div>
           {/* Kyle */}
