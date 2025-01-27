@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import clsx from "clsx";
 
 type FormStep = "service" | "budget" | "timeline" | "contact";
+type SubmissionStatus = "idle" | "submitting" | "success" | "error";
 
 interface FormData {
   service: string;
@@ -21,6 +22,7 @@ interface FormData {
 
 export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState<FormStep>("service");
+  const [status, setStatus] = useState<SubmissionStatus>("idle");
   const { register, handleSubmit, setValue, watch } = useForm<FormData>();
 
   const services = [
@@ -54,8 +56,35 @@ export default function ContactForm() {
   };
 
   const onSubmit = async (data: FormData) => {
-    // TODO: Implement form submission logic
-    console.log(data);
+    try {
+      setStatus("submitting");
+      
+      const formData = {
+        ...data,
+        access_key: "78432edd-0a4e-4101-a602-b3d909db5ec8",
+        subject: `New Contact from ${data.firstName} ${data.lastName} - ${data.service}`,
+        from_name: `${data.firstName} ${data.lastName}`,
+      };
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus("success");
+      } else {
+        throw new Error("Submission failed");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus("error");
+    }
   };
 
   const watchedFields = watch();
@@ -74,6 +103,24 @@ export default function ContactForm() {
       {value}
     </button>
   );
+
+  if (status === "success") {
+    return (
+      <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <div className="text-center py-8">
+          <div className="mb-4 text-btv-blue">
+            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold mb-4">Thanks for reaching out!</h2>
+          <p className="text-gray-600">
+            We've received your message and will get back to you soon.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
@@ -190,10 +237,21 @@ export default function ContactForm() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-btv-blue text-white py-3 px-6 rounded-lg hover:bg-btv-blue-600 transition-colors"
+                disabled={status === "submitting"}
+                className={clsx(
+                  "w-full text-white py-3 px-6 rounded-lg transition-colors",
+                  status === "submitting" 
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-btv-blue hover:bg-btv-blue-600"
+                )}
               >
-                Submit
+                {status === "submitting" ? "Sending..." : "Submit"}
               </button>
+              {status === "error" && (
+                <p className="text-red-500 text-sm text-center">
+                  Something went wrong. Please try again or email us directly.
+                </p>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
