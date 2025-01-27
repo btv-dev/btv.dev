@@ -43,9 +43,6 @@ export default function ImageStepper() {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
             setShouldAutoSlide(true);
             setIsAnimating(true);
-          } else {
-            setShouldAutoSlide(false);
-            setIsAnimating(false);
           }
         });
       },
