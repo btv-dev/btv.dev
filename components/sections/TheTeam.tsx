@@ -64,8 +64,7 @@ export function TheTeam() {
             <Paragraph className="md:text-md text-justify" variants={fadeUpVariant} useParentAnimation>
               With a bachelor's in Computer Science from CESI, a French
               engineering school, James is a design enthusiast with a passion
-              for understanding user behavior. James enjoys
-              learning languages, running through the countryside, and advocating for social issues.
+              for understanding user behavior. Outside of work, he is an avid runner, outdoorist, and advocate for social issues.
             </Paragraph>
           </div>
           {/* Kyle */}
