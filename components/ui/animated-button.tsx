@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 const buttonVariants = {
   rest: { 
@@ -67,24 +68,14 @@ export function AnimatedButton({
         className
       )}
     >
-      <motion.span variants={buttonVariants}>
+      <motion.span 
+        variants={buttonVariants}
+      >
         {children}
       </motion.span>
-      <motion.svg 
-        variants={arrowVariants}
-        xmlns="http://www.w3.org/2000/svg" 
-        width="20" 
-        height="20" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
-      >
-        <path d="M5 12h14"/>
-        <path d="m12 5 7 7-7 7"/>
-      </motion.svg>
+      <motion.span variants={arrowVariants}>
+        <ArrowRight size={20} className="stroke-current" />
+      </motion.span>
     </motion.a>
   );
 }

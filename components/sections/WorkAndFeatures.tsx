@@ -110,7 +110,7 @@ export function WorkAndFeatures() {
           })}
         </div>
       </div>
-      <AnimatedButton className="mt-20" variant="fullWidth" href="#Lets-Talk">
+      <AnimatedButton className="mt-20 text-2xl" variant="fullWidth" href="#Lets-Talk">
         Let's talk!
       </AnimatedButton>
     </Section>

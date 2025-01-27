@@ -4,7 +4,7 @@ import { H2, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
 import NextImage from "next/image";
-import { AnimatedButton } from "@/components/ui/animated-button";
+import { CustomLink } from "../ui/custom-link";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -52,15 +52,15 @@ export function SupportingNonProfits() {
           and tailored solutions.
         </Paragraph>
         <Paragraph variants={fadeUpVariant} useParentAnimation>
-          Let's create something remarkable together.
+          Let's  <CustomLink href="#Lets-Talk">
+            create something remarkable 
+          </CustomLink> together.
         </Paragraph>
         <motion.div 
           variants={fadeUpVariant}
           className="flex flex-col items-end"
         >
-          <AnimatedButton href="#Lets-Talk" className="mt-8 md:mt-0">
-            Let's talk!
-          </AnimatedButton>
+         
         </motion.div>
       </motion.div>
     </Section>
