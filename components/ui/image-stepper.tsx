@@ -80,7 +80,7 @@ export default function ImageStepper() {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-8">
+      <div className="flex flex-col lg:flex-row lg:space-x-8">
         <div className="relative w-full lg:w-3/5" ref={containerRef}>
           <div className="relative h-96 sm:h-80 md:h-96 overflow-hidden rounded-xl">
             {slides.map((slide, index) => (
