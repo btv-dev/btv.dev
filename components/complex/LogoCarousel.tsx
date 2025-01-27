@@ -146,7 +146,7 @@ interface LogoCarouselProps {
 export function LogoCarousel({ logos }: LogoCarouselProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [logoSets, setLogoSets] = useState<Logo[][]>([]);
-  const ANIMATION_SPEED = 4000;
+  const ANIMATION_SPEED = 3000;
   const COLUMN_DELAY = 100; // 200ms delay between columns
 
   // Create initial set immediately
