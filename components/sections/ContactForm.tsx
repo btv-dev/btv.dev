@@ -49,8 +49,8 @@ const CheckmarkAnimation = () => {
       <Lottie
         animationData={animationData}
         loop={false}
-        style={{ 
-          width: "100%", 
+        style={{
+          width: "100%",
           height: "100%",
         }}
       />
@@ -108,7 +108,7 @@ export default function ContactForm() {
   const onSubmit = async (data: FormData) => {
     try {
       setStatus("submitting");
-      
+
       const formData = {
         ...data,
         access_key: "78432edd-0a4e-4101-a602-b3d909db5ec8",
@@ -165,15 +165,13 @@ export default function ContactForm() {
         }}
         className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100"
       >
+        <CheckmarkAnimation />
         <motion.div
-          className="text-center py-8"
+          className="text-center pb-8 bt-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="mb-4 text-btv-blue">
-            <CheckmarkAnimation />
-          </div>
           <motion.h2
             className="text-2xl font-bold mb-4"
             initial={{ opacity: 0 }}
@@ -313,7 +311,7 @@ export default function ContactForm() {
                 disabled={status === "submitting"}
                 className={clsx(
                   "w-full text-white py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2",
-                  status === "submitting" 
+                  status === "submitting"
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-btv-blue hover:bg-btv-blue-600"
                 )}
