@@ -38,9 +38,23 @@ export function AnimatedButton({
   className,
   variant = 'fitContent' 
 }: AnimatedButtonProps) {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <motion.a
       href={href}
+      onClick={handleClick}
       initial="rest"
       whileHover="hover"
       animate="rest"
