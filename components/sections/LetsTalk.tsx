@@ -19,8 +19,8 @@ const fadeUpVariant = {
 
 export function LetsTalk() {
   return (
-    <Section id="Lets-Talk" fade="top" innerClassname="pb-0">
-      <H2>Let's Talk!</H2>
+    <Section fade="top" innerClassname="pb-0">
+      <H2 id="Lets-Talk">Let's Talk!</H2>
 
 
 
