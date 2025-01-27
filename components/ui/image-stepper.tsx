@@ -137,7 +137,7 @@ export default function ImageStepper() {
                   <div 
                     className="absolute inset-0 bg-btv-blue-300 origin-left"
                     style={{
-                      animation: 'progress 5s linear infinite',
+                      animation: 'progress 5s cubic-bezier(0.3, 0.1, 0.4, 1) infinite',
                       animationPlayState: shouldAutoSlide ? 'running' : 'paused'
                     }}
                   />
