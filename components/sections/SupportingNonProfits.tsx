@@ -3,6 +3,7 @@
 import { H2, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
+import NextImage from "next/image";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -38,6 +39,13 @@ export function SupportingNonProfits() {
           Your cause deserves a digital presence that reflects its heart and
           impact.
         </Paragraph>
+        <NextImage
+          width={800}
+          height={400}
+          className="w-full h-auto rounded-sm mx-auto mt-8"
+          src="/images/red-cross.webp"
+          alt="James working with the red cross"
+        />
         <Paragraph variants={fadeUpVariant} useParentAnimation>
           Understanding the challenges you face, we offer special discounts
           and tailored solutions.
