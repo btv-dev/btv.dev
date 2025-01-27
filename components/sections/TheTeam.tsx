@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
@@ -19,8 +19,8 @@ const fadeUpVariant = {
 
 export function TheTeam() {
   return (
-    <Section id="The-Team">
-      <H2>The Team</H2>
+    <Section id="About">
+      <H2>About</H2>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -35,9 +35,12 @@ export function TheTeam() {
         }}
       >
         <Paragraph className="mb-8" variants={fadeUpVariant} useParentAnimation>
-          We're friends, brothers, & developers.
+          Named after Vermont's international airport code (<span className="font-rubik-mono-one text-btv-blue">BTV</span>), we are a boutique software development studio with roots in Burlington, Vermont. We specialize in crafting elegant, user-focused web applications and digital solutions that blend technical excellence with intuitive design. Our approach combines Vermont's values of authenticity and craftsmanship with modern development practices.
         </Paragraph>
-        <motion.div 
+        <Paragraph className="mb-8" variants={fadeUpVariant} useParentAnimation>
+          We're friends, brothers, & developers. Together, we bring over 24 years of experience in web development and design.
+        </Paragraph>
+        <motion.div
           className="grid md:grid-cols-2 gap-8"
           variants={fadeUpVariant}
         >
