@@ -45,7 +45,7 @@ export function SupportingNonProfits() {
         <Paragraph variants={fadeUpVariant} useParentAnimation>
           Let's create something remarkable together.
           <a
-            href="mailto:hey@btv.dev"
+            href="#Lets-Talk"
             className="ml-2 text-btv-blue-500 hover:text-btv-blue-600 underline"
           >
             Let's talk!
