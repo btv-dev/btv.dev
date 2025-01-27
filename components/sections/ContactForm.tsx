@@ -85,9 +85,9 @@ export default function ContactForm() {
 
   const budgetRanges = [
     "Under $5,000",
-    "$5,000 - $10,000",
-    "$10,000 - $25,000",
-    "$25,000+",
+    "$5,000 - $15,000",
+    "$15,000 - $30,000",
+    "$30,000+",
     "Not sure yet",
   ];
 
