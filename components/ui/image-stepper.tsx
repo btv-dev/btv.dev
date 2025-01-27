@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { H2 } from './typography';
 
 interface Slide {
@@ -32,8 +32,39 @@ const slides: Slide[] = [
 
 export default function ImageStepper() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [shouldAutoSlide, setShouldAutoSlide] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.8) {
+            setShouldAutoSlide(true);
+          } else {
+            setShouldAutoSlide(false);
+          }
+        });
+      },
+      {
+        threshold: 0.8, // 80% of the element must be visible
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!shouldAutoSlide) return;
+
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex === slides.length - 1 ? 0 : prevIndex + 1
@@ -41,7 +72,7 @@ export default function ImageStepper() {
     }, 5000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [shouldAutoSlide]);
 
   const goToSlide = (index: number): void => {
     setCurrentIndex(index);
@@ -50,7 +81,7 @@ export default function ImageStepper() {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
       <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-8">
-        <div className="relative w-full lg:w-3/5">
+        <div className="relative w-full lg:w-3/5" ref={containerRef}>
           <div className="relative h-96 sm:h-80 md:h-96 overflow-hidden rounded-xl">
             {slides.map((slide, index) => (
               <div
