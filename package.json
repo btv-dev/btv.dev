@@ -18,7 +18,7 @@
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.469.0",
     "mini-svg-data-uri": "^1.4.4",
-    "next": "14.2.16",
+    "next": "14.2.21",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.54.2",
