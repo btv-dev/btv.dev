@@ -38,7 +38,9 @@ export function HeroHighlightImplemented() {
     <>
       <HeroHighlight ref={heroHighlightRef}>
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-white/80" /> {/* Dark overlay */}
+          <div className="absolute inset-0 bg-white/80" />
+          {/*<div className="absolute inset-0 bg-black/10" /> White overlay */}
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent" /> {/* Bottom gradient fade */}
           <Image
             src="/images/church-street.jpg"
             alt="Church Street in Burlington, Vermont"
@@ -83,7 +85,7 @@ export function HeroHighlightImplemented() {
             className="font-rubik-mono-one text-7xl text-btv-blue leading-none m-0"
             initial={{ scale: 1 }}
             animate={{ scale: 0 }}
-            transition={{ 
+            transition={{
               delay: TIMING.DOT.START_SHRINK,
               duration: TIMING.DOT.DURATION,
               ease: "easeIn"

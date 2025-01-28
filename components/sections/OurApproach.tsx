@@ -13,7 +13,7 @@ const headerVariants = {
 
 const OurApproach = () => {
   return (
-    <Section id="Our-Approach">
+    <Section id="Our-Approach" className="mt-24">
       <motion.div
         initial="hidden"
         whileInView="visible"
