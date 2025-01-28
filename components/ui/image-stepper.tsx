@@ -1,12 +1,15 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { H3 } from './typography';
+import discoverImage from '../../public/images/approach/research.webp';
+import sketchImage from '../../public/images/approach/sketch.webp';
+import buildImage from '../../public/images/approach/build.webp';
 
 interface Slide {
-  src: string;
   alt: string;
   title: string;
   description: string;
+  src: StaticImageData;
 }
 
 const slides: Slide[] = [
@@ -14,19 +17,19 @@ const slides: Slide[] = [
     title: "1: Discover",
     alt: "Step 1",
     description: "We start by diving deep into your goals, brand personality, and design preferences.",
-    src: "/images/approach/research.webp",
+    src: discoverImage,
   },
   {
     title: "2: Brainstorm",
     alt: "Step 2",
     description: "We sketch ideas on paper and create mockups, visualizing potential directions and refining concepts before moving forward.",
-    src: "/images/approach/sketch.webp",
+    src: sketchImage,
   },
   {
     title: "3: Build",
     alt: "Step 3",
     description: "Bringing designs to life, we begin development to craft a site that exceeds expectations.",
-    src: "/images/approach/build.webp",
+    src: buildImage,
   },
 ];
 
@@ -116,6 +119,7 @@ export default function ImageStepper() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw"
                   className="object-cover"
                   priority={index === 0}
+                  placeholder='blur'
                 />
               </div>
             ))}

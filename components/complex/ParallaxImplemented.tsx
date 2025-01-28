@@ -1,52 +1,58 @@
 "use client";
 import React from "react";
 import { HeroParallax } from "../ui/hero-parallax";
+import trekTheNek from "@/public/images/example-work/trek-the-nek.webp";
+import voting from "@/public/images/example-work/voting.webp";
+import sage from "@/public/images/example-work/sage.webp";
+import moho from "@/public/images/example-work/moho.webp";
+import esnVotes from "@/public/images/example-work/esn-votes.webp";
+import chaussettes from "@/public/images/example-work/chaussettes.webp";
+import greenhills from "@/public/images/example-work/greenhills.webp";
+import milemed from "@/public/images/example-work/milemed.webp";
 
 export function ParallaxImplemented() {
   return <HeroParallax products={exampleWork} />;
 }
 
-const ROOT_DIR = "/images/example-work/";
-
 const exampleWork = [
     {
         title: 'Trek the NEK',
         link: '',
-        thumbnail: `${ROOT_DIR}trek-the-nek.webp`,
+        thumbnail: trekTheNek,
     },
     {
         title: 'Civic Engagement Non-Profit',
         link: '',
-        thumbnail: `${ROOT_DIR}voting.webp`,
+        thumbnail: voting,
     },
     {
         title: 'Sage & Scribe Literary Agency',
         link: '',
-        thumbnail: `${ROOT_DIR}sage.webp`,
+        thumbnail: sage,
     },
     {
         title: 'Moho Access',
         link: '',
-        thumbnail: `${ROOT_DIR}moho.webp`,
+        thumbnail: moho,
     },// END OF FIRST ROW
     {
         title: 'ESN Votes',
         link: '',
-        thumbnail: `${ROOT_DIR}esn-votes.webp`,
+        thumbnail: esnVotes,
     },
     {
         title: 'Les Frères Chaussettes',
         link: '',
-        thumbnail: `${ROOT_DIR}chaussettes.webp`,
+        thumbnail: chaussettes,
     },
     {
         title: 'Green Hills Public Affairs',
         link: '',
-        thumbnail: `${ROOT_DIR}greenhills.webp`,
+        thumbnail: greenhills,
     },
     {
-        title: 'University of Bonn — MiLeMed',
+        title: 'University of Bonn — MiLeMed',
         link: '',
-        thumbnail: `${ROOT_DIR}milemed.webp`,
+        thumbnail: milemed,
     },
 ];

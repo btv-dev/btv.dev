@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import NextImage from "next/image";
 import { CustomLink } from "../ui/custom-link";
 import { AnimatedButton } from "../ui/animated-button";
+import redCrossImage from "../../public/images/red-cross.webp";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -45,8 +46,9 @@ export function SupportingNonProfits() {
           width={800}
           height={400}
           className="w-full h-auto rounded-sm mx-auto mt-8"
-          src="/images/red-cross.webp"
+          src={redCrossImage}
           alt="James working with the red cross"
+          placeholder="blur"
         />
         <Paragraph variants={fadeUpVariant} useParentAnimation>
           Understanding the challenges you face, we offer special discounts
