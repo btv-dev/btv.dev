@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { CanvasDot } from "./CanvasDot";
 import { motion, useMotionValue } from "framer-motion";
 import { HeroHighlight, Highlight } from "../ui/hero-highlight";
+import Image from "next/image";
 
 // Animation timing constants (in seconds)
 const TIMING = {
@@ -36,6 +37,16 @@ export function HeroHighlightImplemented() {
   return (
     <>
       <HeroHighlight ref={heroHighlightRef}>
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-white/80" /> {/* Dark overlay */}
+          <Image
+            src="/images/church-street.jpg"
+            alt="Church Street in Burlington, Vermont"
+            fill
+            className="object-cover -z-10"
+            priority
+          />
+        </div>
         <CanvasDot
           heroRef={heroHighlightRef}
           dotRef={dotRef}
@@ -100,7 +111,7 @@ export function HeroHighlightImplemented() {
             ease: [0.4, 0.0, 0.2, 1],
             delay: TIMING.SUBTITLE.START
           }}
-          className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-5xl leading-relaxed lg:leading-snug text-center mx-auto mt-8"
+          className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-800 dark:text-white max-w-5xl leading-relaxed lg:leading-snug text-center mx-auto mt-8"
         >
           A Vermont based web design agency, we develop solutions that{" "}
           <Highlight delay={TIMING.HIGHLIGHTS.FIRST} className="dark:text-white">
