@@ -38,11 +38,11 @@ export function HeroHighlightImplemented() {
     <>
       <HeroHighlight ref={heroHighlightRef}>
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-white/80" />
-          {/*<div className="absolute inset-0 bg-black/10" /> White overlay */}
+          <div className="absolute inset-0 bg-white/70" />
+          {/* <div className="absolute inset-0 bg-black/10" /> */}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent" /> {/* Bottom gradient fade */}
           <Image
-            src="/images/church-street.jpg"
+            src="/images/church-street.webp"
             alt="Church Street in Burlington, Vermont"
             fill
             className="object-cover -z-10"
