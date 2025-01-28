@@ -119,7 +119,7 @@ export const Highlight = ({
         }}
         style={{
           backgroundImage:
-            "linear-gradient(120deg, var(--highlight-color, #58AED2) 0%, var(--highlight-color, #74D7E2) 100%)",
+            "linear-gradient(120deg, var(--highlight-color, #1D83C4) 0%, var(--highlight-color, #75beeb) 100%)",
           backgroundSize: "100% 100%",
           color: "white",
           borderRadius: "0.2em",
