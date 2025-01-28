@@ -7,7 +7,7 @@ import {
   useSpring,
   MotionValue,
 } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { H2, Paragraph } from "./typography";
 import { staggerContainer, fadeUpVariant } from "@/lib/animations";
 
@@ -17,7 +17,7 @@ export const HeroParallax = ({
   products: {
     title: string;
     link: string;
-    thumbnail: string;
+    thumbnail: StaticImageData;
   }[];
 }) => {
   const [rows, setRows] = React.useState({
@@ -158,7 +158,7 @@ export const ProductCard = ({
   product: {
     title: string;
     link: string;
-    thumbnail: string;
+    thumbnail: StaticImageData;
   };
   translate: MotionValue<number>;
 }) => {
@@ -180,6 +180,7 @@ export const ProductCard = ({
           className="object-cover object-center"
           alt={product.title}
           sizes="(max-width: 768px) 100vw, 40rem"
+          placeholder="blur"
         />
         <div className="absolute inset-0 opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
         <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
