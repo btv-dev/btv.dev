@@ -4,6 +4,9 @@ import NextImage from "next/image";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
+import kyleLectureImage from "../../public/images/kyle-lecture.webp";
+import jamesImage from "../../public/images/james.webp";
+import kyleImage from "../../public/images/kyle.webp";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -41,8 +44,9 @@ export function TheTeam() {
           width={800}
           height={400}
           className="w-full h-auto rounded-sm mx-auto"
-          src="/images/kyle-lecture.webp"
+          src={kyleLectureImage}
           alt="Kyle delivering a code talk"
+          placeholder="blur"
         />
         <Paragraph className="mb-8" variants={fadeUpVariant} useParentAnimation>
           We're friends, brothers, & developers. With 24 years of experience between us, we share a passion for creating exceptional digital experiences.
@@ -57,8 +61,9 @@ export function TheTeam() {
               width={160}
               height={160}
               className="w-40 h-40 rounded-full mx-auto"
-              src="/images/james.webp"
+              src={jamesImage}
               alt="Headshot of James Mitofsky"
+              placeholder="blur"
             />
             <H3 className="font-semibold" variants={fadeUpVariant} useParentAnimation>James Mitofsky</H3>
             <Paragraph className="md:text-md text-justify" variants={fadeUpVariant} useParentAnimation>
@@ -73,8 +78,9 @@ export function TheTeam() {
               width={160}
               height={160}
               className="w-40 h-40 rounded-full mx-auto"
-              src="/images/kyle.webp"
+              src={kyleImage}
               alt="Headshot of Kyle Mitofsky"
+              placeholder="blur"
             />
             <H3 className="font-semibold" variants={fadeUpVariant} useParentAnimation>Kyle Mitofsky</H3>
             <Paragraph className="md:text-md text-justify" variants={fadeUpVariant} useParentAnimation>
