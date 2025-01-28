@@ -5,6 +5,7 @@ import { CanvasDot } from "./CanvasDot";
 import { motion, useMotionValue } from "framer-motion";
 import { HeroHighlight, Highlight } from "../ui/hero-highlight";
 import Image from "next/image";
+import heroImage from "../../public/images/church-street.webp";
 
 // Animation timing constants (in seconds)
 const TIMING = {
@@ -42,11 +43,13 @@ export function HeroHighlightImplemented() {
           {/* <div className="absolute inset-0 bg-black/10" /> */}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent" /> {/* Bottom gradient fade */}
           <Image
-            src="/images/church-street.webp"
+            src={heroImage}
             alt="Church Street in Burlington, Vermont"
             fill
             className="object-cover -z-10"
             priority
+            placeholder="blur"
+            loading="eager"
           />
         </div>
         <CanvasDot
