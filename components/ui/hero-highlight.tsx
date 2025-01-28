@@ -80,7 +80,7 @@ export const Highlight = ({
 }) => {
   return (
     <motion.div
-      className={cn("relative inline-flex items-center justify-center whitespace-nowrap", className)}
+      className={cn("relative inline-flex items-center justify-center whitespace-nowrap leading-8 sm:leading-relaxed", className)}
       initial={{
         scale: 1,
       }}
