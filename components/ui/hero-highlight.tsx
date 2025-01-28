@@ -76,24 +76,18 @@ export const Highlight = ({
 }: {
   children: React.ReactNode;
   className?: string;
-  delay?: number; // Add delay as a prop
+  delay?: number;
 }) => {
   return (
-    <motion.span
+    <motion.div
+      className={cn("relative inline-flex items-center justify-center whitespace-nowrap", className)}
       initial={{
-        backgroundSize: "0% 100%",
         scale: 1,
       }}
       animate={{
-        backgroundSize: "100% 100%",
         scale: [1, 1.02, 1],
       }}
       transition={{
-        backgroundSize: {
-          duration: 0.4,
-          ease: "circInOut",
-          delay,
-        },
         scale: {
           duration: 0.5,
           times: [0, 0.6, 1],
@@ -101,24 +95,39 @@ export const Highlight = ({
           delay,
         },
       }}
-      style={{
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "left center",
-        display: "inline",
-        whiteSpace: "nowrap",
-      }}
-      className={cn(
-        `
-relative inline whitespace-nowrap pb-1 px-1 rounded-lg 
-bg-gradient-to-r 
-from-[#58AED2] to-[#74D7E2]
-dark:from-[#3F90BB] dark:to-[#51B3C7]
-`,
-        className
-      )}
     >
-      {children}
-    </motion.span>
+      {/* Base black text */}
+      <span className="relative whitespace-nowrap px-[0.1em]">
+        {children}
+      </span>
+
+      {/* Highlight and white text layer */}
+      <motion.span
+        className="absolute inset-0 whitespace-nowrap flex items-center justify-center"
+        initial={{
+          WebkitMaskImage: "linear-gradient(to right, black 0%, transparent 0%)",
+          maskImage: "linear-gradient(to right, black 0%, transparent 0%)",
+        }}
+        animate={{
+          WebkitMaskImage: "linear-gradient(to right, black 100%, transparent 100%)",
+          maskImage: "linear-gradient(to right, black 100%, transparent 100%)",
+        }}
+        transition={{
+          duration: 0.4,
+          ease: "circInOut",
+          delay,
+        }}
+        style={{
+          backgroundImage:
+            "linear-gradient(120deg, var(--highlight-color, #58AED2) 0%, var(--highlight-color, #74D7E2) 100%)",
+          backgroundSize: "100% 100%",
+          color: "white",
+          borderRadius: "0.2em",
+        }}
+      >
+        {children}
+      </motion.span>
+    </motion.div>
   );
 };
 
