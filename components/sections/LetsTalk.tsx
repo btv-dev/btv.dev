@@ -42,7 +42,7 @@ export function LetsTalk() {
           collaborate, and innovate.
         </Paragraph>
         <ContactForm />
-        <Paragraph variants={fadeUpVariant} useParentAnimation>
+        <Paragraph variants={fadeUpVariant} useParentAnimation className="mb-24">
         <b>Forms not your thing?</b> No worries. Reach out at{" "}
           <a
             href="mailto:hey@btv.dev"

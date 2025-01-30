@@ -20,7 +20,7 @@ const fadeUpVariant = {
 
 export function TheyTrustUs() {
   return (
-    <Section id="They-Trust-Us" className="mb-0">
+    <Section id="They-Trust-Us" className="mb-0" fade="all">
       <H2>They Trust Us</H2>
       <motion.div
         variants={fadeUpVariant}
@@ -28,7 +28,7 @@ export function TheyTrustUs() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        <Paragraph className="max-w-xl mb-12">
+        <Paragraph className="mb-12">
           We&apos;re proud to work with a diverse range of clients, from local
           artisans to international organizations. Each project is an opportunity
           to create something unique and impactful.

@@ -9,6 +9,7 @@ interface TypographyProps extends HTMLMotionProps<"div"> {
   children: ReactNode;
   className?: string;
   useParentAnimation?: boolean;
+  noAnimation?: boolean;
 }
 
 // H1
@@ -74,23 +75,36 @@ H2.displayName = "H2";
 
 // H3
 export const H3 = forwardRef<HTMLHeadingElement, TypographyProps>(
-  ({ children, className, variants = fadeUpVariant, initial = "hidden", viewport = defaultViewport, useParentAnimation, ...props }, ref) => {
+  ({ children, className, variants = fadeUpVariant, initial = "hidden", viewport = defaultViewport, useParentAnimation, noAnimation, ...props }, ref) => {
+    const baseClassName = cn(
+      "scroll-m-20 text-2xl font-semibold tracking-tight",
+      className
+    );
+
+    if (noAnimation) {
+      return (
+        <h3
+          ref={ref}
+          className={baseClassName}
+        >
+          {children}
+        </h3>
+      );
+    }
+
     const motionProps = useParentAnimation ? {
-      variants: variants
+      variants,
     } : {
-      variants: variants,
-      initial: initial,
+      initial,
+      viewport,
+      variants,
       whileInView: "visible",
-      viewport: viewport
     };
 
     return (
       <motion.h3
         ref={ref}
-        className={cn(
-          "scroll-m-20 text-center text-xl font-semibold tracking-tight",
-          className
-        )}
+        className={baseClassName}
         {...motionProps}
         {...props}
       >
@@ -102,22 +116,39 @@ export const H3 = forwardRef<HTMLHeadingElement, TypographyProps>(
 
 H3.displayName = "H3";
 
+
 // Paragraph
-export const Paragraph = forwardRef<HTMLParagraphElement, TypographyProps>(
-  ({ children, className, variants = fadeVariant, initial = "hidden", viewport = defaultViewport, useParentAnimation, ...props }, ref) => {
+export const Paragraph = forwardRef<HTMLParagraphElement, TypographyProps & Omit<HTMLMotionProps<"p">, keyof TypographyProps>>(
+  ({ children, className, variants = fadeVariant, initial = "hidden", viewport = defaultViewport, useParentAnimation, noAnimation, ...props }, ref) => {
+    const baseClassName = cn(
+      "[&:not(:first-child)]:mt-6 text-lg md:text-xl/loose",
+      className
+    );
+
+    if (noAnimation) {
+      return (
+        <p
+          ref={ref}
+          className={baseClassName}
+        >
+          {children}
+        </p>
+      );
+    }
+
     const motionProps = useParentAnimation ? {
-      variants: variants
+      variants,
     } : {
-      variants: variants,
-      initial: initial,
-      whileInView: "visible",
-      viewport: viewport
+      initial,
+      viewport,
+      variants,
+      whileInView: "visible"
     };
 
     return (
       <motion.p
         ref={ref}
-        className={cn("leading-7 [&:not(:first-child)]:mt-6 text-lg md:text-xl", className)}
+        className={baseClassName}
         {...motionProps}
         {...props}
       >

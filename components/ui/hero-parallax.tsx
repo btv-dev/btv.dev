@@ -7,9 +7,10 @@ import {
   useSpring,
   MotionValue,
 } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { H2, Paragraph } from "./typography";
 import { staggerContainer, fadeUpVariant } from "@/lib/animations";
+import SafariFrame from "./safari-frame";
 
 export const HeroParallax = ({
   products,
@@ -85,15 +86,14 @@ export const HeroParallax = ({
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 200]),
+    useTransform(scrollYProgress, [0, 0.2], [-700, -100]),
     springConfig
   );
   return (
     <div
       ref={ref}
-      className="py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="pt-[45rem] mb-[-6rem] overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
-      <Header />
       <motion.div
         style={{
           rotateX,
@@ -173,19 +173,8 @@ export const ProductCard = ({
       key={product.title}
       className="group/product relative flex-shrink-0 w-full max-w-[30rem] md:max-w-[40rem] pb-5"
     >
-      <div className="relative w-full pt-[66.67%]">
-        <Image
-          src={product.thumbnail}
-          fill
-          className="object-cover object-center"
-          alt={product.title}
-          sizes="(max-width: 768px) 100vw, 40rem"
-          placeholder="blur"
-        />
-        <div className="absolute inset-0 opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
-        <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
-          {product.title}
-        </h2>
+      <div className="relative w-full pt-12">
+        <SafariFrame src={product.thumbnail} urlText={product.title} />
       </div>
     </motion.div>
   );
