@@ -1,70 +1,68 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  LayoutGrid, // for Responsive Design & Animations
-  Search, // for SEO Tools
-  MessageSquare, // for Contact Forms & Social Sharing
-  Image as ImageIcon, // for Image Optimization & Lazy Loading
-  TrendingUp, // for Analytics Integration
-  FileText, // for Integrated Blog & CMS
-  Shield, // for Security Features
-  Zap, // for Performance Optimization
-  Heart,
-} from "lucide-react";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { fadeUpVariant, staggerContainer } from "@/lib/animations";
 import { AnimatedButton } from "../ui/animated-button";
+import { LayoutPanelTopIcon } from "../ui/layout-panel-top";
+import { ShieldCheckIcon } from "../ui/shield-check";
+import { GaugeIcon } from "../ui/gauge";
+import { SearchIcon } from "../ui/search";
+import { WaypointsIcon } from "../ui/waypoints";
+import { FileStackIcon } from "../ui/file-stack";
+import { TrendingUpIcon } from "../ui/trending-up";
+import { SquarePenIcon } from "../ui/square-pen";
+import { Heart } from "lucide-react";
 
 const features = [
   {
     title: "Responsive Design & Animations",
     description:
       "Engaging, mobile-friendly layouts with subtle animations to enhance user experience.",
-    icon: LayoutGrid,
+    icon: LayoutPanelTopIcon,
   },
   {
     title: "Security Features",
     description:
       "Built-in protection against vulnerabilities on the web, SSL integration, and secure data handling.",
-    icon: Shield,
+    icon: ShieldCheckIcon,
   },
   {
     title: "Performance Optimization",
     description:
       "Advanced caching, code splitting, and bundle optimization for lightning-fast load times.",
-    icon: Zap,
+    icon: GaugeIcon,
   },
   {
     title: "SEO Tools",
     description:
       "Out-of-the-box SEO-friendly markup, meta tag management, and structured data to boost visibility.",
-    icon: Search,
+    icon: SearchIcon,
   },
   {
     title: "Contact Forms & Social Sharing",
     description:
       "Easy-to-use contact forms and social media integration to engage visitors and streamline communication.",
-    icon: MessageSquare,
+    icon: WaypointsIcon,
   },
   {
     title: "Image Optimization & Lazy Loading",
     description:
       "Automated image compression and lazy loading for faster page loads and improved performance.",
-    icon: ImageIcon,
+    icon: FileStackIcon,
   },
   {
     title: "Analytics Integration",
     description:
       "Setup for tracking user interactions, helping you make data-driven decisions.",
-    icon: TrendingUp,
+    icon: TrendingUpIcon,
   },
   {
     title: "Integrated Blog & CMS",
     description:
       "A simple, built-in content management system allowing effortless content updates and blog posts.",
-    icon: FileText,
+    icon: SquarePenIcon,
   },
 ];
 
