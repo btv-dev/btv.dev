@@ -1,6 +1,6 @@
 'use client';
 
-import { useAnimation, motion } from 'framer-motion';
+import { useAnimation, motion, Variants } from 'framer-motion';
 import { useEffect } from 'react'
 
 interface SearchIconProps {
@@ -20,7 +20,7 @@ const SearchIcon = ({ className = "", size = 28, isVisible = false }: SearchIcon
     }
   }, [isVisible, controls]);
 
-  const pathVariants: motion.Variants = {
+  const pathVariants: Variants = {
     normal: {
       opacity: 0,
       pathLength: 0,
