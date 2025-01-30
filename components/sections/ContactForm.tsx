@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimate } from "framer-motion";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import Lottie from "lottie-react";
@@ -80,6 +80,7 @@ export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState<FormStep>("service");
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [direction, setDirection] = useState<"left" | "right">("right");
+  const [scope, animate] = useAnimate();
   const { register, handleSubmit, setValue, watch } = useForm<FormData>();
 
   const services = [
@@ -136,25 +137,73 @@ export default function ContactForm() {
 
   const hasNextStep = currentStepIndex < formSteps.length - 1 && currentStepIndex >= 0 && hasCurrentStepSelection();
 
-  const handleOptionSelect = (field: keyof FormData, value: string) => {
+  const handleOptionSelect = async (field: keyof FormData, value: string) => {
     setValue(field, value);
     setDirection("right");
+    
+    // Animate out current step
+    await animate(scope.current.children, { 
+      x: -100,
+      opacity: 0,
+      position: "absolute",
+    }, { duration: 0.2 });
+
+    // Update step
     if (field === "service") setCurrentStep("budget");
     if (field === "budget") setCurrentStep("timeline");
     if (field === "timeline") setCurrentStep("contact");
+
+    // Animate in new step
+    animate(scope.current.children, { 
+      x: 0,
+      opacity: 1,
+      position: "relative",
+    }, { duration: 0.3 });
   };
 
-  const goToPreviousStep = () => {
+  const goToPreviousStep = async () => {
     if (hasPreviousStep) {
       setDirection("left");
+      
+      // Animate out current step
+      await animate(scope.current.children, { 
+        x: 100,
+        opacity: 0,
+        position: "absolute",
+      }, { duration: 0.2 });
+
+      // Update step
       setCurrentStep(formSteps[currentStepIndex - 1]);
+
+      // Animate in new step
+      animate(scope.current.children, { 
+        x: 0,
+        opacity: 1,
+        position: "relative",
+      }, { duration: 0.3 });
     }
   };
 
-  const goToNextStep = () => {
+  const goToNextStep = async () => {
     if (hasNextStep) {
       setDirection("right");
+      
+      // Animate out current step
+      await animate(scope.current.children, { 
+        x: -100,
+        opacity: 0,
+        position: "absolute",
+      }, { duration: 0.2 });
+
+      // Update step
       setCurrentStep(formSteps[currentStepIndex + 1]);
+
+      // Animate in new step
+      animate(scope.current.children, { 
+        x: 0,
+        opacity: 1,
+        position: "relative",
+      }, { duration: 0.3 });
     }
   };
 
@@ -334,238 +383,150 @@ export default function ContactForm() {
         <div className="flex-1">
           <div className="mx-auto">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-              <AnimatePresence mode="wait" custom={direction}>
-                {currentStep === "service" && (
-                  <motion.div
-                    key="service"
-                    custom={direction}
-                    variants={{
-                      enter: (direction: "left" | "right") => ({
-                        x: direction === "right" ? 100 : -100,
-                        opacity: 0
-                      }),
-                      center: {
-                        x: 0,
-                        opacity: 1
-                      },
-                      exit: (direction: "left" | "right") => ({
-                        x: direction === "right" ? -100 : 100,
-                        opacity: 0
-                      })
-                    }}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      x: { 
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 15,
-                        restDelta: 0.001
-                      },
-                      opacity: {
-                        duration: 0.15
-                      }
-                    }}
-                  >
-                    <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
-                    <div className="flex flex-wrap gap-4">
-                      {services.map((service) => (
-                        <OptionButton key={service} value={service} field="service" />
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-
-                {currentStep === "budget" && (
-                  <motion.div
-                    key="budget"
-                    custom={direction}
-                    variants={{
-                      enter: (direction: "left" | "right") => ({
-                        x: direction === "right" ? 100 : -100,
-                        opacity: 0
-                      }),
-                      center: {
-                        x: 0,
-                        opacity: 1
-                      },
-                      exit: (direction: "left" | "right") => ({
-                        x: direction === "right" ? -100 : 100,
-                        opacity: 0
-                      })
-                    }}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      x: { 
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 15,
-                        restDelta: 0.001
-                      },
-                      opacity: {
-                        duration: 0.15
-                      }
-                    }}
-                  >
-                    <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
-                    <div className="flex flex-wrap gap-4">
-                      {budgetRanges.map((budget) => (
-                        <OptionButton key={budget} value={budget} field="budget" />
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-
-                {currentStep === "timeline" && (
-                  <motion.div
-                    key="timeline"
-                    custom={direction}
-                    variants={{
-                      enter: (direction: "left" | "right") => ({
-                        x: direction === "right" ? 100 : -100,
-                        opacity: 0
-                      }),
-                      center: {
-                        x: 0,
-                        opacity: 1
-                      },
-                      exit: (direction: "left" | "right") => ({
-                        x: direction === "right" ? -100 : 100,
-                        opacity: 0
-                      })
-                    }}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      x: { 
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 15,
-                        restDelta: 0.001
-                      },
-                      opacity: {
-                        duration: 0.15
-                      }
-                    }}
-                  >
-                    <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
-                    <div className="flex flex-wrap gap-4">
-                      {timelineOptions.map((timeline) => (
-                        <OptionButton key={timeline} value={timeline} field="timeline" />
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-
-                {currentStep === "contact" && (
-                  <motion.div
-                    key="contact"
-                    custom={direction}
-                    variants={{
-                      enter: (direction: "left" | "right") => ({
-                        x: direction === "right" ? 100 : -100,
-                        opacity: 0
-                      }),
-                      center: {
-                        x: 0,
-                        opacity: 1
-                      },
-                      exit: (direction: "left" | "right") => ({
-                        x: direction === "right" ? -100 : 100,
-                        opacity: 0
-                      })
-                    }}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      x: { 
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 15,
-                        restDelta: 0.001
-                      },
-                      opacity: {
-                        duration: 0.15
-                      }
-                    }}
-                    className="space-y-6 bg-white p-8 rounded-lg shadow-md"
-                  >
-                    <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
-                    <div className="grid grid-cols-2 gap-4">
-                      <input
-                        type="text"
-                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                        placeholder="First Name"
-                        {...register("firstName", { required: true })}
-                      />
-                      <input
-                        type="text"
-                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                        placeholder="Last Name"
-                        {...register("lastName", { required: true })}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <input
-                        type="email"
-                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                        placeholder="Email"
-                        {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-                      />
-                      <input
-                        type="tel"
-                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                        placeholder="Phone"
-                        {...register("phone")}
-                      />
-                    </div>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                      placeholder="Company"
-                      {...register("company")}
-                    />
-                    <textarea
-                      className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
-                      placeholder="Tell us more about your project..."
-                      {...register("message")}
-                    />
-                    <button
-                      type="submit"
-                      disabled={status === "submitting"}
-                      className={clsx(
-                        "w-full text-white py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2",
-                        status === "submitting"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-btv-blue hover:bg-btv-blue-600"
-                      )}
+              <motion.div 
+                ref={scope} 
+                className="relative overflow-hidden"
+                layout
+                transition={{
+                  layout: {
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  }
+                }}
+              >
+                <AnimatePresence mode="sync" custom={direction}>
+                  {currentStep === "service" && (
+                    <motion.div
+                      key="service"
+                      initial={{ x: direction === "right" ? 100 : -100, opacity: 0, position: "absolute" }}
+                      animate={{ x: 0, opacity: 1, position: "relative" }}
+                      exit={{ x: direction === "right" ? -100 : 100, opacity: 0, position: "absolute" }}
+                      style={{ width: "100%" }}
                     >
-                      {status === "submitting" ? (
-                        <>
-                          <Spinner />
-                          <span>Submitting</span>
-                        </>
-                      ) : (
-                        <span>Submit</span>
-                      )}
-                    </button>
-                    {status === "error" && (
-                      <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-red-500 text-sm text-center"
+                      <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
+                      <div className="flex flex-wrap gap-4">
+                        {services.map((service) => (
+                          <OptionButton key={service} value={service} field="service" />
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {currentStep === "budget" && (
+                    <motion.div
+                      key="budget"
+                      initial={{ x: direction === "right" ? 100 : -100, opacity: 0, position: "absolute" }}
+                      animate={{ x: 0, opacity: 1, position: "relative" }}
+                      exit={{ x: direction === "right" ? -100 : 100, opacity: 0, position: "absolute" }}
+                      style={{ width: "100%" }}
+                    >
+                      <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
+                      <div className="flex flex-wrap gap-4">
+                        {budgetRanges.map((budget) => (
+                          <OptionButton key={budget} value={budget} field="budget" />
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {currentStep === "timeline" && (
+                    <motion.div
+                      key="timeline"
+                      initial={{ x: direction === "right" ? 100 : -100, opacity: 0, position: "absolute" }}
+                      animate={{ x: 0, opacity: 1, position: "relative" }}
+                      exit={{ x: direction === "right" ? -100 : 100, opacity: 0, position: "absolute" }}
+                      style={{ width: "100%" }}
+                    >
+                      <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
+                      <div className="flex flex-wrap gap-4">
+                        {timelineOptions.map((timeline) => (
+                          <OptionButton key={timeline} value={timeline} field="timeline" />
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {currentStep === "contact" && (
+                    <motion.div
+                      key="contact"
+                      initial={{ x: direction === "right" ? 100 : -100, opacity: 0, position: "absolute" }}
+                      animate={{ x: 0, opacity: 1, position: "relative" }}
+                      exit={{ x: direction === "right" ? -100 : 100, opacity: 0, position: "absolute" }}
+                      style={{ width: "100%" }}
+                      className="space-y-6 bg-white p-8 rounded-lg shadow-md"
+                    >
+                      <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
+                      <div className="grid grid-cols-2 gap-4">
+                        <input
+                          type="text"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          placeholder="First Name"
+                          {...register("firstName", { required: true })}
+                        />
+                        <input
+                          type="text"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          placeholder="Last Name"
+                          {...register("lastName", { required: true })}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <input
+                          type="email"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          placeholder="Email"
+                          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                        />
+                        <input
+                          type="tel"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          placeholder="Phone"
+                          {...register("phone")}
+                        />
+                      </div>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                        placeholder="Company"
+                        {...register("company")}
+                      />
+                      <textarea
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
+                        placeholder="Tell us more about your project..."
+                        {...register("message")}
+                      />
+                      <button
+                        type="submit"
+                        disabled={status === "submitting"}
+                        className={clsx(
+                          "w-full text-white py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2",
+                          status === "submitting"
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-btv-blue hover:bg-btv-blue-600"
+                        )}
                       >
-                        Something went wrong. Please try again or email us directly.
-                      </motion.p>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                        {status === "submitting" ? (
+                          <>
+                            <Spinner />
+                            <span>Submitting</span>
+                          </>
+                        ) : (
+                          <span>Submit</span>
+                        )}
+                      </button>
+                      {status === "error" && (
+                        <motion.p
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-500 text-sm text-center"
+                        >
+                          Something went wrong. Please try again or email us directly.
+                        </motion.p>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </form>
           </div>
         </div>
