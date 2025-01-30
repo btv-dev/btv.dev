@@ -2,10 +2,12 @@
 
 import type { Variants } from 'framer-motion';
 import { useAnimation, motion } from 'framer-motion';
+import { useEffect } from 'react'
 
 interface TrendingUpIconProps {
   className?: string;
   size?: number;
+  isVisible?: boolean;
 }
 
 const svgVariants: Variants = {
@@ -14,6 +16,15 @@ const svgVariants: Variants = {
     y: 0,
     translateX: [0, 2, 0],
     translateY: [0, -2, 0],
+    transition: {
+      duration: 0.5,
+    },
+  },
+  normal: {
+    x: 0,
+    y: 0,
+    translateX: 0,
+    translateY: 0,
     transition: {
       duration: 0.5,
     },
@@ -62,14 +73,20 @@ const arrowVariants: Variants = {
   },
 };
 
-const TrendingUpIcon = ({ className = "", size = 28 }: TrendingUpIconProps) => {
+const TrendingUpIcon = ({ className = "", size = 28, isVisible = false }: TrendingUpIconProps) => {
   const controls = useAnimation();
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start('animate');
+    } else {
+      controls.start('normal');
+    }
+  }, [isVisible, controls]);
 
   return (
     <div
       className={`${className} cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center`}
-      onMouseEnter={() => controls.start('animate')}
-      onMouseLeave={() => controls.start('normal')}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +99,6 @@ const TrendingUpIcon = ({ className = "", size = 28 }: TrendingUpIconProps) => {
         strokeLinecap="round"
         strokeLinejoin="round"
         variants={svgVariants}
-        initial="normal"
         animate={controls}
       >
         <motion.polyline

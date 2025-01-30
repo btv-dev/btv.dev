@@ -5,6 +5,7 @@ import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { fadeUpVariant, staggerContainer } from "@/lib/animations";
 import { AnimatedButton } from "../ui/animated-button";
+import { useState } from "react";
 import { LayoutPanelTopIcon } from "../ui/layout-panel-top";
 import { ShieldCheckIcon } from "../ui/shield-check";
 import { GaugeIcon } from "../ui/gauge";
@@ -90,6 +91,8 @@ const HeartIcon = () => (
 );
 
 export function WorkAndFeatures() {
+  const [visibleCards, setVisibleCards] = useState<{ [key: number]: boolean }>({});
+
   return (
     <Section id="Work-And-Features">
       <motion.div
@@ -117,8 +120,9 @@ export function WorkAndFeatures() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
                   variants={fadeUpVariant}
+                  onViewportEnter={() => setVisibleCards(prev => ({ ...prev, [index]: true }))}
                 >
-                  <Icon className="text-btv-blue-500 mb-4" size={48} />
+                  <Icon className="text-btv-blue-500 mb-4" size={48} isVisible={visibleCards[index]} />
                   <H3 initial={false} animate={false} variants={undefined}>{feature.title}</H3>
                   <p className="text-center text-gray-600">
                     {feature.description}

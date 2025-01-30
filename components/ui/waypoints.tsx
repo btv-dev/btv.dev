@@ -2,16 +2,18 @@
 
 import type { Variants } from 'framer-motion';
 import { useAnimation, motion } from 'framer-motion';
+import { useEffect } from 'react'
 
 interface WaypointsIconProps {
   className?: string;
   size?: number;
+  isVisible?: boolean;
 }
 
 const variants: Variants = {
   normal: {
-    pathLength: 1,
-    opacity: 1,
+    pathLength: 0,
+    opacity: 0,
   },
   animate: (custom: number) => ({
     pathLength: [0, 1],
@@ -23,14 +25,20 @@ const variants: Variants = {
   }),
 };
 
-const WaypointsIcon = ({ className = "", size = 28 }: WaypointsIconProps) => {
+const WaypointsIcon = ({ className = "", size = 28, isVisible = false }: WaypointsIconProps) => {
   const controls = useAnimation();
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start('animate');
+    } else {
+      controls.start('normal');
+    }
+  }, [isVisible, controls]);
 
   return (
     <div
       className={`${className} cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center`}
-      onMouseEnter={() => controls.start('animate')}
-      onMouseLeave={() => controls.start('normal')}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -49,12 +57,14 @@ const WaypointsIcon = ({ className = "", size = 28 }: WaypointsIconProps) => {
           r="2.5"
           variants={variants}
           animate={controls}
+          initial="normal"
           custom={0}
         />
         <motion.path
           d="m10.2 6.3-3.9 3.9"
           variants={variants}
           animate={controls}
+          initial="normal"
           custom={1}
         />
         <motion.circle
@@ -63,12 +73,14 @@ const WaypointsIcon = ({ className = "", size = 28 }: WaypointsIconProps) => {
           r="2.5"
           variants={variants}
           animate={controls}
+          initial="normal"
           custom={0}
         />
         <motion.path
           d="M7 12h10"
           variants={variants}
           animate={controls}
+          initial="normal"
           custom={2}
         />
         <motion.circle
@@ -77,12 +89,14 @@ const WaypointsIcon = ({ className = "", size = 28 }: WaypointsIconProps) => {
           r="2.5"
           variants={variants}
           animate={controls}
+          initial="normal"
           custom={0}
         />
         <motion.path
           d="m13.8 17.7 3.9-3.9"
           variants={variants}
           animate={controls}
+          initial="normal"
           custom={3}
         />
         <motion.circle
@@ -91,6 +105,7 @@ const WaypointsIcon = ({ className = "", size = 28 }: WaypointsIconProps) => {
           r="2.5"
           variants={variants}
           animate={controls}
+          initial="normal"
           custom={0}
         />
       </svg>

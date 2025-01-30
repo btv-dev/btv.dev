@@ -2,21 +2,19 @@
 
 import type { Variants } from 'framer-motion';
 import { useAnimation, motion } from 'framer-motion';
+import { useEffect } from 'react'
 
 interface ShieldCheckIconProps {
   className?: string;
   size?: number;
+  isVisible?: boolean;
 }
 
 const pathVariants: Variants = {
   normal: {
-    opacity: 1,
-    pathLength: 1,
-    scale: 1,
-    transition: {
-      duration: 0.3,
-      opacity: { duration: 0.1 },
-    },
+    opacity: 0,
+    pathLength: 0,
+    scale: 0.5,
   },
   animate: {
     opacity: [0, 1],
@@ -29,14 +27,20 @@ const pathVariants: Variants = {
   },
 };
 
-const ShieldCheckIcon = ({ className = "", size = 28 }: ShieldCheckIconProps) => {
+const ShieldCheckIcon = ({ className = "", size = 28, isVisible = false }: ShieldCheckIconProps) => {
   const controls = useAnimation();
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start('animate');
+    } else {
+      controls.start('normal');
+    }
+  }, [isVisible, controls]);
 
   return (
     <div
       className={`${className} cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center`}
-      onMouseEnter={() => controls.start('animate')}
-      onMouseLeave={() => controls.start('normal')}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,20 +1,28 @@
 'use client';
 
 import { useAnimation, motion } from 'framer-motion';
+import { useEffect } from 'react'
 
 interface LayoutPanelTopIconProps {
   className?: string;
   size?: number;
+  isVisible?: boolean;
 }
 
-const LayoutPanelTopIcon = ({ className = "", size = 28 }: LayoutPanelTopIconProps) => {
+const LayoutPanelTopIcon = ({ className = "", size = 28, isVisible = false }: LayoutPanelTopIconProps) => {
   const controls = useAnimation();
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start('animate');
+    } else {
+      controls.start('normal');
+    }
+  }, [isVisible, controls]);
 
   return (
     <div
       className={`${className} cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center`}
-      onMouseEnter={() => controls.start('animate')}
-      onMouseLeave={() => controls.start('normal')}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -33,10 +41,10 @@ const LayoutPanelTopIcon = ({ className = "", size = 28 }: LayoutPanelTopIconPro
           x="3"
           y="3"
           rx="1"
-          initial="normal"
+          initial={{ opacity: 0, translateY: -5 }}
           animate={controls}
           variants={{
-            normal: { opacity: 1, translateY: 0 },
+            normal: { opacity: 0, translateY: -5 },
             animate: {
               opacity: [0, 1],
               translateY: [-5, 0],
@@ -53,17 +61,17 @@ const LayoutPanelTopIcon = ({ className = "", size = 28 }: LayoutPanelTopIconPro
           x="3"
           y="14"
           rx="1"
-          initial="normal"
+          initial={{ opacity: 0, translateX: -5 }}
           animate={controls}
           variants={{
-            normal: { opacity: 1, translateX: 0 },
+            normal: { opacity: 0, translateX: -5 },
             animate: {
               opacity: [0, 1],
-              translateX: [-10, 0],
+              translateX: [-5, 0],
               transition: {
-                opacity: { duration: 0.7, times: [0.5, 1] },
-                translateX: { delay: 0.3 },
+                opacity: { duration: 0.5, times: [0.2, 1] },
                 duration: 0.5,
+                delay: 0.1,
               },
             },
           }}
@@ -74,17 +82,17 @@ const LayoutPanelTopIcon = ({ className = "", size = 28 }: LayoutPanelTopIconPro
           x="14"
           y="14"
           rx="1"
-          initial="normal"
+          initial={{ opacity: 0, translateX: 5 }}
           animate={controls}
           variants={{
-            normal: { opacity: 1, translateX: 0 },
+            normal: { opacity: 0, translateX: 5 },
             animate: {
               opacity: [0, 1],
-              translateX: [10, 0],
+              translateX: [5, 0],
               transition: {
-                opacity: { duration: 0.8, times: [0.5, 1] },
-                translateX: { delay: 0.4 },
+                opacity: { duration: 0.5, times: [0.2, 1] },
                 duration: 0.5,
+                delay: 0.2,
               },
             },
           }}
