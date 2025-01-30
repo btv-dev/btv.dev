@@ -385,7 +385,7 @@ export default function ContactForm() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className="space-y-6"
+                    className="space-y-6 bg-white p-8 rounded-lg shadow-md"
                   >
                     <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
                     <div className="grid grid-cols-2 gap-4">
