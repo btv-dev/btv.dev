@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import Lottie from "lottie-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type FormStep = "service" | "budget" | "timeline" | "contact";
 type SubmissionStatus = "idle" | "submitting" | "success" | "error";
@@ -103,11 +104,54 @@ export default function ContactForm() {
     "I'm flexible",
   ];
 
+  const formSteps: FormStep[] = ["service", "budget", "timeline", "contact"];
+  
+  const currentStepIndex = formSteps.indexOf(currentStep);
+  const hasPreviousStep = currentStepIndex > 0;
+  
+  // Watch the current values
+  const currentService = watch("service");
+  const currentBudget = watch("budget");
+  const currentTimeline = watch("timeline");
+  const currentFirstName = watch("firstName");
+  const currentEmail = watch("email");
+
+  // Check if current step has a valid selection
+  const hasCurrentStepSelection = () => {
+    switch (currentStep) {
+      case "service":
+        return !!currentService;
+      case "budget":
+        return !!currentBudget;
+      case "timeline":
+        return !!currentTimeline;
+      case "contact":
+        // Require at least first name and email for contact step
+        return !!currentFirstName && !!currentEmail;
+      default:
+        return false;
+    }
+  };
+
+  const hasNextStep = currentStepIndex < formSteps.length - 1 && currentStepIndex >= 0 && hasCurrentStepSelection();
+
   const handleOptionSelect = (field: keyof FormData, value: string) => {
     setValue(field, value);
     if (field === "service") setCurrentStep("budget");
     if (field === "budget") setCurrentStep("timeline");
     if (field === "timeline") setCurrentStep("contact");
+  };
+
+  const goToPreviousStep = () => {
+    if (hasPreviousStep) {
+      setCurrentStep(formSteps[currentStepIndex - 1]);
+    }
+  };
+
+  const goToNextStep = () => {
+    if (hasNextStep) {
+      setCurrentStep(formSteps[currentStepIndex + 1]);
+    }
   };
 
   const onSubmit = async (data: FormData) => {
@@ -268,150 +312,181 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        <AnimatePresence mode="wait">
-          {currentStep === "service" && (
-            <motion.div
-              key="service"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
-              <div className="flex flex-wrap gap-4">
-                {services.map((service) => (
-                  <OptionButton key={service} value={service} field="service" />
-                ))}
-              </div>
-            </motion.div>
+    <div className="relative mx-auto">
+      {/* Form container with navigation */}
+      <div className="flex items-center gap-4">
+        <button
+          onClick={goToPreviousStep}
+          className={clsx(
+            "p-2 rounded-full border bg-white shadow-sm hover:bg-gray-50 transition-opacity shrink-0",
+            hasPreviousStep ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
+          disabled={!hasPreviousStep}
+          aria-label="Previous step"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
 
-          {currentStep === "budget" && (
-            <motion.div
-              key="budget"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
-              <div className="flex flex-wrap gap-4">
-                {budgetRanges.map((budget) => (
-                  <OptionButton key={budget} value={budget} field="budget" />
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {currentStep === "timeline" && (
-            <motion.div
-              key="timeline"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
-              <div className="flex flex-wrap gap-4">
-                {timelineOptions.map((timeline) => (
-                  <OptionButton key={timeline} value={timeline} field="timeline" />
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {currentStep === "contact" && (
-            <motion.div
-              key="contact"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="space-y-6"
-            >
-              <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">First Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                    {...register("firstName", { required: true })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Last Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                    {...register("lastName", { required: true })}
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                    {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone</label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                    {...register("phone")}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Company</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                  {...register("company")}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Additional Information</label>
-                <textarea
-                  className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
-                  placeholder="Tell us more about your project..."
-                  {...register("message")}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className={clsx(
-                  "w-full text-white py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2",
-                  status === "submitting"
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-btv-blue hover:bg-btv-blue-600"
+        <div className="flex-1">
+          <div className="mx-auto">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+              <AnimatePresence mode="wait">
+                {currentStep === "service" && (
+                  <motion.div
+                    key="service"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                  >
+                    <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
+                    <div className="flex flex-wrap gap-4">
+                      {services.map((service) => (
+                        <OptionButton key={service} value={service} field="service" />
+                      ))}
+                    </div>
+                  </motion.div>
                 )}
-              >
-                {status === "submitting" ? (
-                  <>
-                    <Spinner />
-                    <span>Submitting</span>
-                  </>
-                ) : (
-                  <span>Submit</span>
+
+                {currentStep === "budget" && (
+                  <motion.div
+                    key="budget"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                  >
+                    <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
+                    <div className="flex flex-wrap gap-4">
+                      {budgetRanges.map((budget) => (
+                        <OptionButton key={budget} value={budget} field="budget" />
+                      ))}
+                    </div>
+                  </motion.div>
                 )}
-              </button>
-              {status === "error" && (
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-red-500 text-sm text-center"
-                >
-                  Something went wrong. Please try again or email us directly.
-                </motion.p>
-              )}
-            </motion.div>
+
+                {currentStep === "timeline" && (
+                  <motion.div
+                    key="timeline"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                  >
+                    <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
+                    <div className="flex flex-wrap gap-4">
+                      {timelineOptions.map((timeline) => (
+                        <OptionButton key={timeline} value={timeline} field="timeline" />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {currentStep === "contact" && (
+                  <motion.div
+                    key="contact"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="space-y-6"
+                  >
+                    <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">First Name</label>
+                        <input
+                          type="text"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          {...register("firstName", { required: true })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Last Name</label>
+                        <input
+                          type="text"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          {...register("lastName", { required: true })}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Email</label>
+                        <input
+                          type="email"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Phone</label>
+                        <input
+                          type="tel"
+                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          {...register("phone")}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Company</label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                        {...register("company")}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Additional Information</label>
+                      <textarea
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
+                        placeholder="Tell us more about your project..."
+                        {...register("message")}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className={clsx(
+                        "w-full text-white py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2",
+                        status === "submitting"
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-btv-blue hover:bg-btv-blue-600"
+                      )}
+                    >
+                      {status === "submitting" ? (
+                        <>
+                          <Spinner />
+                          <span>Submitting</span>
+                        </>
+                      ) : (
+                        <span>Submit</span>
+                      )}
+                    </button>
+                    {status === "error" && (
+                      <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-red-500 text-sm text-center"
+                      >
+                        Something went wrong. Please try again or email us directly.
+                      </motion.p>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </form>
+          </div>
+        </div>
+
+        <button
+          onClick={goToNextStep}
+          className={clsx(
+            "p-2 rounded-full border bg-white shadow-sm hover:bg-gray-50 transition-opacity shrink-0",
+            hasNextStep ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
-        </AnimatePresence>
-      </form>
+          disabled={!hasNextStep}
+          aria-label="Next step"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   );
 }
