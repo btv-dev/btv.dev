@@ -133,7 +133,7 @@ export function WorkAndFeatures() {
       >
         <H2 variants={fadeUpVariant} useParentAnimation>Services</H2>
         <Paragraph className="mb-10 md:mb-14" variants={fadeUpVariant} useParentAnimation>
-          We create digital experiences that captivate and convert, and we deliver according to your specific needs. Here are a few of the services our clients tell us they <HeartIcon /> :
+          We create digital experiences that captivate and convert, and we deliver according to your specific needs. Here are a few of the services our clients <HeartIcon /> :
         </Paragraph>
       </motion.div>
 
