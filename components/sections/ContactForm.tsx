@@ -139,7 +139,7 @@ export default function ContactForm() {
 
   const watchedFields = watch();
 
-  const getBorderColor = (value: string, field: keyof FormData) => {
+  const getBorderColor = (value: string) => {
     const colors: { [key: string]: string } = {
       "A new website": "border-blue-400",
       "A mobile application": "border-purple-400",
@@ -159,17 +159,37 @@ export default function ContactForm() {
     return colors[value] || "border-gray-200";
   };
 
+  const getBackgroundColor = (value: string) => {
+    const colors: { [key: string]: string } = {
+      "A new website": "bg-blue-50",
+      "A mobile application": "bg-purple-50",
+      "Digital marketing": "bg-green-50",
+      "Content creation": "bg-orange-50",
+      "Something else": "bg-pink-50",
+      "Under $5,000": "bg-teal-50",
+      "$5,000 - $15,000": "bg-indigo-50",
+      "$15,000 - $30,000": "bg-rose-50",
+      "$30,000+": "bg-amber-50",
+      "Not sure yet": "bg-cyan-50",
+      "Immediately": "bg-emerald-50",
+      "Next month": "bg-violet-50",
+      "Next quarter": "bg-fuchsia-50",
+      "I'm flexible": "bg-sky-50",
+    };
+    return colors[value] || "bg-gray-50";
+  };
+
   const OptionButton = ({ value, field }: { value: string; field: keyof FormData }) => (
     <button
       type="button"
       onClick={() => handleOptionSelect(field, value)}
       className={clsx(
         "px-6 py-3 rounded-lg transition-all duration-200",
-        "border-2 hover:bg-gray-50",
-        getBorderColor(value, field),
-        "text-left flex-1 min-w-[200px]",
-        watchedFields[field] === value && "bg-gray-50 border-opacity-100",
-        watchedFields[field] !== value && "border-opacity-40"
+        "border-2 hover:bg-opacity-50",
+        getBorderColor(value),
+        "text-center flex-1 min-w-[200px]",
+        watchedFields[field] === value && [getBackgroundColor(value), "border-opacity-100"],
+        watchedFields[field] !== value && ["hover:bg-opacity-10", "border-opacity-40", getBackgroundColor(value), "bg-opacity-0"]
       )}
     >
       {value}
