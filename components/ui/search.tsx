@@ -21,7 +21,8 @@ const SearchIcon = ({ className = "", size = 28, isVisible = false }: SearchIcon
   }, [isVisible, controls]);
 
   return (
-    <div className={className}>
+    <div className={`${className} flex items-center justify-center`}
+    >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         width={size}
@@ -47,18 +48,18 @@ const SearchIcon = ({ className = "", size = 28, isVisible = false }: SearchIcon
           bounce: 0.3,
         }}
       >
-        <motion.circle 
-          cx="11" 
-          cy="11" 
-          r="8" 
+        <motion.circle
+          cx="11"
+          cy="11"
+          r="8"
           initial={{ opacity: 0, scale: 0.8 }}
           variants={{
             normal: { opacity: 0, scale: 0.8 },
             animate: { opacity: 1, scale: 1 },
           }}
         />
-        <motion.path 
-          d="m21 21-4.3-4.3" 
+        <motion.path
+          d="m21 21-4.3-4.3"
           initial={{ opacity: 0, pathLength: 0 }}
           variants={{
             normal: { opacity: 0, pathLength: 0 },

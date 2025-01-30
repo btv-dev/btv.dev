@@ -54,7 +54,7 @@ const SquarePenIcon = ({ className = "", size = 28, isVisible = false }: SquareP
 
   return (
     <div
-      className={`${className} cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center`}
+      className={`${className} flex items-center justify-center`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

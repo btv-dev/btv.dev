@@ -1,11 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion, useInView, HTMLMotionProps } from "framer-motion";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { fadeUpVariant, staggerContainer } from "@/lib/animations";
 import { AnimatedButton } from "../ui/animated-button";
-import { useState } from "react";
+import { useRef } from "react";
 import { LayoutPanelTopIcon } from "../ui/layout-panel-top";
 import { ShieldCheckIcon } from "../ui/shield-check";
 import { GaugeIcon } from "../ui/gauge";
@@ -15,6 +16,36 @@ import { FileStackIcon } from "../ui/file-stack";
 import { TrendingUpIcon } from "../ui/trending-up";
 import { SquarePenIcon } from "../ui/square-pen";
 import { Heart } from "lucide-react";
+
+interface FeatureCardProps extends Omit<HTMLMotionProps<"div">, "title"> {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  isVisible?: boolean;
+}
+
+const FeatureCard = ({ title, description, icon, ...props }: FeatureCardProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.3 // requires 30% of the card to be visible
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5 }}
+      className="relative p-4 border rounded-lg shadow-md flex flex-col justify-center"
+      {...props}
+    >
+      {React.cloneElement(icon as React.ReactElement, { isVisible: isInView })}
+      <H3 noAnimation className="font-bold text-center mt-4">{title}</H3>
+      <Paragraph noAnimation className="text-sm text-muted-foreground">{description}</Paragraph>
+    </motion.div>
+  );
+};
 
 const features = [
   {
@@ -48,7 +79,7 @@ const features = [
     icon: WaypointsIcon,
   },
   {
-    title: "Image Optimization & Lazy Loading",
+    title: "Asset Optimization",
     description:
       "Automated image compression and lazy loading for faster page loads and improved performance.",
     icon: FileStackIcon,
@@ -74,7 +105,7 @@ const HeartIcon = () => (
       scale: [1, 1.25, 1, 1.15, 1],
       rotate: [0, 2, 0, 2, 0],
     }}
-    style={{ 
+    style={{
       position: 'relative',
       top: '7px'
     }}
@@ -91,7 +122,6 @@ const HeartIcon = () => (
 );
 
 export function WorkAndFeatures() {
-  const [visibleCards, setVisibleCards] = useState<{ [key: number]: boolean }>({});
 
   return (
     <Section id="Work-And-Features">
@@ -108,26 +138,17 @@ export function WorkAndFeatures() {
       </motion.div>
 
       <div className="flex flex-col gap-6">
-        {/* Row container */}
-        <div className="flex flex-wrap gap-8 md:gap-12">
+        {/* Row container - using flex with stretch alignment */}
+        <div className="flex flex-wrap items-stretch gap-8 md:gap-12">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="w-full sm:flex-1 min-w-[280px]">
-                <motion.div
-                  className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg h-full"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  variants={fadeUpVariant}
-                  onViewportEnter={() => setVisibleCards(prev => ({ ...prev, [index]: true }))}
-                >
-                  <Icon className="text-btv-blue-500 mb-4" size={48} isVisible={visibleCards[index]} />
-                  <H3 initial={false} animate={false} variants={undefined}>{feature.title}</H3>
-                  <p className="text-center text-gray-600">
-                    {feature.description}
-                  </p>
-                </motion.div>
+              <div key={index} className="flex w-full sm:flex-1 min-w-[280px]">
+                <FeatureCard
+                  title={feature.title}
+                  description={feature.description}
+                  icon={<Icon className="text-btv-blue" size={44} />}
+                />
               </div>
             );
           })}
