@@ -70,24 +70,24 @@ const features = [
 
 const HeartIcon = () => (
   <motion.div
-    className="inline-block"
+    className="inline-block px-1"
     animate={{
-      scale: [1, 1.15, 1.15, 1],
+      scale: [1, 1.25, 1, 1.15, 1],
+      rotate: [0, 2, 0, 2, 0],
     }}
     style={{ 
-      rotate: 10,
       position: 'relative',
-      top: '2px'
+      top: '7px'
     }}
     transition={{
       duration: 2.5,
       repeat: Infinity,
-      times: [0, 0.4, 0.6, 1],
-      ease: "easeInOut",
+      times: [0, 0.15, 0.25, 0.35, 1],
+      ease: [0.32, 0, 0.67, 0],
       repeatType: "loop"
     }}
   >
-    <Heart className="text-red-500 fill-red-500" size={17} />
+    <Heart className="text-btv-blue fill-btv-blue" size={25} />
   </motion.div>
 );
 
