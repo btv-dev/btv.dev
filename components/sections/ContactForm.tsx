@@ -389,57 +389,44 @@ export default function ContactForm() {
                   >
                     <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
                     <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">First Name</label>
-                        <input
-                          type="text"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                          {...register("firstName", { required: true })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Last Name</label>
-                        <input
-                          type="text"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                          {...register("lastName", { required: true })}
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Email</label>
-                        <input
-                          type="email"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Phone</label>
-                        <input
-                          type="tel"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                          {...register("phone")}
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Company</label>
                       <input
                         type="text"
                         className="w-full px-4 py-2 rounded-lg border border-gray-200"
-                        {...register("company")}
+                        placeholder="First Name"
+                        {...register("firstName", { required: true })}
+                      />
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                        placeholder="Last Name"
+                        {...register("lastName", { required: true })}
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Additional Information</label>
-                      <textarea
-                        className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
-                        placeholder="Tell us more about your project..."
-                        {...register("message")}
+                    <div className="grid grid-cols-2 gap-4">
+                      <input
+                        type="email"
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                        placeholder="Email"
+                        {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                      />
+                      <input
+                        type="tel"
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                        placeholder="Phone"
+                        {...register("phone")}
                       />
                     </div>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                      placeholder="Company"
+                      {...register("company")}
+                    />
+                    <textarea
+                      className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
+                      placeholder="Tell us more about your project..."
+                      {...register("message")}
+                    />
                     <button
                       type="submit"
                       disabled={status === "submitting"}
