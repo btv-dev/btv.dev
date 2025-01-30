@@ -26,7 +26,9 @@ const TIMING = {
   },
   HIGHLIGHTS: {
     FIRST: 3.1,
-    SECOND: 4.0,
+    SECOND: 4.3, // have a gap from first one because of text and then sequence of close 234
+    THIRD: 5.2,
+    FOURTH: 6.1
   }
 } as const;
 
@@ -124,13 +126,21 @@ export function HeroHighlightImplemented() {
               }}
               className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-800 dark:text-white max-w-5xl leading-relaxed lg:leading-snug text-center mx-auto mt-8"
             >
-              A Vermont based web design agency, we develop solutions that{" "}
+              We help{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.FIRST} className="dark:text-white">
-                reflect your values
-              </Highlight>{" "}
-              and{" "}
+                passionate organizations
+              </Highlight>
+              {" "}strengthen their impact through strategic digital{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.SECOND} className="dark:text-white">
-                amplify your mission
+                design,
+              </Highlight>
+              {" "}
+              <Highlight delay={TIMING.HIGHLIGHTS.THIRD} className="dark:text-white">
+                branding,
+              </Highlight>
+              {" "}and{" "}
+              <Highlight delay={TIMING.HIGHLIGHTS.FOURTH} className="dark:text-white">
+                content
               </Highlight>
               .
             </motion.div>
