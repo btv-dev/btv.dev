@@ -22,7 +22,7 @@ const fadeUpVariant = {
 
 export function SupportingNonProfits() {
   return (
-    <Section id="NonProfits" fade="all">
+    <Section id="NonProfits">
       <H2>Supporting Non-Profits</H2>
       <motion.div
         initial="hidden"
@@ -43,8 +43,6 @@ export function SupportingNonProfits() {
           impact.
         </Paragraph>
         <NextImage
-          width={800}
-          height={400}
           className="w-full h-auto rounded-sm mx-auto mt-8"
           src={redCrossImage}
           alt="James working with the red cross"

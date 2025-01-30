@@ -117,7 +117,7 @@ export const Paragraph = forwardRef<HTMLParagraphElement, TypographyProps>(
     return (
       <motion.p
         ref={ref}
-        className={cn("leading-7 [&:not(:first-child)]:mt-6 text-lg md:text-xl", className)}
+        className={cn("[&:not(:first-child)]:mt-6 text-lg md:text-xl/loose", className)}
         {...motionProps}
         {...props}
       >

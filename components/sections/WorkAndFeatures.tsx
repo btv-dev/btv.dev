@@ -10,6 +10,7 @@ import {
   FileText, // for Integrated Blog & CMS
   Shield, // for Security Features
   Zap, // for Performance Optimization
+  Heart,
 } from "lucide-react";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
@@ -67,21 +68,41 @@ const features = [
   },
 ];
 
+const HeartIcon = () => (
+  <motion.div
+    className="inline-block"
+    animate={{
+      scale: [1, 1.15, 1.15, 1],
+    }}
+    style={{ 
+      rotate: 10,
+      position: 'relative',
+      top: '2px'
+    }}
+    transition={{
+      duration: 2.5,
+      repeat: Infinity,
+      times: [0, 0.4, 0.6, 1],
+      ease: "easeInOut",
+      repeatType: "loop"
+    }}
+  >
+    <Heart className="text-red-500 fill-red-500" size={17} />
+  </motion.div>
+);
+
 export function WorkAndFeatures() {
   return (
-    <Section id="Work-And-Features" fade="all">
-      {/* Features Section */}
+    <Section id="Work-And-Features">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={staggerContainer}
       >
-        <H2 variants={fadeUpVariant} useParentAnimation>Features</H2>
+        <H2 variants={fadeUpVariant} useParentAnimation>Services</H2>
         <Paragraph className="mb-10 md:mb-14" variants={fadeUpVariant} useParentAnimation>
-          We don't just build websites; we create digital experiences that
-          captivate and convert. We deliver according to your needs, but here
-          are some features our clients love:
+          We create digital experiences that captivate and convert, and we deliver according to your specific needs. Here are a few of the services our clients tell us they <HeartIcon /> :
         </Paragraph>
       </motion.div>
 

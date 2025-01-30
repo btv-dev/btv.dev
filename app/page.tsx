@@ -1,10 +1,9 @@
 import { HeroHighlightImplemented } from "../components/complex/HeroHighlight";
 import { ParallaxImplemented } from "@/components/complex/ParallaxImplemented";
 import { WorkAndFeatures } from "../components/sections/WorkAndFeatures";
-import OurApproach from "../components/sections/OurApproach";
 import { TheyTrustUs } from "../components/sections/TheyTrustUs";
 import { SupportingNonProfits } from "../components/sections/SupportingNonProfits";
-import { TheTeam } from "../components/sections/TheTeam";
+import { About } from "../components/sections/TheTeam";
 import { LetsTalk } from "../components/sections/LetsTalk";
 
 export default function Home() {
@@ -14,12 +13,12 @@ export default function Home() {
       <HeroHighlightImplemented />
 
       <main>
-        <OurApproach />
         <ParallaxImplemented />
+        <About />
         <WorkAndFeatures />
         <TheyTrustUs />
+        {/* <OurApproach /> */}
         <SupportingNonProfits />
-        <TheTeam />
         <LetsTalk />
       </main>
     </div>
