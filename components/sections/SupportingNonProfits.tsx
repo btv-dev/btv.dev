@@ -4,8 +4,6 @@ import { H2, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
 import NextImage from "next/image";
-import { CustomLink } from "../ui/custom-link";
-import { AnimatedButton } from "../ui/animated-button";
 import redCrossImage from "../../public/images/red-cross.webp";
 
 const fadeUpVariant = {
@@ -53,21 +51,8 @@ export function SupportingNonProfits() {
           and tailored solutions.
         </Paragraph>
         <Paragraph variants={fadeUpVariant} useParentAnimation>
-          Let's  <CustomLink href="#Lets-Talk">
-            create something remarkable 
-          </CustomLink> together.
+          Let's create something <em>remarkable</em> together.
         </Paragraph>
-        <motion.div 
-          variants={fadeUpVariant}
-          className="flex flex-col items-end"
-        >
-          <AnimatedButton
-            href="#Lets-Talk"
-            className="mt-8"
-          >
-            Let's Talk
-          </AnimatedButton>
-        </motion.div>
       </motion.div>
     </Section>
   );
