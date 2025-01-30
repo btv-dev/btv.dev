@@ -139,15 +139,37 @@ export default function ContactForm() {
 
   const watchedFields = watch();
 
+  const getBorderColor = (value: string, field: keyof FormData) => {
+    const colors: { [key: string]: string } = {
+      "A new website": "border-blue-400",
+      "A mobile application": "border-purple-400",
+      "Digital marketing": "border-green-400",
+      "Content creation": "border-orange-400",
+      "Something else": "border-pink-400",
+      "Under $5,000": "border-teal-400",
+      "$5,000 - $15,000": "border-indigo-400",
+      "$15,000 - $30,000": "border-rose-400",
+      "$30,000+": "border-amber-400",
+      "Not sure yet": "border-cyan-400",
+      "Immediately": "border-emerald-400",
+      "Next month": "border-violet-400",
+      "Next quarter": "border-fuchsia-400",
+      "I'm flexible": "border-sky-400",
+    };
+    return colors[value] || "border-gray-200";
+  };
+
   const OptionButton = ({ value, field }: { value: string; field: keyof FormData }) => (
     <button
       type="button"
       onClick={() => handleOptionSelect(field, value)}
       className={clsx(
         "px-6 py-3 rounded-lg transition-all duration-200",
-        "border border-gray-200 hover:border-gray-300",
-        "text-left w-full",
-        watchedFields[field] === value && "border-blue-500 bg-blue-50"
+        "border-2 hover:bg-gray-50",
+        getBorderColor(value, field),
+        "text-left flex-1 min-w-[200px]",
+        watchedFields[field] === value && "bg-gray-50 border-opacity-100",
+        watchedFields[field] !== value && "border-opacity-40"
       )}
     >
       {value}
@@ -205,7 +227,7 @@ export default function ContactForm() {
               exit={{ opacity: 0, y: -20 }}
             >
               <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
-              <div className="space-y-4">
+              <div className="flex flex-wrap gap-4">
                 {services.map((service) => (
                   <OptionButton key={service} value={service} field="service" />
                 ))}
@@ -221,7 +243,7 @@ export default function ContactForm() {
               exit={{ opacity: 0, y: -20 }}
             >
               <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
-              <div className="space-y-4">
+              <div className="flex flex-wrap gap-4">
                 {budgetRanges.map((budget) => (
                   <OptionButton key={budget} value={budget} field="budget" />
                 ))}
@@ -237,7 +259,7 @@ export default function ContactForm() {
               exit={{ opacity: 0, y: -20 }}
             >
               <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
-              <div className="space-y-4">
+              <div className="flex flex-wrap gap-4">
                 {timelineOptions.map((timeline) => (
                   <OptionButton key={timeline} value={timeline} field="timeline" />
                 ))}
