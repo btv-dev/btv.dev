@@ -357,8 +357,15 @@ export default function ContactForm() {
                     animate="center"
                     exit="exit"
                     transition={{
-                      duration: 0.3,
-                      ease: "easeInOut"
+                      x: { 
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      },
+                      opacity: {
+                        duration: 0.2,
+                        ease: "easeIn"
+                      }
                     }}
                   >
                     <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
@@ -392,8 +399,15 @@ export default function ContactForm() {
                     animate="center"
                     exit="exit"
                     transition={{
-                      duration: 0.3,
-                      ease: "easeInOut"
+                      x: { 
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      },
+                      opacity: {
+                        duration: 0.2,
+                        ease: "easeIn"
+                      }
                     }}
                   >
                     <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
@@ -427,8 +441,15 @@ export default function ContactForm() {
                     animate="center"
                     exit="exit"
                     transition={{
-                      duration: 0.3,
-                      ease: "easeInOut"
+                      x: { 
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      },
+                      opacity: {
+                        duration: 0.2,
+                        ease: "easeIn"
+                      }
                     }}
                   >
                     <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
@@ -462,8 +483,15 @@ export default function ContactForm() {
                     animate="center"
                     exit="exit"
                     transition={{
-                      duration: 0.3,
-                      ease: "easeInOut"
+                      x: { 
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      },
+                      opacity: {
+                        duration: 0.2,
+                        ease: "easeIn"
+                      }
                     }}
                     className="space-y-6 bg-white p-8 rounded-lg shadow-md"
                   >
