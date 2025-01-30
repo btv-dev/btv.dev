@@ -359,12 +359,12 @@ export default function ContactForm() {
                     transition={{
                       x: { 
                         type: "spring",
-                        stiffness: 300,
-                        damping: 30
+                        stiffness: 400,
+                        damping: 15,
+                        restDelta: 0.001
                       },
                       opacity: {
-                        duration: 0.2,
-                        ease: "easeIn"
+                        duration: 0.15
                       }
                     }}
                   >
@@ -401,12 +401,12 @@ export default function ContactForm() {
                     transition={{
                       x: { 
                         type: "spring",
-                        stiffness: 300,
-                        damping: 30
+                        stiffness: 400,
+                        damping: 15,
+                        restDelta: 0.001
                       },
                       opacity: {
-                        duration: 0.2,
-                        ease: "easeIn"
+                        duration: 0.15
                       }
                     }}
                   >
@@ -443,12 +443,12 @@ export default function ContactForm() {
                     transition={{
                       x: { 
                         type: "spring",
-                        stiffness: 300,
-                        damping: 30
+                        stiffness: 400,
+                        damping: 15,
+                        restDelta: 0.001
                       },
                       opacity: {
-                        duration: 0.2,
-                        ease: "easeIn"
+                        duration: 0.15
                       }
                     }}
                   >
@@ -485,12 +485,12 @@ export default function ContactForm() {
                     transition={{
                       x: { 
                         type: "spring",
-                        stiffness: 300,
-                        damping: 30
+                        stiffness: 400,
+                        damping: 15,
+                        restDelta: 0.001
                       },
                       opacity: {
-                        duration: 0.2,
-                        ease: "easeIn"
+                        duration: 0.15
                       }
                     }}
                     className="space-y-6 bg-white p-8 rounded-lg shadow-md"
