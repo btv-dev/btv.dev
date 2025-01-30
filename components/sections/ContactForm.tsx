@@ -313,10 +313,10 @@ export default function ContactForm() {
       type="button"
       onClick={() => handleOptionSelect(field, value)}
       className={clsx(
-        "px-6 py-3 rounded-lg transition-all duration-200",
-        "border-2 hover:bg-opacity-50",
+        "px-8 py-4 rounded-xl transition-all duration-200",
+        "border-2 font-medium hover:bg-opacity-50",
         getBorderColor(value),
-        "text-center flex-1 min-w-[200px]",
+        "text-center flex-1 min-w-[250px] text-lg",
         watchedFields[field] === value && [getBackgroundColor(value), "border-opacity-100"],
         watchedFields[field] !== value && ["hover:bg-opacity-10", "border-opacity-40", getBackgroundColor(value), "bg-opacity-0"]
       )}
@@ -403,7 +403,7 @@ export default function ContactForm() {
                       exit={{ x: direction === "right" ? -100 : 100, opacity: 0, position: "absolute" }}
                       style={{ width: "100%" }}
                     >
-                      <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
+                      <h2 className="text-4xl font-bold mb-8">What are you looking for?</h2>
                       <div className="flex flex-wrap gap-4">
                         {services.map((service) => (
                           <OptionButton key={service} value={service} field="service" />
@@ -420,7 +420,7 @@ export default function ContactForm() {
                       exit={{ x: direction === "right" ? -100 : 100, opacity: 0, position: "absolute" }}
                       style={{ width: "100%" }}
                     >
-                      <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
+                      <h2 className="text-4xl font-bold mb-8">What's your budget?</h2>
                       <div className="flex flex-wrap gap-4">
                         {budgetRanges.map((budget) => (
                           <OptionButton key={budget} value={budget} field="budget" />
@@ -437,7 +437,7 @@ export default function ContactForm() {
                       exit={{ x: direction === "right" ? -100 : 100, opacity: 0, position: "absolute" }}
                       style={{ width: "100%" }}
                     >
-                      <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
+                      <h2 className="text-4xl font-bold mb-8">When do you want to start?</h2>
                       <div className="flex flex-wrap gap-4">
                         {timelineOptions.map((timeline) => (
                           <OptionButton key={timeline} value={timeline} field="timeline" />
@@ -455,43 +455,43 @@ export default function ContactForm() {
                       style={{ width: "100%" }}
                       className="space-y-6 bg-white p-8 rounded-lg shadow-md"
                     >
-                      <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <h2 className="text-4xl font-bold mb-8">Tell us more about you!</h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <input
                           type="text"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
                           placeholder="First Name"
                           {...register("firstName", { required: true })}
                         />
                         <input
                           type="text"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
                           placeholder="Last Name"
                           {...register("lastName", { required: true })}
                         />
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <input
                           type="email"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
                           placeholder="Email"
                           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
                         />
                         <input
                           type="tel"
-                          className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
                           placeholder="Phone"
                           {...register("phone")}
                         />
                       </div>
                       <input
                         type="text"
-                        className="w-full px-4 py-2 rounded-lg border border-gray-200"
+                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
                         placeholder="Company"
                         {...register("company")}
                       />
                       <textarea
-                        className="w-full px-4 py-2 rounded-lg border border-gray-200 h-32"
+                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 h-40 text-lg"
                         placeholder="Tell us more about your project..."
                         {...register("message")}
                       />
@@ -499,10 +499,9 @@ export default function ContactForm() {
                         type="submit"
                         disabled={status === "submitting"}
                         className={clsx(
-                          "w-full text-white py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2",
-                          status === "submitting"
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-btv-blue hover:bg-btv-blue-600"
+                          "w-full px-8 py-5 rounded-xl font-semibold text-lg shadow-lg",
+                          "bg-blue-600 text-white hover:bg-blue-700 transition-colors",
+                          status === "submitting" && "opacity-75 cursor-not-allowed"
                         )}
                       >
                         {status === "submitting" ? (
