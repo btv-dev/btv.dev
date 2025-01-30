@@ -194,7 +194,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+    <div className="mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <AnimatePresence mode="wait">
           {currentStep === "service" && (
