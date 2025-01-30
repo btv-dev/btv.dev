@@ -28,7 +28,7 @@ const FeatureCard = ({ title, description, icon, ...props }: FeatureCardProps) =
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.3 // requires 30% of the card to be visible
+    amount: 0.5 // requires 30% of the card to be visible
   });
 
   return (
