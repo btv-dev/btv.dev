@@ -33,19 +33,16 @@ const svgVariants: Variants = {
 
 const pathVariants: Variants = {
   normal: {
-    opacity: 1,
-    pathLength: 1,
-    transition: {
-      duration: 0.4,
-      opacity: { duration: 0.1 },
-    },
+    opacity: 0,
+    pathLength: 0,
+    scale: 0.5,
   },
   animate: {
     opacity: [0, 1],
     pathLength: [0, 1],
-    pathOffset: [1, 0],
+    scale: [0.5, 1],
     transition: {
-      duration: 0.4,
+      duration: 1,
       opacity: { duration: 0.1 },
     },
   },

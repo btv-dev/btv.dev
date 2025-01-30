@@ -1,6 +1,6 @@
 'use client';
 
-import type { Transition } from 'framer-motion';
+import type { Transition, Variants } from 'framer-motion';
 import { useAnimation, motion } from 'framer-motion';
 import { useEffect } from 'react'
 
@@ -27,6 +27,23 @@ const GaugeIcon = ({ className = "", size = 28, isVisible = false }: GaugeIconPr
       controls.start('normal');
     }
   }, [isVisible, controls]);
+
+  const pathVariants: Variants = {
+    normal: {
+      opacity: 0,
+      pathLength: 0,
+      scale: 0.5,
+    },
+    animate: {
+      opacity: [0, 1],
+      pathLength: [0, 1],
+      scale: [0.5, 1],
+      transition: {
+        duration: 1,
+        opacity: { duration: 0.1 },
+      },
+    },
+  };
 
   return (
     <div
@@ -57,11 +74,7 @@ const GaugeIcon = ({ className = "", size = 28, isVisible = false }: GaugeIconPr
           d="M3.34 19a10 10 0 1 1 17.32 0"
           initial={{ opacity: 0, pathLength: 0 }}
           animate={controls}
-          variants={{
-            normal: { opacity: 0, pathLength: 0 },
-            animate: { opacity: 1, pathLength: 1 },
-          }}
-          transition={{ duration: 0.5 }}
+          variants={pathVariants}
         />
       </svg>
     </div>

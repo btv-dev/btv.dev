@@ -50,7 +50,7 @@ const LayoutPanelTopIcon = ({ className = "", size = 28, isVisible = false }: La
               translateY: [-5, 0],
               transition: {
                 opacity: { duration: 0.5, times: [0.2, 1] },
-                duration: 0.5,
+                duration: 1,
               },
             },
           }}
@@ -70,7 +70,7 @@ const LayoutPanelTopIcon = ({ className = "", size = 28, isVisible = false }: La
               translateX: [-5, 0],
               transition: {
                 opacity: { duration: 0.5, times: [0.2, 1] },
-                duration: 0.5,
+                duration: 1,
                 delay: 0.1,
               },
             },
@@ -91,7 +91,7 @@ const LayoutPanelTopIcon = ({ className = "", size = 28, isVisible = false }: La
               translateX: [5, 0],
               transition: {
                 opacity: { duration: 0.5, times: [0.2, 1] },
-                duration: 0.5,
+                duration: 1,
                 delay: 0.2,
               },
             },

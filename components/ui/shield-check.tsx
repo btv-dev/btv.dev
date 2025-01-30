@@ -21,7 +21,7 @@ const pathVariants: Variants = {
     pathLength: [0, 1],
     scale: [0.5, 1],
     transition: {
-      duration: 0.4,
+      duration: 1,
       opacity: { duration: 0.1 },
     },
   },

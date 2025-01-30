@@ -1,6 +1,6 @@
 'use client';
 
-import { useAnimation, motion } from 'framer-motion';
+import { useAnimation, motion, Variants } from 'framer-motion';
 import { useEffect } from 'react'
 
 interface FileStackIconProps {
@@ -19,6 +19,23 @@ const FileStackIcon = ({ className = "", size = 28, isVisible = false }: FileSta
       controls.start('normal');
     }
   }, [isVisible, controls]);
+
+  const pathVariants: Variants = {
+    normal: {
+      opacity: 0,
+      pathLength: 0,
+      scale: 0.5,
+    },
+    animate: {
+      opacity: [0, 1],
+      pathLength: [0, 1],
+      scale: [0.5, 1],
+      transition: {
+        duration: 1,
+        opacity: { duration: 0.1 },
+      },
+    },
+  };
 
   return (
     <div
@@ -56,12 +73,8 @@ const FileStackIcon = ({ className = "", size = 28, isVisible = false }: FileSta
         <motion.path
           d="M7 8v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H15"
           initial={{ opacity: 0, pathLength: 0 }}
-          variants={{
-            normal: { opacity: 0, pathLength: 0 },
-            animate: { opacity: 1, pathLength: 1 },
-          }}
+          variants={pathVariants}
           animate={controls}
-          transition={{ duration: 0.5, delay: 0.2 }}
         />
         <motion.path
           d="M3 12v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H11"
@@ -71,7 +84,6 @@ const FileStackIcon = ({ className = "", size = 28, isVisible = false }: FileSta
             animate: { opacity: 1, translateX: 0, translateY: 0 },
           }}
           animate={controls}
-          transition={{ duration: 0.5, delay: 0.3 }}
         />
       </svg>
     </div>

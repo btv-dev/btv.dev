@@ -20,6 +20,23 @@ const SearchIcon = ({ className = "", size = 28, isVisible = false }: SearchIcon
     }
   }, [isVisible, controls]);
 
+  const pathVariants: motion.Variants = {
+    normal: {
+      opacity: 0,
+      pathLength: 0,
+      scale: 0.5,
+    },
+    animate: {
+      opacity: [0, 1],
+      pathLength: [0, 1],
+      scale: [0.5, 1],
+      transition: {
+        duration: 1,
+        opacity: { duration: 0.1 },
+      },
+    },
+  };
+
   return (
     <div className={`${className} flex items-center justify-center`}
     >
@@ -61,10 +78,7 @@ const SearchIcon = ({ className = "", size = 28, isVisible = false }: SearchIcon
         <motion.path
           d="m21 21-4.3-4.3"
           initial={{ opacity: 0, pathLength: 0 }}
-          variants={{
-            normal: { opacity: 0, pathLength: 0 },
-            animate: { opacity: 1, pathLength: 1 },
-          }}
+          variants={pathVariants}
         />
       </motion.svg>
     </div>

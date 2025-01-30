@@ -25,6 +25,23 @@ const variants: Variants = {
   }),
 };
 
+const pathVariants: Variants = {
+  normal: {
+    opacity: 0,
+    pathLength: 0,
+    scale: 0.5,
+  },
+  animate: {
+    opacity: [0, 1],
+    pathLength: [0, 1],
+    scale: [0.5, 1],
+    transition: {
+      duration: 1,
+      opacity: { duration: 0.1 },
+    },
+  },
+};
+
 const WaypointsIcon = ({ className = "", size = 28, isVisible = false }: WaypointsIconProps) => {
   const controls = useAnimation();
 
@@ -62,10 +79,9 @@ const WaypointsIcon = ({ className = "", size = 28, isVisible = false }: Waypoin
         />
         <motion.path
           d="m10.2 6.3-3.9 3.9"
-          variants={variants}
+          variants={pathVariants}
           animate={controls}
           initial="normal"
-          custom={1}
         />
         <motion.circle
           cx="4.5"
@@ -78,10 +94,9 @@ const WaypointsIcon = ({ className = "", size = 28, isVisible = false }: Waypoin
         />
         <motion.path
           d="M7 12h10"
-          variants={variants}
+          variants={pathVariants}
           animate={controls}
           initial="normal"
-          custom={2}
         />
         <motion.circle
           cx="19.5"
@@ -94,10 +109,9 @@ const WaypointsIcon = ({ className = "", size = 28, isVisible = false }: Waypoin
         />
         <motion.path
           d="m13.8 17.7 3.9-3.9"
-          variants={variants}
+          variants={pathVariants}
           animate={controls}
           initial="normal"
-          custom={3}
         />
         <motion.circle
           cx="12"
