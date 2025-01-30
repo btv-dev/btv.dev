@@ -316,9 +316,9 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="relative mx-auto">
+    <div className="relative mx-auto my-20">
       {/* Form container with navigation */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <button
           onClick={goToPreviousStep}
           className={clsx(
