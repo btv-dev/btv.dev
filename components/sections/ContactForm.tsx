@@ -456,7 +456,7 @@ export default function ContactForm() {
                       className="space-y-6 bg-white p-8 rounded-lg shadow-md"
                     >
                       <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input
                           type="text"
                           className="w-full px-4 py-2 rounded-lg border border-gray-200"
@@ -470,7 +470,7 @@ export default function ContactForm() {
                           {...register("lastName", { required: true })}
                         />
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input
                           type="email"
                           className="w-full px-4 py-2 rounded-lg border border-gray-200"
