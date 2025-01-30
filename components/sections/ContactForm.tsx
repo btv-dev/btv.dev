@@ -385,7 +385,7 @@ export default function ContactForm() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <motion.div 
                 ref={scope} 
-                className="relative overflow-hidden"
+                className="relative"
                 layout
                 transition={{
                   layout: {
