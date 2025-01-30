@@ -79,6 +79,7 @@ interface FormData {
 export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState<FormStep>("service");
   const [status, setStatus] = useState<SubmissionStatus>("idle");
+  const [direction, setDirection] = useState<"left" | "right">("right");
   const { register, handleSubmit, setValue, watch } = useForm<FormData>();
 
   const services = [
@@ -137,6 +138,7 @@ export default function ContactForm() {
 
   const handleOptionSelect = (field: keyof FormData, value: string) => {
     setValue(field, value);
+    setDirection("right");
     if (field === "service") setCurrentStep("budget");
     if (field === "budget") setCurrentStep("timeline");
     if (field === "timeline") setCurrentStep("contact");
@@ -144,12 +146,14 @@ export default function ContactForm() {
 
   const goToPreviousStep = () => {
     if (hasPreviousStep) {
+      setDirection("left");
       setCurrentStep(formSteps[currentStepIndex - 1]);
     }
   };
 
   const goToNextStep = () => {
     if (hasNextStep) {
+      setDirection("right");
       setCurrentStep(formSteps[currentStepIndex + 1]);
     }
   };
@@ -330,13 +334,32 @@ export default function ContactForm() {
         <div className="flex-1">
           <div className="mx-auto">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" custom={direction}>
                 {currentStep === "service" && (
                   <motion.div
                     key="service"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    custom={direction}
+                    variants={{
+                      enter: (direction: "left" | "right") => ({
+                        x: direction === "right" ? 100 : -100,
+                        opacity: 0
+                      }),
+                      center: {
+                        x: 0,
+                        opacity: 1
+                      },
+                      exit: (direction: "left" | "right") => ({
+                        x: direction === "right" ? -100 : 100,
+                        opacity: 0
+                      })
+                    }}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeInOut"
+                    }}
                   >
                     <h2 className="text-2xl font-bold mb-6">What are you looking for?</h2>
                     <div className="flex flex-wrap gap-4">
@@ -350,9 +373,28 @@ export default function ContactForm() {
                 {currentStep === "budget" && (
                   <motion.div
                     key="budget"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    custom={direction}
+                    variants={{
+                      enter: (direction: "left" | "right") => ({
+                        x: direction === "right" ? 100 : -100,
+                        opacity: 0
+                      }),
+                      center: {
+                        x: 0,
+                        opacity: 1
+                      },
+                      exit: (direction: "left" | "right") => ({
+                        x: direction === "right" ? -100 : 100,
+                        opacity: 0
+                      })
+                    }}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeInOut"
+                    }}
                   >
                     <h2 className="text-2xl font-bold mb-6">What's your budget?</h2>
                     <div className="flex flex-wrap gap-4">
@@ -366,9 +408,28 @@ export default function ContactForm() {
                 {currentStep === "timeline" && (
                   <motion.div
                     key="timeline"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    custom={direction}
+                    variants={{
+                      enter: (direction: "left" | "right") => ({
+                        x: direction === "right" ? 100 : -100,
+                        opacity: 0
+                      }),
+                      center: {
+                        x: 0,
+                        opacity: 1
+                      },
+                      exit: (direction: "left" | "right") => ({
+                        x: direction === "right" ? -100 : 100,
+                        opacity: 0
+                      })
+                    }}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeInOut"
+                    }}
                   >
                     <h2 className="text-2xl font-bold mb-6">When do you want to start?</h2>
                     <div className="flex flex-wrap gap-4">
@@ -382,9 +443,28 @@ export default function ContactForm() {
                 {currentStep === "contact" && (
                   <motion.div
                     key="contact"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    custom={direction}
+                    variants={{
+                      enter: (direction: "left" | "right") => ({
+                        x: direction === "right" ? 100 : -100,
+                        opacity: 0
+                      }),
+                      center: {
+                        x: 0,
+                        opacity: 1
+                      },
+                      exit: (direction: "left" | "right") => ({
+                        x: direction === "right" ? -100 : 100,
+                        opacity: 0
+                      })
+                    }}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeInOut"
+                    }}
                     className="space-y-6 bg-white p-8 rounded-lg shadow-md"
                   >
                     <h2 className="text-2xl font-bold mb-6">Tell us more about you!</h2>
