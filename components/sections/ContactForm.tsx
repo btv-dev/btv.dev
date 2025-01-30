@@ -9,6 +9,11 @@ import Lottie from "lottie-react";
 type FormStep = "service" | "budget" | "timeline" | "contact";
 type SubmissionStatus = "idle" | "submitting" | "success" | "error";
 
+interface ColorScheme {
+  border: string;
+  bg: string;
+}
+
 const Spinner = () => (
   <motion.svg
     className="animate-spin h-5 w-5"
@@ -76,19 +81,19 @@ export default function ContactForm() {
   const { register, handleSubmit, setValue, watch } = useForm<FormData>();
 
   const services = [
-    "A new website",
-    "A mobile application",
-    "Digital marketing",
-    "Content creation",
+    "A Full-Service Agency",
+    "A New Website",
+    "Digital Marketing",
+    "A New Brand",
     "Something else",
   ];
 
   const budgetRanges = [
-    "Under $5,000",
-    "$5,000 - $15,000",
-    "$15,000 - $30,000",
-    "$30,000+",
-    "Not sure yet",
+    "< $10,000",
+    "$10,000 - $20,000",
+    "$20,000 - $45,000",
+    "> $45,000",
+    "Not sure!",
   ];
 
   const timelineOptions = [
@@ -139,44 +144,71 @@ export default function ContactForm() {
 
   const watchedFields = watch();
 
+  // Color combinations grouped by form section
+  const colorSchemes = {
+    service: [
+      { border: "border-blue-400", bg: "bg-blue-50" },
+      { border: "border-purple-400", bg: "bg-purple-50" },
+      { border: "border-green-400", bg: "bg-green-50" },
+      { border: "border-orange-400", bg: "bg-orange-50" },
+      { border: "border-pink-400", bg: "bg-pink-50" },
+    ],
+    budget: [
+      { border: "border-amber-400", bg: "bg-amber-50" },
+      { border: "border-cyan-400", bg: "bg-cyan-50" },
+      { border: "border-teal-400", bg: "bg-teal-50" },
+      { border: "border-rose-400", bg: "bg-rose-50" },
+      { border: "border-indigo-400", bg: "bg-indigo-50" },
+    ],
+    timeline: [
+      { border: "border-emerald-400", bg: "bg-emerald-50" },
+      { border: "border-violet-400", bg: "bg-violet-50" },
+      { border: "border-fuchsia-400", bg: "bg-fuchsia-50" },
+      { border: "border-sky-400", bg: "bg-sky-50" },
+    ],
+  };
+
+  const getColorIndex = (value: string, options: string[]) => {
+    const index = options.indexOf(value);
+    return index >= 0 ? index : -1;
+  };
+
   const getBorderColor = (value: string) => {
-    const colors: { [key: string]: string } = {
-      "A new website": "border-blue-400",
-      "A mobile application": "border-purple-400",
-      "Digital marketing": "border-green-400",
-      "Content creation": "border-orange-400",
-      "Something else": "border-pink-400",
-      "Under $5,000": "border-teal-400",
-      "$5,000 - $15,000": "border-indigo-400",
-      "$15,000 - $30,000": "border-rose-400",
-      "$30,000+": "border-amber-400",
-      "Not sure yet": "border-cyan-400",
-      "Immediately": "border-emerald-400",
-      "Next month": "border-violet-400",
-      "Next quarter": "border-fuchsia-400",
-      "I'm flexible": "border-sky-400",
-    };
-    return colors[value] || "border-gray-200";
+    let options: string[] = [];
+    let colors: ColorScheme[] = [];
+    
+    if (currentStep === "service") {
+      options = services;
+      colors = colorSchemes.service;
+    } else if (currentStep === "budget") {
+      options = budgetRanges;
+      colors = colorSchemes.budget;
+    } else if (currentStep === "timeline") {
+      options = timelineOptions;
+      colors = colorSchemes.timeline;
+    }
+
+    const index = getColorIndex(value, options);
+    return index >= 0 ? colors[index % colors.length].border : "border-gray-200";
   };
 
   const getBackgroundColor = (value: string) => {
-    const colors: { [key: string]: string } = {
-      "A new website": "bg-blue-50",
-      "A mobile application": "bg-purple-50",
-      "Digital marketing": "bg-green-50",
-      "Content creation": "bg-orange-50",
-      "Something else": "bg-pink-50",
-      "Under $5,000": "bg-teal-50",
-      "$5,000 - $15,000": "bg-indigo-50",
-      "$15,000 - $30,000": "bg-rose-50",
-      "$30,000+": "bg-amber-50",
-      "Not sure yet": "bg-cyan-50",
-      "Immediately": "bg-emerald-50",
-      "Next month": "bg-violet-50",
-      "Next quarter": "bg-fuchsia-50",
-      "I'm flexible": "bg-sky-50",
-    };
-    return colors[value] || "bg-gray-50";
+    let options: string[] = [];
+    let colors: ColorScheme[] = [];
+    
+    if (currentStep === "service") {
+      options = services;
+      colors = colorSchemes.service;
+    } else if (currentStep === "budget") {
+      options = budgetRanges;
+      colors = colorSchemes.budget;
+    } else if (currentStep === "timeline") {
+      options = timelineOptions;
+      colors = colorSchemes.timeline;
+    }
+
+    const index = getColorIndex(value, options);
+    return index >= 0 ? colors[index % colors.length].bg : "bg-gray-50";
   };
 
   const OptionButton = ({ value, field }: { value: string; field: keyof FormData }) => (
