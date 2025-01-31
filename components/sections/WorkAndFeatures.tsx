@@ -159,7 +159,7 @@ export function WorkAndFeatures(): JSX.Element {
       >
         <H2 variants={fadeUpVariant} useParentAnimation>Our Services</H2>
         <Paragraph className="mb-10 md:mb-14" variants={fadeUpVariant} useParentAnimation>
-          We help quality-focused organizations express themselves in the digital world. Here's how we can bring your vision to life <HeartIcon />
+          We help quality-focused organizations express themselves in the digital world. Here's how we can bring your vision to life. <HeartIcon />
         </Paragraph>
       </motion.div>
 
