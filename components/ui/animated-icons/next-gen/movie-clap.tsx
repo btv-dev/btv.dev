@@ -1,24 +1,19 @@
 'use client';
 
+import { AnimatedIconProps } from '@/types/icons';
 import { useAnimation, motion, Variants } from 'framer-motion';
 import { useEffect } from 'react';
 
-interface ClapIconProps {
-  className?: string;
-  size?: number;
-  isVisible?: boolean;
-}
-
-const ClapIcon = ({ className = "", size = 28, isVisible = false }: ClapIconProps) => {
+const ClapIcon = ({ className = "", size = 28, isAnimate = false }: AnimatedIconProps) => {
   const controls = useAnimation();
 
   useEffect(() => {
-    if (isVisible) {
+    if (isAnimate) {
       controls.start('animate');
     } else {
       controls.start('normal');
     }
-  }, [isVisible, controls]);
+  }, [isAnimate, controls]);
 
   const variants: Variants = {
     normal: {
@@ -62,8 +57,8 @@ const ClapIcon = ({ className = "", size = 28, isVisible = false }: ClapIconProp
   return (
     <div 
       className={`${className} flex items-center justify-center`}
-      onMouseEnter={() => !isVisible && controls.start('animate')}
-      onMouseLeave={() => !isVisible && controls.start('normal')}
+      onMouseEnter={() => !isAnimate && controls.start('animate')}
+      onMouseLeave={() => !isAnimate && controls.start('normal')}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,26 +1,30 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useInView, HTMLMotionProps } from "framer-motion";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { fadeUpVariant, staggerContainer } from "@/lib/animations";
 import { AnimatedButton } from "../ui/animated-button";
 import { useRef } from "react";
-import { PaletteIcon, MonitorSmartphoneIcon, VideoIcon, ShareIcon, Heart, LucideIcon } from "lucide-react";
-import { ClapIcon } from '../ui/animated-icons/movie-clap';
+import { Heart } from "lucide-react";
+import { ClapIcon } from '../ui/animated-icons/next-gen/movie-clap';
+import { UploadIcon } from '../ui/animated-icons/next-gen/share';
+import { LayoutIcon } from '../ui/animated-icons/next-gen/layout';
+import { AnimatedIconProps } from '@/types/icons';
+import { PaletteIcon } from '../ui/animated-icons/next-gen/design';
 
 interface ServiceCardProps extends Omit<HTMLMotionProps<"div">, "title"> {
   title: string;
   description: string;
   features: string[];
-  icon: LucideIcon;
+  icon: React.ComponentType<AnimatedIconProps>;
 }
 
 interface Service {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: React.ComponentType<AnimatedIconProps>;
   features: string[];
 }
 
@@ -37,6 +41,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     amount: 0.5
   });
 
+  const [isAnimateIcon, setIsAnimateIcon] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      const timer = setTimeout(() => setIsAnimateIcon(true), 600);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView]);
+
   return (
     <motion.div
       ref={ref}
@@ -47,9 +60,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       {...props}
     >
       <Icon 
-        className="text-btv-blue mb-4"
-        size={44}
-        isVisible={isInView}
+        className="text-btv-blue m-6"
+        size={60}
+        isAnimate={isAnimateIcon}
       />
       <H3 noAnimation className="font-bold mb-3">{title}</H3>
       <Paragraph noAnimation className="text-muted-foreground mb-4">{description}</Paragraph>
@@ -80,7 +93,7 @@ const services: Service[] = [
   {
     title: "Digital Experience Design",
     description: "Crafting intuitive, performance-focused websites and applications that serve your goals.",
-    icon: MonitorSmartphoneIcon,
+    icon: LayoutIcon,
     features: [
       "Custom website and application development",
       "Responsive, mobile-first experiences",
@@ -102,7 +115,7 @@ const services: Service[] = [
   {
     title: "Digital Presence Strategy",
     description: "Ensuring your story is told consistently across all digital touchpoints.",
-    icon: ShareIcon,
+    icon: UploadIcon,
     features: [
       "Social media presence optimization",
       "Business listing management",
