@@ -25,10 +25,10 @@ const rubikMonoOne = Rubik_Mono_One({
 export const metadata: Metadata = {
   title: "BTV dot Dev",
   description:
-    "We help passionate organizations strengthen their impact through strategic digital design, branding, and content.",
+    "We craft digital identities for organizations that take pride in doing things differently.",
   openGraph: {
     title: "BTV dot Dev",
-    description: "We help passionate organizations strengthen their impact through strategic digital design, branding, and content.",
+    description: "We craft digital identities for organizations that take pride in doing things differently.",
     url: "https://btv.dev",
     siteName: "BTV dot Dev",
     images: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "BTV dot Dev",
-    description: "We help passionate organizations strengthen their impact through strategic digital design, branding, and content.",
+    description: "We craft digital identities for organizations that take pride in doing things differently.",
     images: ['/images/opengraph.png'],
   },
 };

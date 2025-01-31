@@ -6,10 +6,11 @@ interface HeroHighlightProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   containerClassName?: string;
+  deactivateDots?: boolean;
 }
 
 export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
-  ({ children, className, containerClassName }, ref) => {
+  ({ children, className, containerClassName, deactivateDots = false }, ref) => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -33,27 +34,30 @@ export const HeroHighlight = forwardRef<HTMLDivElement, HeroHighlightProps>(
         onMouseMove={handleMouseMove}
         ref={ref}
       >
-        <div className="absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800  pointer-events-none" />
-        <motion.div
-          className="pointer-events-none bg-dot-thick-btv-blue-500 dark:bg-dot-thick-btv-blue-500  absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
-          style={{
-            WebkitMaskImage: useMotionTemplate`
-            radial-gradient(
-              200px circle at ${mouseX}px ${mouseY}px,
-              black 0%,
-              transparent 100%
-            )
-          `,
-            maskImage: useMotionTemplate`
-            radial-gradient(
-              200px circle at ${mouseX}px ${mouseY}px,
-              black 0%,
-              transparent 100%
-            )
-          `,
-          }}
-        />
-
+        {!deactivateDots && (
+          <>
+            <div className="absolute inset-0 bg-dot-thick-neutral-300 dark:bg-dot-thick-neutral-800 pointer-events-none" />
+            <motion.div
+              className="pointer-events-none bg-dot-thick-btv-blue-500 dark:bg-dot-thick-btv-blue-500 absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+              style={{
+                WebkitMaskImage: useMotionTemplate`
+                radial-gradient(
+                  200px circle at ${mouseX}px ${mouseY}px,
+                  black 0%,
+                  transparent 100%
+                )
+              `,
+                maskImage: useMotionTemplate`
+                radial-gradient(
+                  200px circle at ${mouseX}px ${mouseY}px,
+                  black 0%,
+                  transparent 100%
+                )
+              `,
+              }}
+            />
+          </>
+        )}
         {/* Linear Gradient Overlays */}
         <div
           className="absolute inset-0 pointer-events-none z-10"

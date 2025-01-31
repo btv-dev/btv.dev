@@ -11,12 +11,14 @@ interface CanvasDotProps {
 
 // Synchronized with HeroHighlight timing
 const DOT_SHOW_DELAY = 750; // Show dot right after text finishes shrinking (600ms + 300ms)
+const MOUSE_FOLLOW_DELAY = 6300; // Start following mouse after last highlight (6.1s + small buffer)
 
 export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const radiusRef = useRef(0);
   const startTimeRef = useRef<number | null>(null);
   const [showDot, setShowDot] = useState(false);
+  const [canFollowMouse, setCanFollowMouse] = useState(false);
   const initialYRef = useRef<number | null>(null);
   const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
   const targetRadius = 13;
@@ -51,7 +53,11 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
 
   useEffect(() => {
     const timer = setTimeout(() => setShowDot(true), DOT_SHOW_DELAY);
-    return () => clearTimeout(timer);
+    const mouseTimer = setTimeout(() => setCanFollowMouse(true), MOUSE_FOLLOW_DELAY);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(mouseTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -105,15 +111,23 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Smooth movement towards target
-      dotX += (targetX - dotX) * speed;
-      dotY += (targetY - dotY) * speed;
+      // Draw the shadow dot at origin
+      ctx.beginPath();
+      ctx.arc(dotPosition.x, dotPosition.y, radiusRef.current * 0.9, 0, 2 * Math.PI);
+      ctx.fillStyle = "transparent"; // clear background dot
+      ctx.strokeStyle = "#1d83c4"; // thinner border
+      ctx.lineWidth = 2; // Thinner border
+      ctx.stroke();
 
-      // Draw the dot
+      // Smooth movement towards target
+      dotX += (targetX - dotX) * (speed * 2); // Increase speed factor for faster return
+      dotY += (targetY - dotY) * (speed * 2); // Increase speed factor for faster return
+
+      // Draw the dot that follows the cursor
+      ctx.fillStyle = '#1d83c4'; // Solid color for the cursor dot
       ctx.beginPath();
       ctx.arc(dotX, dotY, radiusRef.current, 0, 2 * Math.PI);
-      ctx.fillStyle = "#1d83c4";
-      ctx.fill();
+      ctx.fill(); // Fill the dot completely
 
       requestAnimationFrame(draw);
     };
@@ -123,34 +137,58 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
     draw();
 
     const onMouseMove = (e: MouseEvent) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+      // Don't follow mouse until all animations are complete
+      if (!heroRef.current || !canFollowMouse) return;
+      
+      const heroBounds = heroRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - heroBounds.left;
+      const mouseY = e.clientY - heroBounds.top;
 
-      const distance = Math.sqrt((mouseX - dotX) ** 2 + (mouseY - dotY) ** 2);
+      // Calculate distance from mouse to dot's origin
+      const distanceToOrigin = Math.sqrt(
+        Math.pow(mouseX - dotPosition.x, 2) + 
+        Math.pow(mouseY - dotPosition.y, 2)
+      );
 
-      if (distance < 200) {
+      // Check if mouse is within hero bounds and not too close to origin
+      if (
+        mouseX >= 0 &&
+        mouseX <= heroBounds.width &&
+        mouseY >= 0 &&
+        mouseY <= heroBounds.height &&
+        distanceToOrigin > 300 // Return to origin if mouse is within 300px
+      ) {
         targetX = mouseX;
         targetY = mouseY;
       } else {
+        // Return to home position
         targetX = dotPosition.x;
         targetY = dotPosition.y;
       }
     };
 
     const onMouseLeave = () => {
+      // Return to home position
+      targetX = dotPosition.x;
+      targetY = dotPosition.y;
+    };
+
+    const onScroll = () => {
       targetX = dotPosition.x;
       targetY = dotPosition.y;
     };
 
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("scroll", onScroll);
 
     return () => {
       window.removeEventListener("resize", updateCanvasSize);
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("scroll", onScroll);
     };
-  }, [showDot, dotRef, heroRef, dotPosition, targetRadius]);
+  }, [showDot, dotRef, heroRef, dotPosition, targetRadius, canFollowMouse]);
 
   if (!showDot) return null;
 

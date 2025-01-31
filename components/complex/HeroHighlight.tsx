@@ -40,18 +40,21 @@ export function HeroHighlightImplemented() {
 
   return (
     <>
-      <HeroHighlight ref={heroHighlightRef}>
+      <HeroHighlight ref={heroHighlightRef} deactivateDots>
         <div className="absolute inset-0 -z-10">
+          {/* Gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#AF6451] to-[#5D87BC] mix-blend-overlay" />
+          {/* White overlay */}
           <div className="absolute inset-0 bg-white/70" />
+          {/* Bottom fade to white */}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent" />
           <Image
             src={heroImage}
             alt="Church Street in Burlington, Vermont"
             fill
-            className="object-cover -z-10"
+            className="object-cover mix-blend-overlay"
             priority
             placeholder="blur"
-            loading="eager"
             onLoad={() => {
               setTimeout(() => setIsImageLoaded(true), 500);
             }}
@@ -124,23 +127,19 @@ export function HeroHighlightImplemented() {
                 ease: [0.4, 0.0, 0.2, 1],
                 delay: TIMING.SUBTITLE.START
               }}
-              className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-800 dark:text-white max-w-5xl leading-relaxed lg:leading-snug text-center mx-auto mt-8"
+              className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-800 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto mt-8"
             >
-              We help{" "}
+              We craft{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.FIRST} className="dark:text-white">
-                passionate organizations
+                digital identities
               </Highlight>
-              {" "}strengthen their impact through strategic digital{" "}
+              {" "}for organizations{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.SECOND} className="dark:text-white">
-                design,
+                that take pride
               </Highlight>
-              {" "}
+              {" "}in doing things{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.THIRD} className="dark:text-white">
-                branding,
-              </Highlight>
-              {" "}and{" "}
-              <Highlight delay={TIMING.HIGHLIGHTS.FOURTH} className="dark:text-white">
-                content
+                differently
               </Highlight>
               .
             </motion.div>

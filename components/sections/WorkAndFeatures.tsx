@@ -1,35 +1,54 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useInView, HTMLMotionProps } from "framer-motion";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { fadeUpVariant, staggerContainer } from "@/lib/animations";
 import { AnimatedButton } from "../ui/animated-button";
 import { useRef } from "react";
-import { LayoutPanelTopIcon } from "../ui/layout-panel-top";
-import { ShieldCheckIcon } from "../ui/shield-check";
-import { GaugeIcon } from "../ui/gauge";
-import { SearchIcon } from "../ui/search";
-import { WaypointsIcon } from "../ui/waypoints";
-import { FileStackIcon } from "../ui/file-stack";
-import { TrendingUpIcon } from "../ui/trending-up";
-import { SquarePenIcon } from "../ui/square-pen";
 import { Heart } from "lucide-react";
+import { ClapIcon } from '../ui/animated-icons/next-gen/movie-clap';
+import { UploadIcon } from '../ui/animated-icons/next-gen/share';
+import { LayoutIcon } from '../ui/animated-icons/next-gen/layout';
+import { AnimatedIconProps } from '@/types/icons';
+import { PaletteIcon } from '../ui/animated-icons/next-gen/design';
 
-interface FeatureCardProps extends Omit<HTMLMotionProps<"div">, "title"> {
+interface ServiceCardProps extends Omit<HTMLMotionProps<"div">, "title"> {
   title: string;
   description: string;
-  icon: React.ReactNode;
-  isVisible?: boolean;
+  features: string[];
+  icon: React.ComponentType<AnimatedIconProps>;
 }
 
-const FeatureCard = ({ title, description, icon, ...props }: FeatureCardProps) => {
-  const ref = useRef(null);
+interface Service {
+  title: string;
+  description: string;
+  icon: React.ComponentType<AnimatedIconProps>;
+  features: string[];
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({ 
+  title, 
+  description, 
+  features, 
+  icon: Icon, 
+  ...props 
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.5 // requires 30% of the card to be visible
+    amount: 0.5
   });
+
+  const [isAnimateIcon, setIsAnimateIcon] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      const timer = setTimeout(() => setIsAnimateIcon(true), 600);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView]);
 
   return (
     <motion.div
@@ -37,68 +56,76 @@ const FeatureCard = ({ title, description, icon, ...props }: FeatureCardProps) =
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
-      className="relative p-4 border rounded-lg shadow-md flex flex-col justify-center"
+      className="relative p-6 border rounded-lg shadow-md flex flex-col justify-start h-full"
       {...props}
     >
-      {React.cloneElement(icon as React.ReactElement, { isVisible: isInView })}
-      <H3 noAnimation className="font-bold text-center mt-4">{title}</H3>
-      <Paragraph noAnimation className="text-sm text-muted-foreground">{description}</Paragraph>
+      <Icon 
+        className="text-btv-blue p-3"
+        size={60}
+        isAnimate={isAnimateIcon}
+      />
+      <H3 noAnimation className="font-bold mb-3">{title}</H3>
+      <Paragraph noAnimation className="text-muted-foreground mb-4">{description}</Paragraph>
+      <ul className="text-sm text-muted-foreground space-y-2">
+        {features.map((feature, index) => (
+          <li key={index} className="flex items-start">
+            <span className="mr-2">•</span>
+            {feature}
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 };
 
-const features = [
+const services: Service[] = [
   {
-    title: "Responsive Design & Animations",
-    description:
-      "Engaging, mobile-friendly layouts with subtle animations to enhance user experience.",
-    icon: LayoutPanelTopIcon,
+    title: "Brand Identity & Design",
+    description: "Creating visual languages that express your values and approach with intention.",
+    icon: PaletteIcon,
+    features: [
+      "Logo design and visual identity systems",
+      "Brand guidelines and style documentation",
+      "Typography and color strategy",
+      "Visual asset creation"
+    ]
   },
   {
-    title: "Security Features",
-    description:
-      "Built-in protection against vulnerabilities on the web, SSL integration, and secure data handling.",
-    icon: ShieldCheckIcon,
+    title: "Digital Experience Design",
+    description: "Crafting intuitive, performance-focused websites and applications that serve your goals.",
+    icon: LayoutIcon,
+    features: [
+      "Custom website and application development",
+      "Responsive, mobile-first experiences",
+      "Performance optimization and security",
+      "Content management systems"
+    ]
   },
   {
-    title: "Performance Optimization",
-    description:
-      "Advanced caching, code splitting, and bundle optimization for lightning-fast load times.",
-    icon: GaugeIcon,
+    title: "Motion & Animation",
+    description: "Adding dimension to your story through thoughtful movement and interaction.",
+    icon: ClapIcon,
+    features: [
+      "Brand animation and motion graphics",
+      "Interactive user experience elements",
+      "Micro-interactions and transitions",
+      "Animated product demonstrations"
+    ]
   },
   {
-    title: "SEO Tools",
-    description:
-      "Out-of-the-box SEO-friendly markup, meta tag management, and structured data to boost visibility.",
-    icon: SearchIcon,
-  },
-  {
-    title: "Contact Forms & Social Sharing",
-    description:
-      "Easy-to-use contact forms and social media integration to engage visitors and streamline communication.",
-    icon: WaypointsIcon,
-  },
-  {
-    title: "Asset Optimization",
-    description:
-      "Automated image compression and lazy loading for faster page loads and improved performance.",
-    icon: FileStackIcon,
-  },
-  {
-    title: "Analytics Integration",
-    description:
-      "Setup for tracking user interactions, helping you make data-driven decisions.",
-    icon: TrendingUpIcon,
-  },
-  {
-    title: "Integrated Blog & CMS",
-    description:
-      "A simple, built-in content management system allowing effortless content updates and blog posts.",
-    icon: SquarePenIcon,
-  },
+    title: "Digital Presence Strategy",
+    description: "Ensuring your story is told consistently across all digital touchpoints.",
+    icon: UploadIcon,
+    features: [
+      "Social media presence optimization",
+      "Business listing management",
+      "Content strategy and planning",
+      "Analytics and performance tracking"
+    ]
+  }
 ];
 
-const HeartIcon = () => (
+const HeartIcon: React.FC = () => (
   <motion.div
     className="inline-block px-1"
     animate={{
@@ -121,8 +148,7 @@ const HeartIcon = () => (
   </motion.div>
 );
 
-export function WorkAndFeatures() {
-
+export function WorkAndFeatures(): JSX.Element {
   return (
     <Section id="Work-And-Features">
       <motion.div
@@ -131,31 +157,26 @@ export function WorkAndFeatures() {
         viewport={{ once: true }}
         variants={staggerContainer}
       >
-        <H2 variants={fadeUpVariant} useParentAnimation>Services</H2>
+        <H2 variants={fadeUpVariant} useParentAnimation>Our Services</H2>
         <Paragraph className="mb-10 md:mb-14" variants={fadeUpVariant} useParentAnimation>
-          We create digital experiences that captivate and convert, and we deliver according to your specific needs. Here are a few of the services our clients <HeartIcon /> :
+          We help quality-focused organizations express themselves in the digital world. Here's how we can bring your vision to life. <HeartIcon />
         </Paragraph>
       </motion.div>
 
-      <div className="flex flex-col gap-6">
-        {/* Row container - using flex with stretch alignment */}
-        <div className="flex flex-wrap items-stretch gap-8 md:gap-12">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <div key={index} className="flex w-full sm:flex-1 min-w-[280px]">
-                <FeatureCard
-                  title={feature.title}
-                  description={feature.description}
-                  icon={<Icon className="text-btv-blue" size={44} />}
-                />
-              </div>
-            );
-          })}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        {services.map((service, index) => (
+          <ServiceCard
+            key={index}
+            title={service.title}
+            description={service.description}
+            features={service.features}
+            icon={service.icon}
+          />
+        ))}
       </div>
+
       <AnimatedButton className="mt-20" variant="fullWidth" href="#Lets-Talk">
-        Let's talk!
+        Let's explore how we can help
       </AnimatedButton>
     </Section>
   );
