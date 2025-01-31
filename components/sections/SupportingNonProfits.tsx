@@ -8,8 +8,8 @@ import redCrossImage from "../../public/images/red-cross.webp";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
@@ -17,6 +17,9 @@ const fadeUpVariant = {
     }
   }
 };
+
+
+const MotionImage = motion(NextImage);
 
 export function SupportingNonProfits() {
   return (
@@ -40,11 +43,18 @@ export function SupportingNonProfits() {
           Your cause deserves a digital presence that reflects its heart and
           impact.
         </Paragraph>
-        <NextImage
-          className="w-full h-auto rounded-sm mx-auto mt-8"
+        <MotionImage
+          className="w-full h-auto rounded-xl md:rounded-[7rem] mx-auto my-24"
           src={redCrossImage}
           alt="James working with the red cross"
           placeholder="blur"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.2
+          }}
+          variants={fadeUpVariant}
         />
         <Paragraph variants={fadeUpVariant} useParentAnimation>
           Understanding the challenges you face, we offer special discounts
