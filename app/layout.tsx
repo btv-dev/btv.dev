@@ -58,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${rubikMonoOne.variable} antialiased text-gray-900`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rubikMonoOne.variable} antialiased text-gray-900 min-h-screen`}
       >
         {children}
       </body>
