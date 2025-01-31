@@ -26,13 +26,13 @@ const FaqSection = React.forwardRef<HTMLElement, FaqSectionProps>(
         )}
         {...props}
       >
-        <div className="w-full mx-2 md:mx-0">
+        <div className="w-full px-2 md:px-0">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center mb-12"
+            className="mx-auto text-center mb-12"
           >
           </motion.div>
 
