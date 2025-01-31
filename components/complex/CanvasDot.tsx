@@ -120,8 +120,8 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
       ctx.stroke();
 
       // Smooth movement towards target
-      dotX += (targetX - dotX) * speed;
-      dotY += (targetY - dotY) * speed;
+      dotX += (targetX - dotX) * (speed * 2); // Increase speed factor for faster return
+      dotY += (targetY - dotY) * (speed * 2); // Increase speed factor for faster return
 
       // Draw the dot that follows the cursor
       ctx.fillStyle = '#1d83c4'; // Solid color for the cursor dot
