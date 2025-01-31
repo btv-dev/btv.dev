@@ -136,12 +136,19 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
       const mouseX = e.clientX - heroBounds.left;
       const mouseY = e.clientY - heroBounds.top;
 
-      // Check if mouse is within hero bounds
+      // Calculate distance from mouse to dot's origin
+      const distanceToOrigin = Math.sqrt(
+        Math.pow(mouseX - dotPosition.x, 2) + 
+        Math.pow(mouseY - dotPosition.y, 2)
+      );
+
+      // Check if mouse is within hero bounds and not too close to origin
       if (
         mouseX >= 0 &&
         mouseX <= heroBounds.width &&
         mouseY >= 0 &&
-        mouseY <= heroBounds.height
+        mouseY <= heroBounds.height &&
+        distanceToOrigin > 300 // Return to origin if mouse is within 300px
       ) {
         targetX = mouseX;
         targetY = mouseY;
