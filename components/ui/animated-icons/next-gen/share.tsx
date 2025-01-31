@@ -1,8 +1,8 @@
 'use client';
 
 import { AnimatedIconProps } from '@/types/icons';
-import type { Variants } from 'motion/react';
-import { motion, useAnimation } from 'motion/react';
+import type { Variants } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 
 const arrowVariants: Variants = {
