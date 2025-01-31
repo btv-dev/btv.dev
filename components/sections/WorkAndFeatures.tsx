@@ -60,7 +60,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       {...props}
     >
       <Icon 
-        className="text-btv-blue m-6"
+        className="text-btv-blue p-3"
         size={60}
         isAnimate={isAnimateIcon}
       />
