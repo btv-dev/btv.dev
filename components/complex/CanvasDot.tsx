@@ -11,12 +11,14 @@ interface CanvasDotProps {
 
 // Synchronized with HeroHighlight timing
 const DOT_SHOW_DELAY = 750; // Show dot right after text finishes shrinking (600ms + 300ms)
+const MOUSE_FOLLOW_DELAY = 6300; // Start following mouse after last highlight (6.1s + small buffer)
 
 export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const radiusRef = useRef(0);
   const startTimeRef = useRef<number | null>(null);
   const [showDot, setShowDot] = useState(false);
+  const [canFollowMouse, setCanFollowMouse] = useState(false);
   const initialYRef = useRef<number | null>(null);
   const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
   const targetRadius = 13;
@@ -51,7 +53,11 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
 
   useEffect(() => {
     const timer = setTimeout(() => setShowDot(true), DOT_SHOW_DELAY);
-    return () => clearTimeout(timer);
+    const mouseTimer = setTimeout(() => setCanFollowMouse(true), MOUSE_FOLLOW_DELAY);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(mouseTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -123,21 +129,31 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
     draw();
 
     const onMouseMove = (e: MouseEvent) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+      // Don't follow mouse until all animations are complete
+      if (!heroRef.current || !canFollowMouse) return;
+      
+      const heroBounds = heroRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - heroBounds.left;
+      const mouseY = e.clientY - heroBounds.top;
 
-      const distance = Math.sqrt((mouseX - dotX) ** 2 + (mouseY - dotY) ** 2);
-
-      if (distance < 200) {
+      // Check if mouse is within hero bounds
+      if (
+        mouseX >= 0 &&
+        mouseX <= heroBounds.width &&
+        mouseY >= 0 &&
+        mouseY <= heroBounds.height
+      ) {
         targetX = mouseX;
         targetY = mouseY;
       } else {
+        // Return to home position
         targetX = dotPosition.x;
         targetY = dotPosition.y;
       }
     };
 
     const onMouseLeave = () => {
+      // Return to home position
       targetX = dotPosition.x;
       targetY = dotPosition.y;
     };
@@ -150,7 +166,7 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [showDot, dotRef, heroRef, dotPosition, targetRadius]);
+  }, [showDot, dotRef, heroRef, dotPosition, targetRadius, canFollowMouse]);
 
   if (!showDot) return null;
 
