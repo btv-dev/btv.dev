@@ -173,13 +173,20 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
       targetY = dotPosition.y;
     };
 
+    const onScroll = () => {
+      targetX = dotPosition.x;
+      targetY = dotPosition.y;
+    };
+
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("scroll", onScroll);
 
     return () => {
       window.removeEventListener("resize", updateCanvasSize);
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("scroll", onScroll);
     };
   }, [showDot, dotRef, heroRef, dotPosition, targetRadius, canFollowMouse]);
 
