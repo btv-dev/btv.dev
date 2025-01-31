@@ -500,7 +500,7 @@ export default function ContactForm() {
                         disabled={status === "submitting"}
                         className={clsx(
                           "w-full px-8 py-5 rounded-xl font-semibold text-lg shadow-lg",
-                          "bg-blue-600 text-white hover:bg-blue-700 transition-colors",
+                          "bg-btv-blue text-white hover:bg-btv-blue-600 transition-colors",
                           status === "submitting" && "opacity-75 cursor-not-allowed"
                         )}
                       >
