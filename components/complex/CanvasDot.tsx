@@ -111,15 +111,23 @@ export function CanvasDot({ dotRef, heroRef, yMotionValue }: CanvasDotProps) {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Draw the shadow dot at origin
+      ctx.beginPath();
+      ctx.arc(dotPosition.x, dotPosition.y, radiusRef.current * 0.9, 0, 2 * Math.PI);
+      ctx.fillStyle = "transparent"; // clear background dot
+      ctx.strokeStyle = "#1d83c4"; // thinner border
+      ctx.lineWidth = 2; // Thinner border
+      ctx.stroke();
+
       // Smooth movement towards target
       dotX += (targetX - dotX) * speed;
       dotY += (targetY - dotY) * speed;
 
-      // Draw the dot
+      // Draw the dot that follows the cursor
+      ctx.fillStyle = '#1d83c4'; // Solid color for the cursor dot
       ctx.beginPath();
       ctx.arc(dotX, dotY, radiusRef.current, 0, 2 * Math.PI);
-      ctx.fillStyle = "#1d83c4";
-      ctx.fill();
+      ctx.fill(); // Fill the dot completely
 
       requestAnimationFrame(draw);
     };
