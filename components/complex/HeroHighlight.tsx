@@ -40,18 +40,21 @@ export function HeroHighlightImplemented() {
 
   return (
     <>
-      <HeroHighlight ref={heroHighlightRef}>
+      <HeroHighlight ref={heroHighlightRef} deactivateDots>
         <div className="absolute inset-0 -z-10">
+          {/* Gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#AF6451] to-[#5D87BC] mix-blend-overlay" />
+          {/* White overlay */}
           <div className="absolute inset-0 bg-white/70" />
+          {/* Bottom fade to white */}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent" />
           <Image
             src={heroImage}
             alt="Church Street in Burlington, Vermont"
             fill
-            className="object-cover -z-10"
+            className="object-cover mix-blend-overlay"
             priority
             placeholder="blur"
-            loading="eager"
             onLoad={() => {
               setTimeout(() => setIsImageLoaded(true), 500);
             }}
