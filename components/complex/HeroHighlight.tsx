@@ -133,9 +133,9 @@ export function HeroHighlightImplemented() {
               <Highlight delay={TIMING.HIGHLIGHTS.FIRST} className="dark:text-white">
                 digital identities
               </Highlight>
-              {" "}for organizations{" "}
+              {" "}for organizations that{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.SECOND} className="dark:text-white">
-                that take pride
+                take pride
               </Highlight>
               {" "}in doing things{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.THIRD} className="dark:text-white">
