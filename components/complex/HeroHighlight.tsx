@@ -127,23 +127,19 @@ export function HeroHighlightImplemented() {
                 ease: [0.4, 0.0, 0.2, 1],
                 delay: TIMING.SUBTITLE.START
               }}
-              className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-800 dark:text-white max-w-5xl leading-relaxed lg:leading-snug text-center mx-auto mt-8"
+              className="text-2xl px-4 md:text-2xl lg:text-3xl font-bold text-neutral-800 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto mt-8"
             >
-              We help{" "}
+              We craft{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.FIRST} className="dark:text-white">
-                passionate organizations
+                digital identities
               </Highlight>
-              {" "}strengthen their impact through strategic digital{" "}
+              {" "}for organizations{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.SECOND} className="dark:text-white">
-                design,
+                that take pride
               </Highlight>
-              {" "}
+              {" "}in doing things{" "}
               <Highlight delay={TIMING.HIGHLIGHTS.THIRD} className="dark:text-white">
-                branding,
-              </Highlight>
-              {" "}and{" "}
-              <Highlight delay={TIMING.HIGHLIGHTS.FOURTH} className="dark:text-white">
-                content
+                differently
               </Highlight>
               .
             </motion.div>

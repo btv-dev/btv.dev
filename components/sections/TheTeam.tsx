@@ -39,10 +39,10 @@ export function About() {
         variants={fadeUpVariant}
       />
       <Paragraph className="mb-8">
-        Named after Vermont's international airport code, <span className="font-rubik-mono-one text-btv-blue">BTV</span>, we are a digital design agency with roots in Burlington, Vermont.
+        Rooted in Burlington and named for Vermont's international airport code (<span className="font-rubik-mono-one text-btv-blue">BTV</span>), we're a digital brand studio where technical mastery meets creative vision.
       </Paragraph>
       <Paragraph className="mb-8">
-        Why the "<span className="font-rubik-mono-one text-btv-blue">.DEV</span>", you ask? Since the world has moved into the digital age, technical knowledge empowers us to create compelling experiences that weren't previously possible! All of our leadership has a technical background, and we are committed to providing bespoke designs that drive results.
+        Our development expertise (<span className="font-rubik-mono-one text-btv-blue">.DEV</span>) lets us push creative boundaries while ensuring everything we craft works beautifully. All of our leadership has a technical background, and we are committed to providing bespoke designs that drive results.
       </Paragraph>
       <MotionImage
         className="w-full h-auto rounded-xl md:rounded-[7rem] mx-auto my-24"

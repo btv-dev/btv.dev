@@ -39,9 +39,7 @@ export function SupportingNonProfits() {
         }}
       >
         <Paragraph variants={fadeUpVariant} useParentAnimation>
-          We are passionate about empowering mission-driven organizations.
-          Your cause deserves a digital presence that reflects its heart and
-          impact.
+        Like the craftspeople and makers we serve, mission-driven organizations share our commitment to doing things with purpose. We offer tailored solutions that bring the same level of craft to cause-focused work.
         </Paragraph>
         <MotionImage
           className="w-full h-auto rounded-xl md:rounded-[7rem] mx-auto my-24"
