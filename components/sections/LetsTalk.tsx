@@ -4,6 +4,7 @@ import { H2, Paragraph } from "@/components/ui/typography";
 import { Section } from "@/components/ui/layout";
 import { motion } from "framer-motion";
 import ContactForm from "./ContactForm";
+import { CircleHelp } from "lucide-react";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -21,9 +22,6 @@ export function LetsTalk() {
   return (
     <Section fade="top" innerClassname="pb-0">
       <H2 id="Lets-Talk">Let's Talk!</H2>
-
-
-
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -42,6 +40,18 @@ export function LetsTalk() {
           collaborate, and innovate.
         </Paragraph>
         <ContactForm />
+        <motion.div 
+          variants={fadeUpVariant} 
+          className="flex justify-center mt-8 mb-12"
+        >
+          <a
+            href="/faq"
+            className="inline-flex items-center px-6 py-3 text-md font-medium text-white bg-btv-blue-500 rounded-lg hover:bg-btv-blue-600 transition-colors"
+          >
+            <CircleHelp className="size-5 mr-2" />
+            View FAQ
+          </a>
+        </motion.div>
         <Paragraph variants={fadeUpVariant} useParentAnimation className="mb-24">
         <b>Forms not your thing?</b> No worries. Reach out at{" "}
           <a

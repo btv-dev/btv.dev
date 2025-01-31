@@ -459,13 +459,13 @@ export default function ContactForm() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <input
                           type="text"
-                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
+                          className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 text-md"
                           placeholder="First Name"
                           {...register("firstName", { required: true })}
                         />
                         <input
                           type="text"
-                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
+                          className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 text-md"
                           placeholder="Last Name"
                           {...register("lastName", { required: true })}
                         />
@@ -473,25 +473,25 @@ export default function ContactForm() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <input
                           type="email"
-                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
+                          className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 text-md"
                           placeholder="Email"
                           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
                         />
                         <input
                           type="tel"
-                          className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
+                          className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 text-md"
                           placeholder="Phone"
                           {...register("phone")}
                         />
                       </div>
                       <input
                         type="text"
-                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 text-lg"
+                        className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 text-md"
                         placeholder="Company"
                         {...register("company")}
                       />
                       <textarea
-                        className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 h-40 text-lg"
+                        className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 h-40 text-md"
                         placeholder="Tell us more about your project..."
                         {...register("message")}
                       />
@@ -499,8 +499,8 @@ export default function ContactForm() {
                         type="submit"
                         disabled={status === "submitting"}
                         className={clsx(
-                          "w-full px-8 py-5 rounded-xl font-semibold text-lg shadow-lg",
-                          "bg-blue-600 text-white hover:bg-blue-700 transition-colors",
+                          "w-full px-8 py-3 rounded-xl font-semibold text-lg shadow-lg",
+                          "bg-btv-blue text-white hover:bg-btv-blue-600 transition-colors",
                           status === "submitting" && "opacity-75 cursor-not-allowed"
                         )}
                       >
